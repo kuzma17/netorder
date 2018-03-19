@@ -1,0 +1,16 @@
+body{
+    background-color: whitesmoke;
+}
+
+.main_menu{
+    background-color: #3465A4;
+}
+
+.navbar-default .navbar-nav li a {
+    color: #ccf2ff;
+}
+
+.navbar-default .navbar-nav li a:hover, .navbar-default .navbar-nav li a:focus {
+    color: #ffffff;
+    background-color: #3d77c2;
+}
