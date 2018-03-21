@@ -8,7 +8,9 @@
 
                     <div class="panel-body">
                         @include('layouts.message')
-                        <a href="{{route('firm.add')}}" ><button type="button" class="btn btn-success">Add firm</button></a>
+                        @can('add', \App\Firm::class)
+                            <a href="{{route('firm.add')}}" ><button type="button" class="btn btn-success">Add firm</button></a>
+                        @endcan
                         <table class="table table-bordered">
                             <thead>
                             <tr>

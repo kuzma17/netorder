@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\User;
 use App\UserProfile;
+use Gate;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
@@ -12,11 +13,17 @@ use Session;
 class UserController extends Controller
 {
     public function list(){
-        $users = User::orderBy('created_at', 'desc')->paginate(2);
+        $users = User::orderBy('created_at', 'desc')->paginate(20);
         return view('users.list', ['users'=>$users]);
     }
 
     public function add(Request $request){
+
+        $user = new User();
+
+        if(Gate::denies('add', $user)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
 
         $user = new User();
 
@@ -60,6 +67,10 @@ class UserController extends Controller
 
         $user = User::find($id);
 
+        if(Gate::denies('edit', $user)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
+
         if($request->isMethod('post')){
 
             $this->validate($request, [
@@ -98,7 +109,13 @@ class UserController extends Controller
     }
 
     public function del($id){
+
         $user = User::find($id);
+
+        if(Gate::denies('del', $user)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
+
         $user->delete();
         $user->roles()->detach();
         $user->profile()->delete();

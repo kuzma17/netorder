@@ -3,23 +3,23 @@
 namespace App\Http\Controllers;
 
 use App\Order;
-use App\Status;
-use App\TypeWork;
-
-use App\User;
+use Gate;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Session;
 
 class OrderController extends Controller
 {
     public function list_order(){
-        $orders = Order::orderBy('updated_at', 'desc')->paginate(1);
+        $orders = Order::orderBy('updated_at', 'desc')->paginate(20);
         return view('order.list', ['orders'=>$orders]);
     }
 
     public function add_order(Request $request){
 
         $order = new Order();
+
+        if(Gate::denies('add', $order)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
 
         if($request->isMethod('post')){
 
@@ -34,9 +34,7 @@ class OrderController extends Controller
             $order->status_id = $request->status;
             $order->save();
 
-            Session::flash('ok_message', 'Ваш заказ успешно создан и будет обработан в ближайшее время.');
-
-            return redirect(route('orders'));
+            return redirect(route('orders'))->with('ok_message', 'Ваш заказ успешно создан и будет обработан в ближайшее время.');
         }
 
         return view('order.add', ['order'=>$order]);
@@ -45,6 +43,10 @@ class OrderController extends Controller
     public function edit_order(Request $request, $id){
 
         $order = Order::find($id);
+
+        if(Gate::denies('edit', $order)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
 
         if($request->isMethod('post')){
 
@@ -56,9 +58,7 @@ class OrderController extends Controller
             $order->status_id = $request->status;
             $order->save();
 
-            Session::flash('ok_message', 'Ваш заказ успешно создан и будет обработан в ближайшее время.');
-
-            return redirect(route('orders'));
+            return redirect(route('orders'))->with('ok_message', 'Ваш заказ успешно изменен.');
         }
 
         return view('order.edit', ['order'=>$order]);
@@ -66,7 +66,12 @@ class OrderController extends Controller
 
     public function del_order($id){
         $order = Order::find($id);
+
+        if(Gate::denies('del', $order)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
+
         $order->delete();
-        return redirect(route('orders'));
+        return redirect(route('orders'))->with('info_message', 'Ваш заказ успешно удален.');
     }
 }

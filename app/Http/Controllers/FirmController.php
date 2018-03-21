@@ -3,19 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Firm;
+use Gate;
 use Illuminate\Http\Request;
 use Session;
 
 class FirmController extends Controller
 {
     public function list(){
-        $firms = Firm::orderBy('updated_at', 'desc')->paginate(20);;
+        $firms = Firm::orderBy('updated_at', 'desc')->paginate(20);
         return view('firms.list', ['firms'=>$firms]);
     }
 
     public function add(Request $request){
 
         $Firm = new Firm();
+
+        if(Gate::denies('add', $Firm)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
 
         if($request->isMethod('post')){
 
@@ -39,6 +44,10 @@ class FirmController extends Controller
 
         $firm = Firm::find($id);
 
+        if(Gate::denies('edit', $firm)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
+
         if($request->isMethod('post')){
 
             $this->validate($request, $firm->rules);
@@ -58,7 +67,13 @@ class FirmController extends Controller
     }
 
     public function del($id){
+
         $firm = Firm::find($id);
+
+        if(Gate::denies('del', $firm)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
+
         $firm->delete();
         Session::flash('ok_message', 'Firm deleted');
         return redirect(route('firms'));

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Contractor;
+use Gate;
 use Illuminate\Http\Request;
 use Session;
 
@@ -16,6 +17,10 @@ class ContractorController extends Controller
     public function add(Request $request){
 
         $contractor = new Contractor();
+
+        if(Gate::denies('add', $contractor)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
 
         if($request->isMethod('post')){
 
@@ -41,6 +46,10 @@ class ContractorController extends Controller
 
         $contractor = Contractor::find($id);
 
+        if(Gate::denies('edit', $contractor)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
+
         if($request->isMethod('post')){
 
             $this->validate($request, $contractor->rules);
@@ -62,7 +71,13 @@ class ContractorController extends Controller
     }
 
     public function del($id){
+
         $contractor = Contractor::find($id);
+
+        if(Gate::denies('del', $contractor)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
+
         $contractor->delete();
         Session::flash('ok_message', 'Contractor deleted');
         return redirect(route('contractors'));

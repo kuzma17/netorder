@@ -13,7 +13,6 @@
 
                     <!-- Branding Image -->
                     <a class="navbar-brand" href="{{ url('/') }}">
-<!--{{ config('app.name', 'Laravel') }}-->
     <div style="position: absolute; top: -31px; width: 300px; z-index: 150; ">
         <div style="float: left;">
         <img style="height: 80px; width: auto;" src="/images/logo5.jpg">

@@ -8,7 +8,11 @@
 
                     <div class="panel-body">
                         @include('layouts.message')
-                        <a href="{{route('user.add')}}" ><button type="button" class="btn btn-success">Add user</button></a>
+                        @can('add', $model)
+                            <a href="{{route('user.add')}}" >
+                                <button type="button" class="btn btn-success">Add user</button>
+                            </a>
+                        @endcan
                     <table class="table">
                         <thead>
                         <tr>

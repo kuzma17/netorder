@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use Gate;
 use Illuminate\Http\Request;
 use Session;
 
@@ -16,6 +17,10 @@ class ClientController extends Controller
     public function add(Request $request){
 
         $client = new Client();
+
+        if(Gate::denies('add', $client)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
 
         if($request->isMethod('post')){
 
@@ -44,6 +49,10 @@ class ClientController extends Controller
 
         $client = Client::find($id);
 
+        if(Gate::denies('edit', $client)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
+
         if($request->isMethod('post')){
 
             $this->validate($request, $client->rules );
@@ -68,8 +77,14 @@ class ClientController extends Controller
     }
 
     public function del($id){
-        $firm = Client::find($id);
-        $firm->delete();
+
+        $client = Client::find($id);
+
+        if(Gate::denies('del', $client)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
+
+        $client->delete();
         Session::flash('ok_message', 'Client deleted');
         return redirect(route('clients'));
     }
