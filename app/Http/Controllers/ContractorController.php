@@ -10,7 +10,7 @@ use Session;
 class ContractorController extends Controller
 {
     public function list(){
-        $contractors = Contractor::orderBy('updated_at', 'desc')->paginate(1);;
+        $contractors = Contractor::orderBy('updated_at', 'desc')->paginate(20);;
         return view('contractors.list', ['contractors'=>$contractors]);
     }
 
