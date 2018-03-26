@@ -14,7 +14,6 @@
                             <tr>
                                 <th>id</th>
                                 <th>name</th>
-                                <th>full name</th>
                                 <th>phone</th>
                                 <th>status</th>
                                 <th></th>
@@ -24,7 +23,6 @@
                                 <tr>
                                     <td>{{$client->id}}</td>
                                     <td>{{$client->name}}</td>
-                                    <td>{{$client->full_name}}</td>
                                     <td>{{$client->phone}}</td>
                                     <td>{{$client->status}}</td>
                                     <td>

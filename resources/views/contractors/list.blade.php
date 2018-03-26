@@ -14,7 +14,6 @@
                             <tr>
                                 <th>id</th>
                                 <th>name</th>
-                                <th>full name</th>
                                 <th>user</th>
                                 <th>phone</th>
                                 <th>status</th>
@@ -25,7 +24,6 @@
                                 <tr>
                                     <td>{{$contractor->id}}</td>
                                     <td>{{$contractor->name}}</td>
-                                    <td>{{$contractor->full_name}}</td>
                                     <td>{{$contractor->user->name}}</td>
                                     <td>{{$contractor->phone}}</td>
                                     <td>{{$contractor->status}}</td>

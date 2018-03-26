@@ -28,7 +28,6 @@ class ContractorController extends Controller
 
             $contractor->user_id = $request->user;
             $contractor->name = $request->name;
-            $contractor->full_name = $request->full_name;
             $contractor->phone = $request->phone;
             $contractor->address = $request->address;
             $contractor->status = $request->status;
@@ -56,7 +55,6 @@ class ContractorController extends Controller
 
             $contractor->user_id = $request->user;
             $contractor->name = $request->name;
-            $contractor->full_name = $request->full_name;
             $contractor->phone = $request->phone;
             $contractor->address = $request->address;
             $contractor->status = $request->status;

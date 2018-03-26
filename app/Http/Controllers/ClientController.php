@@ -31,7 +31,6 @@ class ClientController extends Controller
             $client->town_id = $request->town;
             $client->user_id = $request->user;
             $client->name = $request->name;
-            $client->full_name = $request->full_name;
             $client->phone = $request->phone;
             $client->address = $request->address;
             $client->status = $request->status;
@@ -39,7 +38,8 @@ class ClientController extends Controller
 
             Session::flash('ok_message', 'Client created.');
 
-            return redirect(route('clients'));
+            //return redirect(route('clients'));
+            return redirect(route('firms'));
         }
 
         return view('clients.add', ['client'=>$client]);
@@ -62,7 +62,6 @@ class ClientController extends Controller
             $client->town_id = $request->town;
             $client->user_id = $request->user;
             $client->name = $request->name;
-            $client->full_name = $request->full_name;
             $client->phone = $request->phone;
             $client->address = $request->address;
             $client->status = $request->status;
@@ -70,7 +69,8 @@ class ClientController extends Controller
 
             Session::flash('ok_message', 'Client update.');
 
-            return redirect(route('clients'));
+            //return redirect(route('clients'));
+            return redirect(route('firms'));
         }
 
         return view('clients.edit', ['client'=>$client]);
@@ -86,6 +86,7 @@ class ClientController extends Controller
 
         $client->delete();
         Session::flash('ok_message', 'Client deleted');
-        return redirect(route('clients'));
+        //return redirect(route('clients'));
+        return redirect(route('firms'));
     }
 }

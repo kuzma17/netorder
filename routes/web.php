@@ -45,9 +45,11 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('/firm/edit/{id}', ['as'=>'firm.edit', 'uses'=>'FirmController@edit']);
     Route::get('/firm/del/{id}', ['as'=>'firm.del', 'uses'=>'FirmController@del']);
 
-    Route::get('/clients', ['as'=>'clients', 'uses'=>'ClientController@list']);
+   // Route::get('/clients', ['as'=>'clients', 'uses'=>'ClientController@list']);
     Route::get('/client/add', ['as'=>'client.add', 'uses'=>'ClientController@add']);
     Route::post('/client/add', ['as'=>'client.add', 'uses'=>'ClientController@add']);
+    //Route::get('/firm/{id}/client/add', ['as'=>'client.add', 'uses'=>'ClientController@add']);
+    //Route::post('/firm/{id}/client/add', ['as'=>'client.add', 'uses'=>'ClientController@add']);
     Route::get('/client/edit/{id}', ['as'=>'client.edit', 'uses'=>'ClientController@edit']);
     Route::post('/client/edit/{id}', ['as'=>'client.edit', 'uses'=>'ClientController@edit']);
     Route::get('/client/del/{id}', ['as'=>'client.del', 'uses'=>'ClientController@del']);

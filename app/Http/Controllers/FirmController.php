@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Firm;
+use DB;
 use Gate;
 use Illuminate\Http\Request;
 use Session;
@@ -10,7 +11,26 @@ use Session;
 class FirmController extends Controller
 {
     public function list(){
-        $firms = Firm::orderBy('updated_at', 'desc')->paginate(20);
+        $firms = Firm::orderBy('updated_at', 'asc')->paginate(20);
+        //$firms = DB::table('firms')
+          //  ->select('firms.id as firm_id', 'firms.name as firm', 'firms.status as firm_status',
+           //     'clients.id as client_id', 'clients.name as client', 'clients.status as client_status')
+           // ->leftJoin('clients', 'firms.id', '=', 'clients.firm_id')
+           // ->orderBy('firm_id', 'asc')
+           // ->orderBy('client_id', 'asc')
+           // ->get();
+       // $list = [];
+
+        //foreach ($firms as $firm){
+            //$list[$firm->id]['name'] = $firm->name;
+            //$list[$firm->id]['status'] = $firm->status;
+           // echo $firm->id.'<br>';
+          //  dd($firm->clients);
+          // echo '<br>';
+        //}
+
+        //dd($firms);
+
         return view('firms.list', ['firms'=>$firms]);
     }
 
@@ -27,7 +47,6 @@ class FirmController extends Controller
             $this->validate($request, $Firm->rules );
 
             $Firm->name = $request->name;
-            $Firm->full_name = $request->full_name;
             $Firm->phone = $request->phone;
             $Firm->status = $request->status;
             $Firm->save();
@@ -53,7 +72,6 @@ class FirmController extends Controller
             $this->validate($request, $firm->rules);
 
             $firm->name = $request->name;
-            $firm->full_name = $request->full_name;
             $firm->phone = $request->phone;
             $firm->status = $request->status;
             $firm->save();

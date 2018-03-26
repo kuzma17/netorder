@@ -60,17 +60,6 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group{{ $errors->has('full_name') ? ' has-error' : '' }}">
-                                <label  class="col-md-3 control-label">full name<span class="red">*</span></label>
-                                <div class="col-md-9">
-                                    <input class="form-control" type="text" name="full_name" value="{{old('full_name', $client->full_name)}}">
-                                    @if ($errors->has('full_name'))
-                                        <span class="help-block">
-                                        <strong>{{ $errors->first('full_name') }}</strong>
-                                    </span>
-                                    @endif
-                                </div>
-                            </div>
                             <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                                 <label  class="col-md-3 control-label">phone <span class="red">*</span></label>
                                 <div class="col-md-9">

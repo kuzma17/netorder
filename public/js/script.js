@@ -46,4 +46,15 @@ $(document).ready(function () {
            }
        });
    });
+
+
+    $('div.firm_dropdown').click(function () {
+        $(this).parent().next('.branch').toggle();
+        return false;
+    });
+
+    $('a.firm_dropdown').click(function () {
+        $(this).parents(1).next('.branch').toggle();
+        return false;
+    });
 });

@@ -8,7 +8,10 @@ class Firm extends Model
 {
     public $rules = [
         'name' => 'required',
-        'full_name' => 'required',
         'phone' => 'required',
     ];
+
+    public function clients(){
+        return $this->hasMany(Client::class);
+    }
 }

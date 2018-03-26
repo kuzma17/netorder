@@ -14,3 +14,34 @@ body{
     color: #ffffff;
     background-color: #3d77c2;
 }
+.table_header{
+    font-weight: 600;
+    background-color: #2a88bd;
+}
+
+.table_header div{
+    border: 1px solid grey;
+    padding: 5px;
+    height: 30px;
+}
+
+.table_border{
+    border-left: 1px solid grey;
+    border-right: 1px solid grey;
+}
+.firm_line div{
+    border-bottom: 1px solid grey;
+    padding: 5px;
+    height: 30px;
+    background-color: aliceblue;
+}
+
+.branch{
+    display: none;
+}
+
+.client_line div{
+    border-bottom: 1px solid grey;
+    padding: 5px;
+    height: 30px;
+}
