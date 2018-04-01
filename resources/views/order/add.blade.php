@@ -2,11 +2,11 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Login</div>
+            <div class="col-md-8 col-md-offset-2" >
+                    <h3>Создание нового заказа</h3>
+                <div style="clear: both"></div>
+                <p class="panel-info"><i class="fa fa-info-circle" aria-hidden="true"></i> Поля отмеченные <span class="red">*</span> обязательны для заполнения.</p>
 
-                    <div class="panel-body">
                         <form name="order_order" method="post" class="form-horizontal" action="{{ route('order.add') }}">
                             {{ csrf_field() }}
                             <div class="form-group">
@@ -62,8 +62,8 @@
                                 </div>
                             </div>
                         </form>
-                    </div>
-                </div>
+
+
             </div>
         </div>
     </div>

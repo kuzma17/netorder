@@ -15,15 +15,20 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+<div id="app">
+    <div class="content">
         <div style="height: 35px"></div>
         @include('layouts.menu')
 
         @yield('content')
     </div>
+    <div class="footer">
+        <span class="copyright">Copyright 2018 @ design by <a href="mailto:v.kuzma@mail.ru">kuzma</a></span>
+    </div>
+</div>
 
-    <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}"></script>
-    <script src="{{ asset('js/script.js') }}"></script>
+<!-- Scripts -->
+<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/script.js') }}"></script>
 </body>
 </html>

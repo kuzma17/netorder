@@ -1,7 +1,48 @@
-body{
+html, body{
+    height: 100%;
     background-color: whitesmoke;
 }
 
+#app {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+.content {
+    flex: 1 0 auto;
+}
+.footer {
+    flex: 0 0 auto;
+    background-color: #3465A4;
+    border-top: 1px solid #b3b3b3;
+}
+
+.copyright{
+    float:right;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    color: #d8e4f3;
+    margin-right: 10px;
+    padding: 5px;
+}
+.copyright a{
+    color: #d8e4f3;
+}
+.copyright a:hover{
+    color: #d8e4f3;
+    text-decoration: underline;
+}
+
+.red{
+    color: red;
+}
+
+h3{
+    color: red;
+    float: right;
+    padding: 5px;
+    margin: 0;
+}
 .main_menu{
     background-color: #3465A4;
 }
@@ -13,6 +54,17 @@ body{
 .navbar-default .navbar-nav li a:hover, .navbar-default .navbar-nav li a:focus {
     color: #ffffff;
     background-color: #3d77c2;
+}
+
+.table th{
+    background-color: #f2f2f2;
+    color: #2a88bd;
+}
+.table td{
+    background-color: white;
+}
+.table td i{
+    margin: 2px;
 }
 .table_header{
     font-weight: 600;
@@ -44,4 +96,17 @@ body{
     border-bottom: 1px solid grey;
     padding: 5px;
     height: 30px;
+}
+
+.form-group label{
+    color: #2a88bd;
+    font-size: 13px;
+}
+
+.panel-info{
+    font-style: italic;
+}
+
+.panel-info i{
+    color: dodgerblue;
 }

@@ -3,13 +3,10 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Login</div>
 
-                    <div class="panel-body">
                         @include('layouts.message')
                         <a href="{{route('order.add')}}" ><button type="button" class="btn btn-success">Add order</button></a>
-                        <table class="table">
+                        <table class="table table-bordered">
                             <thead>
                             <tr>
                                 <th>id</th>
@@ -32,6 +29,7 @@
                                     <td>{{$order->created_at}}</td>
                                     <td>{{$order->updated_at}}</td>
                                     <td>
+                                        <a href="{{route('order.edit', ['id'=>$order->id])}}" ><i class="fa fa-eye" aria-hidden="true"></i></a>
                                         <a href="{{route('order.edit', ['id'=>$order->id])}}" ><i class="fa fa-edit"></i></a>
                                         <a href="{{route('order.del', ['id'=>$order->id])}}" ><i class="fa fa-trash"></i></a>
                                     </td>
@@ -42,8 +40,7 @@
                         </table>
 
                         {!! $orders->render() !!}
-                    </div>
-                </div>
+                    
             </div>
         </div>
     </div>
