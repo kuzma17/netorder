@@ -29,7 +29,7 @@
                                     <td>{{$order->created_at}}</td>
                                     <td>{{$order->updated_at}}</td>
                                     <td>
-                                        <a href="{{route('order.edit', ['id'=>$order->id])}}" ><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        <a href="{{route('order.view', ['id'=>$order->id])}}" ><i class="fa fa-eye" aria-hidden="true"></i></a>
                                         <a href="{{route('order.edit', ['id'=>$order->id])}}" ><i class="fa fa-edit"></i></a>
                                         <a href="{{route('order.del', ['id'=>$order->id])}}" ><i class="fa fa-trash"></i></a>
                                     </td>

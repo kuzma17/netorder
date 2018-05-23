@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/user/del/{id}', ['as'=>'user.del', 'uses'=>'UserController@del']);
 
     Route::get('/orders', ['as'=>'orders', 'uses'=>'OrderController@list_order']);
+    Route::get('/order/view/{id}', ['as'=>'order.view', 'uses'=>'OrderController@view_order']);
     Route::get('/order/add', ['as'=>'order.add', 'uses'=>'OrderController@add_order']);
     Route::post('/order/add', ['as'=>'order.add', 'uses'=>'OrderController@add_order']);
     Route::get('/order/edit/{id}', ['as'=>'order.edit', 'uses'=>'OrderController@edit_order']);

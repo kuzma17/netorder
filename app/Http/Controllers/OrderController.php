@@ -13,6 +13,11 @@ class OrderController extends Controller
         return view('order.list', ['orders'=>$orders]);
     }
 
+    public function view_order($id){
+        $order = Order::find($id);
+        return view('order.view', ['order'=>$order]);
+    }
+
     public function add_order(Request $request){
 
         $order = new Order();
