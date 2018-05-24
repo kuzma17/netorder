@@ -48,13 +48,17 @@ $(document).ready(function () {
    });
 
 
-    $('div.firm_dropdown').click(function () {
+    $('td.firm_dropdown').click(function () {
+        //$('tr.branch').hide();
         $(this).parent().next('.branch').toggle();
+        $(this).parent().find('td a i.down').toggleClass("fa-caret-up");
         return false;
     });
 
     $('a.firm_dropdown').click(function () {
+        //$('tr.branch').hide();
         $(this).parents(1).next('.branch').toggle();
+        $(this).children('i').toggleClass("fa-caret-up");
         return false;
     });
 });

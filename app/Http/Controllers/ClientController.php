@@ -39,7 +39,8 @@ class ClientController extends Controller
             Session::flash('ok_message', 'Client created.');
 
             //return redirect(route('clients'));
-            return redirect(route('firms'));
+            //return redirect(route('firms'));
+            return redirect(route('firms.id', $client->firm_id));
         }
 
         return view('clients.add', ['client'=>$client]);
@@ -70,7 +71,8 @@ class ClientController extends Controller
             Session::flash('ok_message', 'Client update.');
 
             //return redirect(route('clients'));
-            return redirect(route('firms'));
+            //return redirect(route('firms'));
+            return redirect(route('firms.id', $client->firm_id));
         }
 
         return view('clients.edit', ['client'=>$client]);

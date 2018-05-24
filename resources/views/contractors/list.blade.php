@@ -3,13 +3,9 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Login</div>
-
-                    <div class="panel-body">
                         @include('layouts.message')
                         <a href="{{route('contractor.add')}}" ><button type="button" class="btn btn-success">Add contractor</button></a>
-                        <table class="table">
+                        <table class="table table-bordered">
                             <thead>
                             <tr>
                                 <th>id</th>
@@ -38,8 +34,7 @@
                         </table>
 
                         {!! $contractors->render() !!}
-                    </div>
-                </div>
+
             </div>
         </div>
     </div>

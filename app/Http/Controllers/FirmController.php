@@ -10,7 +10,7 @@ use Session;
 
 class FirmController extends Controller
 {
-    public function list(){
+    public function list($id = 0){
         $firms = Firm::orderBy('updated_at', 'asc')->paginate(20);
         //$firms = DB::table('firms')
           //  ->select('firms.id as firm_id', 'firms.name as firm', 'firms.status as firm_status',
@@ -31,7 +31,7 @@ class FirmController extends Controller
 
         //dd($firms);
 
-        return view('firms.list', ['firms'=>$firms]);
+        return view('firms.list2', ['firms'=>$firms, 'id'=>$id]);
     }
 
     public function add(Request $request){

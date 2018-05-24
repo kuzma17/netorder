@@ -3,17 +3,13 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-heading">Login</div>
-
-                    <div class="panel-body">
                         @include('layouts.message')
                         @can('add', \App\User::class)
                             <a href="{{route('user.add')}}" >
                                 <button type="button" class="btn btn-success">Add user</button>
                             </a>
                         @endcan
-                    <table class="table">
+                    <table class="table table-bordered">
                         <thead>
                         <tr>
                             <th>id</th>
@@ -43,8 +39,6 @@
                     </table>
 
                         {!! $users->render() !!}
-                </div>
-            </div>
         </div>
     </div>
 </div>

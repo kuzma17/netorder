@@ -61,7 +61,7 @@ h3{
     color: #2a88bd;
 }
 .table td{
-    background-color: white;
+
 }
 .table td i{
     margin: 2px;
@@ -89,7 +89,7 @@ h3{
 }
 
 .branch{
-    display: none;
+
 }
 
 .client_line div{
@@ -109,4 +109,14 @@ h3{
 
 .panel-info i{
     color: dodgerblue;
+}
+
+i.fa-edit{
+    color: green;
+}
+i.fa-trash{
+    color: red;
+}
+i.fa-caret-down{
+    font-size: 20px;
 }

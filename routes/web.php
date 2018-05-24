@@ -40,6 +40,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('/upload', ['as'=>'upload_act', 'uses'=>'UploadController@upload']);
 
     Route::get('/firms', ['as'=>'firms', 'uses'=>'FirmController@list']);
+    Route::get('/firms/{id}', ['as'=>'firms.id', 'uses'=>'FirmController@list']);
     Route::get('/firm/add', ['as'=>'firm.add', 'uses'=>'FirmController@add']);
     Route::post('/firm/add', ['as'=>'firm.add', 'uses'=>'FirmController@add']);
     Route::get('/firm/edit/{id}', ['as'=>'firm.edit', 'uses'=>'FirmController@edit']);
