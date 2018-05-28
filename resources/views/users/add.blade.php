@@ -87,23 +87,21 @@
                                     @endif
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" id="firm">
                                 <label  class="col-md-3 control-label">Firm<span class="red">*</span></label>
                                 <div class="col-md-9">
                                     <select name="firm" class="form-control">
+                                        <option value="0" >выберите фирму</option>
                                         @foreach($user->firm_list() as $firm)
                                             <option value="{{ $firm->id }}" >{{ $firm->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div class="form-group" id="branch" style="display: none">
                                 <label  class="col-md-3 control-label">Branch<span class="red">*</span></label>
                                 <div class="col-md-9">
                                     <select name="branch" class="form-control">
-                                        @foreach($user->firm_list() as $branch)
-                                            <option value="{{ $branch->id }}" >{{ $branch->name }}</option>
-                                        @endforeach
                                     </select>
                                 </div>
                             </div>

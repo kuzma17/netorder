@@ -4,60 +4,66 @@
         <div class="row">
             <div class="col-md-12">
                 @include('layouts.message')
-                <div class="filter" style="border: 1px solid #CCCCCC; padding-top: 10px; margin-top: -20px; border-radius: 5px; background-color: #e6eeff">
-                    <form name="filter" method="post" class="form-horizontal" action="" >
-                    <div class="col-md-6 form-group">
-                        <label  class="col-md-3 control-label">Дата создания</label>
-                        <div class="col-md-9">
-                            <input type="text" name="created_at" class="form-control">
+                <div class="filter"
+                     style="border: 1px solid #CCCCCC; padding-top: 10px; margin-top: -20px; border-radius: 5px; background-color: #e6eeff">
+                    <form name="filter" method="post" class="form-horizontal" action="{{ route('orders.filter') }}">
+                        {{ csrf_field() }}
+                        <div class="col-md-6 form-group">
+                            <label class="col-md-3 control-label">Дата создания от</label>
+                            <div class="col-md-9">
+                                <input type="text" name="date_from" class="form-control" value="{{ Request::get('date_from')}}">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label  class="col-md-3 control-label">Дата изменения</label>
-                        <div class="col-md-9">
-                            <input type="text" name="updated_at" class="form-control">
+                        <div class="col-md-6 form-group">
+                            <label class="col-md-3 control-label">Дата изменения до</label>
+                            <div class="col-md-9">
+                                <input type="text" name="date_to" class="form-control" value="{{ Request::get('date_to')}}">
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label  class="col-md-3 control-label">Фирма</label>
-                        <div class="col-md-9">
-                            <select name="firm" class="form-control">
-                                @foreach(\App\Firm::all() as $firm)
-                                    <option value="{{ $firm->id }}" >{{ $firm->name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-md-6 form-group" id="firm">
+                            <label class="col-md-3 control-label">Фирма</label>
+                            <div class="col-md-9">
+                                <select name="firm" class="form-control">
+                                    <option value="0">-</option>
+                                    @foreach(\App\Firm::all() as $firm)
+                                        <option value="{{ $firm->id }}" @if(Request::get('firm') == $firm->id) selected @endif>{{ $firm->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label  class="col-md-3 control-label">Филиал</label>
-                        <div class="col-md-9">
-                            <select name="client" class="form-control">
-                                @foreach(\App\Client::all() as $client)
-                                    <option value="{{ $client->id }}" >{{ $client->name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-md-6 form-group" id="branch">
+                            <label class="col-md-3 control-label">Филиал</label>
+                            <div class="col-md-9">
+                                <select name="branch" class="form-control">
+                                    <option value="0">-</option>
+                                    @foreach(\App\Client::all() as $client)
+                                        <option value="{{ $client->id }}" @if(Request::get('branch') == $client->id) selected @endif>{{ $client->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label  class="col-md-3 control-label">Подрядчик</label>
-                        <div class="col-md-9">
-                            <select name="contractor" class="form-control">
-                                @foreach(\App\Contractor::all() as $contractor)
-                                    <option value="{{ $contractor->id }}" >{{ $contractor->name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-md-6 form-group">
+                            <label class="col-md-3 control-label">Подрядчик</label>
+                            <div class="col-md-9">
+                                <select name="contractor" class="form-control">
+                                    <option value="0">-</option>
+                                    @foreach(\App\Contractor::all() as $contractor)
+                                        <option value="{{ $contractor->id }}" @if(Request::get('contractor') == $contractor->id) selected @endif>{{ $contractor->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-6 form-group">
-                        <label  class="col-md-3 control-label">Статус</label>
-                        <div class="col-md-9">
-                            <select name="status" class="form-control">
-                                @foreach(\App\Status::all() as $status)
-                                    <option value="{{ $status->id }}" >{{ $status->name }}</option>
-                                @endforeach
-                            </select>
+                        <div class="col-md-6 form-group">
+                            <label class="col-md-3 control-label">Статус</label>
+                            <div class="col-md-9">
+                                <select name="status" class="form-control">
+                                    <option value="0">-</option>
+                                    @foreach(\App\Status::all() as $status)
+                                        <option value="{{ $status->id }}" @if(Request::get('status') == $status->id) selected @endif>{{ $status->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
                         </div>
-                    </div>
                         <div class="col-md-12 form-group">
                             <input type="submit" value="выбрать" style="float: right">
                         </div>

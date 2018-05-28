@@ -30,6 +30,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/user/del/{id}', ['as'=>'user.del', 'uses'=>'UserController@del']);
 
     Route::get('/orders', ['as'=>'orders', 'uses'=>'OrderController@list_order']);
+    Route::post('/orders/filter', ['as'=>'orders.filter', 'uses'=>'OrderController@filter_order']);
     Route::get('/order/view/{id}', ['as'=>'order.view', 'uses'=>'OrderController@view_order']);
     Route::get('/order/add', ['as'=>'order.add', 'uses'=>'OrderController@add_order']);
     Route::post('/order/add', ['as'=>'order.add', 'uses'=>'OrderController@add_order']);
@@ -38,6 +39,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/order/del/{id}', ['as'=>'order.del', 'uses'=>'OrderController@del_order']);
 
     Route::post('/upload', ['as'=>'upload_act', 'uses'=>'UploadController@upload']);
+    Route::post('/branch', ['as'=>'branch_act', 'uses'=>'UserController@branch_list']);
 
     Route::get('/firms', ['as'=>'firms', 'uses'=>'FirmController@list']);
     Route::get('/firms/{id}', ['as'=>'firms.id', 'uses'=>'FirmController@list']);

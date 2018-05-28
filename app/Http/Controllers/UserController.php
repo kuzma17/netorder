@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
 use App\User;
 use App\UserProfile;
 use Gate;
@@ -120,5 +121,16 @@ class UserController extends Controller
         $user->roles()->detach();
         $user->profile()->delete();
         return redirect(route('users'));
+    }
+
+    public function branch_list(Request $request){
+        $id = $request->id;
+        $htm = '';
+        $branches = Client::where('firm_id', $id)->get();
+        $htm .= '<option value="0">-</option>';
+        foreach ($branches as $branch){
+            $htm .= '<option value="'.$branch->id.'">'.$branch->name.'</option>';
+        }
+        return $htm;
     }
 }
