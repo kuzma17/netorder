@@ -15,7 +15,7 @@
                             </div>
                         </div>
                         <div class="col-md-6 form-group">
-                            <label class="col-md-3 control-label">Дата изменения до</label>
+                            <label class="col-md-3 control-label">Дата создания до</label>
                             <div class="col-md-9">
                                 <input type="text" name="date_to" class="form-control" value="{{ Request::get('date_to')}}">
                             </div>
