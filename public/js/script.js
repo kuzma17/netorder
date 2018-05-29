@@ -47,6 +47,12 @@ $(document).ready(function () {
        });
    });
 
+    $( function() {
+        $('input[name=date_from], input[name=date_to], input[name=date_end]').datepicker({
+            dateFormat: "yy-mm-dd"
+        });
+    } );
+
     $('#firm div select[name=firm]').change(function () {
         var token = $('input[name=_token]').val();
         var firm_id = $('#firm div select[name=firm]').val();
