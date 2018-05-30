@@ -45,6 +45,7 @@ h3{
 }
 .main_menu{
     background-color: #3465A4;
+    margin-bottom: 0;
 }
 
 .navbar-default .navbar-nav li a {
@@ -117,6 +118,38 @@ i.fa-edit{
 i.fa-trash{
     color: red;
 }
-i.fa-caret-down{
+i.fa-caret-down, i.fa-caret-up{
     font-size: 20px;
+}
+
+.filter{
+    padding-top: 10px;
+    background-color: #e6eeff;
+    border-bottom-left-radius: 10px;
+    border-bottom: 1px solid #CCCCCC;
+    border-left: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
+}
+
+.filter_btn{
+    float: right;
+    width: 100px;
+    background-color: #e6eeff;
+    border-bottom-left-radius: 30px;
+    border-bottom-right-radius: 10px;
+    padding: 5px;
+    border-bottom: 1px solid #CCCCCC;
+    border-left: 1px solid #CCCCCC;
+    border-right: 1px solid #CCCCCC;
+    text-align: center;
+    cursor: pointer;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    z-index: 100;
+    margin-top: -3px;
+    color: #2a88bd;
+}
+
+.filter_btn span{
+    font-size: 13px;
+    margin: 5px;
 }

@@ -65,16 +65,40 @@ $(document).ready(function () {
 
 
     $('td.firm_dropdown').click(function () {
-        //$('tr.branch').hide();
-        $(this).parent().next('.branch').toggle();
+        $(this).parent().next('.branch').toggle(500);
         $(this).parent().find('td a i.down').toggleClass("fa-caret-up");
         return false;
     });
 
     $('a.firm_dropdown').click(function () {
-        //$('tr.branch').hide();
-        $(this).parents(1).next('.branch').toggle();
+        $(this).parents(1).next('.branch').toggle(500);
         $(this).children('i').toggleClass("fa-caret-up");
         return false;
+    });
+
+    $('.filter_btn').click(function () {
+        $('.filter').slideToggle(500);
+        var icon_h = $(this).children('i.down');
+        if(icon_h.hasClass("fa-caret-up")){
+            icon_h.removeClass("fa-caret-up");
+            icon_h.addClass("fa-caret-down");
+        }else{
+            icon_h.removeClass("fa-caret-down");
+            icon_h.addClass("fa-caret-up");
+        }
+        return false;
+    });
+
+    $('#submit_filter').click(function () {
+       $('form[name=filter]').submit();
+    });
+    
+    $('#reset_filter').click(function () {
+        $('input[name=date_from]').val('');
+        $('input[name=date_to]').val('');
+        $("#firm option:first").prop('selected', true);
+        $("#branch option:first").prop('selected', true);
+        $("#contractor option:first").prop('selected', true);
+        $("#status option:first").prop('selected', true);
     });
 });
