@@ -33,6 +33,15 @@ html, body{
     text-decoration: underline;
 }
 
+.panel-auth{
+    margin-top: 200px;
+}
+
+.panel-auth div.panel-heading{
+    padding: 5px;
+    padding-left: 20px;
+}
+
 .red{
     color: red;
 }
@@ -152,4 +161,8 @@ i.fa-caret-down, i.fa-caret-up{
 .filter_btn span{
     font-size: 13px;
     margin: 5px;
+}
+
+.btn-success{
+    margin: 10px;
 }

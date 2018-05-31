@@ -18,7 +18,7 @@
         <img style="height: 80px; width: auto;" src="/images/logo5.jpg">
         </div>
         <div style="float: left; margin-top: 47px; margin-left: 10px; width: 150px">
-        <span style=" font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 24px; color: white"><span style="color: #2ab27b">net</span><span style="color: deepskyblue">order</span></span>
+            @include('layouts.logo')
         </div>
     </div>
 </a>

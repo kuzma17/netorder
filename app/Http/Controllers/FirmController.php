@@ -31,7 +31,7 @@ class FirmController extends Controller
 
         //dd($firms);
 
-        return view('firms.list2', ['firms'=>$firms, 'id'=>$id]);
+        return view('firms.list', ['firms'=>$firms, 'id'=>$id]);
     }
 
     public function add(Request $request){

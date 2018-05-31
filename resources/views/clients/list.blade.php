@@ -8,7 +8,7 @@
 
                     <div class="panel-body">
                         @include('layouts.message')
-                        <a href="{{route('client.add')}}" ><button type="button" class="btn btn-success">Add client</button></a>
+                        <a href="{{route('client.add')}}" ><button type="button" class="btn btn-success">Создать филиал</button></a>
                         <table class="table">
                             <thead>
                             <tr>

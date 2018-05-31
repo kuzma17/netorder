@@ -6,7 +6,7 @@
                         @include('layouts.message')
                         @can('add', \App\User::class)
                             <a href="{{route('user.add')}}" >
-                                <button type="button" class="btn btn-success">Add user</button>
+                                <button type="button" class="btn btn-success">Создать пользователя</button>
                             </a>
                         @endcan
                     <table class="table table-bordered">
@@ -29,8 +29,8 @@
                                 <td>{{$user->profile->phone}}</td>
                                 <td>@foreach($user->roles as $role) {{ $role->name.' ' }} @endforeach</td>
                                 <td>
-                                    <a href="{{route('user.edit', ['id'=>$user->id])}}" ><i class="fa fa-edit"></i></a>
-                                    <a href="{{route('user.del', ['id'=>$user->id])}}" ><i class="fa fa-trash"></i></a>
+                                    <a title="Редактировать пользователя" href="{{route('user.edit', ['id'=>$user->id])}}" ><i class="fa fa-edit"></i></a>
+                                    <a title="Удалить пользователя" href="{{route('user.del', ['id'=>$user->id])}}" ><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>
                         @endforeach

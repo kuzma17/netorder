@@ -74,7 +74,7 @@
                     <i class="fa fa-filter" aria-hidden="true"></i> filter <i class="fa fa-caret-up down" aria-hidden="true"></i>
                 </div>
                 <a href="{{route('order.add')}}">
-                    <button type="button" class="btn btn-success">Add order</button>
+                    <button type="button" class="btn btn-success ">Создать заказ</button>
                 </a>
                 <table class="table table-bordered">
                     <thead>
@@ -99,10 +99,10 @@
                             <td>{{$order->created_at}}</td>
                             <td>{{$order->updated_at}}</td>
                             <td>
-                                <a href="{{route('order.view', ['id'=>$order->id])}}"><i class="fa fa-eye"
+                                <a title="Просмотр заказа" href="{{route('order.view', ['id'=>$order->id])}}"><i class="fa fa-eye"
                                                                                          aria-hidden="true"></i></a>
-                                <a href="{{route('order.edit', ['id'=>$order->id])}}"><i class="fa fa-edit"></i></a>
-                                <a href="{{route('order.del', ['id'=>$order->id])}}"><i class="fa fa-trash"></i></a>
+                                <a title="Редактировать заказ" href="{{route('order.edit', ['id'=>$order->id])}}"><i class="fa fa-edit"></i></a>
+                                <a title="Удалить заказ" href="{{route('order.del', ['id'=>$order->id])}}"><i class="fa fa-trash"></i></a>
                             </td>
                         </tr>
                     @endforeach
