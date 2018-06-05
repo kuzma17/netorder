@@ -38,6 +38,7 @@
         <li class="nav-item"><a href="{{ route('contractors') }}" class="nav-link">Подрядчики</a></li>
         <li class="nav-item"><a href="{{ route('users') }}" class="nav-link">Пользователи</a></li>
         @endcan
+        <li class="nav-item"><a href="" class="nav-link">Помощь</a></li>
         <!-- Authentication Links -->
         @guest
         <li><a href="{{ route('login') }}">Login</a></li>
