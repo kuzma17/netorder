@@ -48,4 +48,13 @@ class UserPolicy
         }
         return false;
     }
+
+    public function read_menu(User $user){
+        foreach ($user->roles as $role){
+            if($role->label == 'admin'){
+                return true;
+            }
+        }
+        return false;
+    }
 }

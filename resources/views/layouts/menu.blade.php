@@ -33,9 +33,11 @@
     <!-- Right Side Of Navbar -->
     <ul class="nav navbar-nav navbar-right">
         <li class="nav-item"><a href="{{ route('orders') }}" class="nav-link">Заявки</a></li>
+        @can('read_menu', \App\User::class)
         <li class="nav-item"><a href="{{ route('firms') }}" class="nav-link">Клиенты</a></li>
         <li class="nav-item"><a href="{{ route('contractors') }}" class="nav-link">Подрядчики</a></li>
         <li class="nav-item"><a href="{{ route('users') }}" class="nav-link">Пользователи</a></li>
+        @endcan
         <!-- Authentication Links -->
         @guest
         <li><a href="{{ route('login') }}">Login</a></li>
