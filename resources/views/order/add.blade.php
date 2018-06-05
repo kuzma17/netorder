@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Contractor<span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Подрядчик<span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="contractor" class="form-control">
                                 @foreach($order->contractors() as $contractor)

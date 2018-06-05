@@ -10,7 +10,7 @@
                 <form name="order_order" method="post" class="form-horizontal" action="{{ route('client.add') }}">
                     {{ csrf_field() }}
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Firm<span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Организация<span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="firm" class="form-control">
                                 @foreach($client->firms() as $firm)
@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Region<span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Регион<span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="region" class="form-control">
                                 @foreach($client->regions() as $region)
@@ -31,7 +31,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Town<span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Город(населенный пункт)<span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="town" class="form-control">
                                 @foreach($client->towns() as $town)
@@ -62,7 +62,7 @@
                         </div>
                     </div>
                     <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                        <label class="col-md-3 control-label">phone <span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Телефон <span class="red">*</span></label>
                         <div class="col-md-9">
                             <input class="form-control" type="text" name="phone" value="{{old('phone', null)}}">
                             @if ($errors->has('phone'))
@@ -73,7 +73,7 @@
                         </div>
                     </div>
                     <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
-                        <label class="col-md-3 control-label">address <span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Адрес <span class="red">*</span></label>
                         <div class="col-md-9">
                             <input class="form-control" type="text" name="address" value="{{old('address', null)}}">
                             @if ($errors->has('address'))
@@ -84,7 +84,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">status</label>
+                        <label class="col-md-3 control-label">Статус</label>
                         <div class="col-md-9">
                             <select name="status" class="form-control">
                                 <option value="on">on</option>

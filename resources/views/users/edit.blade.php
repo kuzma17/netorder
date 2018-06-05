@@ -12,7 +12,7 @@
                       action="{{ route('user.edit', ['id'=>$user->id]) }}">
                     {{ csrf_field() }}
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                        <label class="col-md-3 control-label">Login<span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Логин<span class="red">*</span></label>
                         <div class="col-md-9">
                             <input class="form-control" type="text" name="name" value="{{old('name', $user->name)}}">
                             @if ($errors->has('name'))
@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                        <label for="email" class="col-md-4 control-label">E-Mail Address</label>
+                        <label for="email" class="col-md-4 control-label">E-Mail</label>
 
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control" name="email"
@@ -59,7 +59,7 @@
                         </div>
                     </div>-->
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Role<span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Тип пользователя<span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="role[]" class="form-control" multiple="multiple">
                                 @foreach($user->role_list() as $role)
@@ -82,7 +82,7 @@
                         </div>
                     </div>
                     <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
-                        <label class="col-md-3 control-label">phone <span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Телефон <span class="red">*</span></label>
                         <div class="col-md-9">
                             <input class="form-control" type="text" name="phone"
                                    value="{{old('phone', $user->profile->phone)}}">
@@ -94,7 +94,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Firm<span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Организация<span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="firm" class="form-control">
                                 @foreach($user->firm_list() as $firm)
@@ -105,7 +105,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Branch<span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Филиал<span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="branch" class="form-control">
                                 @foreach($user->firm_list() as $branch)
@@ -115,7 +115,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">status</label>
+                        <label class="col-md-3 control-label">Статус</label>
                         <div class="col-md-9">
                             <select name="status" class="form-control">
                                 <option value="off" @if($user->profile->status == 'off') selected @endif>off</option>
