@@ -12,7 +12,7 @@
                       action="{{ route('user.edit', ['id'=>$user->id]) }}">
                     {{ csrf_field() }}
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                        <label class="col-md-3 control-label">Логин<span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Логин <span class="red">*</span></label>
                         <div class="col-md-9">
                             <input class="form-control" type="text" name="name" value="{{old('name', $user->name)}}">
                             @if ($errors->has('name'))
@@ -59,10 +59,10 @@
                         </div>
                     </div>-->
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Тип пользователя<span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Тип пользователя <span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="role[]" class="form-control" multiple="multiple">
-                                @foreach($user->role_list() as $role)
+                                @foreach($roles as $role)
                                     <option value="{{ $role->id }}"
                                             @if($user->is_role($role->id)) selected @endif>{{ $role->name }}</option>
                                 @endforeach
@@ -70,7 +70,7 @@
                         </div>
                     </div>
                     <div class="form-group{{ $errors->has('full_name') ? ' has-error' : '' }}">
-                        <label class="col-md-3 control-label">full name<span class="red">*</span></label>
+                        <label class="col-md-3 control-label">ФИО <span class="red">*</span></label>
                         <div class="col-md-9">
                             <input class="form-control" type="text" name="full_name"
                                    value="{{old('full_name', $user->profile->name)}}">
@@ -93,23 +93,23 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Организация<span class="red">*</span></label>
+                    <div class="form-group" id="firm">
+                        <label class="col-md-3 control-label">Организация <span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="firm" class="form-control">
-                                @foreach($user->firm_list() as $firm)
+                                @foreach($firms as $firm)
                                     <option value="{{ $firm->id }}"
                                             @if($firm->id == $user->profile->firm_id) selected @endif>{{ $firm->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Филиал<span class="red">*</span></label>
+                    <div class="form-group" id="branch">
+                        <label class="col-md-3 control-label">Филиал <span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="branch" class="form-control">
-                                @foreach($user->firm_list() as $branch)
-                                    <option value="{{ $branch->id }}">{{ $branch->name }}</option>
+                                @foreach($branches as $branch)
+                                    <option value="{{ $branch->id }}" @if($user->profile->branch_id == $branch->id) selected @endif>{{ $branch->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -118,8 +118,8 @@
                         <label class="col-md-3 control-label">Статус</label>
                         <div class="col-md-9">
                             <select name="status" class="form-control">
-                                <option value="off" @if($user->profile->status == 'off') selected @endif>off</option>
                                 <option value="on" @if($user->profile->status == 'on') selected @endif>on</option>
+                                <option value="off" @if($user->profile->status == 'off') selected @endif>off</option>
                             </select>
                         </div>
                     </div>

@@ -14,7 +14,7 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label">Тип услуги<span class="red">*</span></label>
                         <div class="col-md-9">
-                            <select name="type_work" class="form-control">
+                            <select name="type_work" class="form-control" @if($user->is_contractor()) disabled @endif>
                                 @foreach($order->typeWorks() as $type)
                                     <option value="{{ $type->id }}"
                                             @if($type->id == $order->typeWork->id) selected="selected" @endif>{{ $type->name }}</option>
@@ -26,7 +26,7 @@
                         <label class="col-md-3 control-label">дата выполнения</label>
                         <div class="col-md-9">
                             <input class="form-control" type="date" name="date_end"
-                                   value="{{old('date_end', $order->date_end)}}">
+                                   value="{{old('date_end', $order->date_end)}}"  @if($user->is_contractor()) readonly @endif>
                             @if ($errors->has('date_end'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('date_end') }}</strong>
@@ -37,11 +37,11 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label">Комментарий</label>
                         <div class="col-md-9">
-                            <textarea class="form-control" name="comment">{{old('comment', $order->comment)}}</textarea>
+                            <textarea class="form-control" name="comment"  @if($user->is_contractor()) disabled @endif>{{old('comment', $order->comment)}}</textarea>
                         </div>
                     </div>
+                    @if($user->is_admin() || $user->is_contractor())
                     <div class="form-group">
-
                         <div class="ajax-respond col-md-12 control-label">
                             <img src="" style="width:200px;height:200px">
                             <div style="clear: both"></div>
@@ -54,7 +54,7 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label">Статус</label>
                         <div class="col-md-9">
-                            <select name="status" class="form-control">
+                            <select name="status" class="form-control"  @if($user->is_client()) disabled @endif>
                                 @foreach($order->statuses() as $status)
                                     <option value="{{ $status->id }}"
                                             @if($status->id == $order->status->id) selected="selected" @endif>{{ $status->name }}</option>
@@ -62,6 +62,7 @@
                             </select>
                         </div>
                     </div>
+                    @endif
                     <div class="form-group">
                         <div class="col-md-9">
                             <input type="submit" class="btn btn-primary" name="add_all_order" value="Сохранить">

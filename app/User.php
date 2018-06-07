@@ -44,6 +44,10 @@ class User extends Authenticatable
         return $this->hasOne(UserProfile::class);
     }
 
+    public function contractor(){
+        return $this->hasOne(Contractor::class);
+    }
+
     public function firm(){
         return $this->hasOne(Firm::class);
     }
@@ -52,22 +56,62 @@ class User extends Authenticatable
         return $this->hasOne(Client::class);
     }
 
-    public function role_list(){
-        return Role::all();
-    }
+    //public function role_list(){
+    //    return Role::all();
+   // }
 
-    public function firm_list(){
-        return Firm::all();
-    }
+    //public function firm_list(){
+      //  return Firm::all();
+    //}
 
-    public function branch_list($id){
-        return Client::where('firm_id', $id)->get();
-    }
+  //  public function branch_list($id){
+    //    return Client::where('firm_id', $id)->get();
+   // }
 
     public function is_role($role_id)
     {
         foreach ($this->roles as $role){
             if($role->id == $role_id){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function is_admin(){
+        foreach ($this->roles as $role){
+            if($role->label == 'admin'){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function is_admin_firm(){
+        foreach ($this->roles as $role){
+            if($role->label == 'admin_firm'){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function is_client(){
+        foreach ($this->roles as $role){
+            if($role->label == 'client'){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public function is_contractor(){
+        foreach ($this->roles as $role){
+            if($role->label == 'contractor'){
                 return true;
             }
         }

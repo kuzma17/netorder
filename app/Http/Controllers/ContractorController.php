@@ -33,7 +33,7 @@ class ContractorController extends Controller
             $contractor->status = $request->status;
             $contractor->save();
 
-            Session::flash('ok_message', 'Contractor created.');
+            Session::flash('ok_message', 'Подрядчик успешно создан.');
 
             return redirect(route('contractors'));
         }
@@ -60,7 +60,7 @@ class ContractorController extends Controller
             $contractor->status = $request->status;
             $contractor->save();
 
-            Session::flash('ok_message', 'Contractor edited');
+            Session::flash('ok_message', 'Подрядчик успешно изменен.');
 
             return redirect(route('contractors'));
         }
@@ -78,6 +78,6 @@ class ContractorController extends Controller
 
         $contractor->delete();
         Session::flash('ok_message', 'Contractor deleted');
-        return redirect(route('contractors'));
+        return redirect(route('contractors'))->with('info_message', 'Подрядчик успешно удален.');;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Policies;
 
+use App\Order;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -49,9 +50,27 @@ class UserPolicy
         return false;
     }
 
-    public function read_menu(User $user){
+    public function menu(User $user){
         foreach ($user->roles as $role){
             if($role->label == 'admin'){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function filter(User $user){
+        foreach ($user->roles as $role){
+            if($role->label == 'admin'){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public function filter_branch(User $user){
+        foreach ($user->roles as $role){
+            if($role->label == 'admin' || $role->label == 'admin_firm'){
                 return true;
             }
         }

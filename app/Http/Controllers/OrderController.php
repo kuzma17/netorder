@@ -2,23 +2,67 @@
 
 namespace App\Http\Controllers;
 
+use App\Client;
+use App\Contractor;
+use App\Firm;
 use App\Order;
+use App\Status;
 use Gate;
 use Illuminate\Http\Request;
 
 class OrderController extends Controller
 {
-    public function list_order(){
-        $orders = Order::orderBy('updated_at', 'desc')->paginate(20);
-        return view('order.list', ['orders'=>$orders]);
+    private function get_order(){
+        $user = \Auth::user();
+        if($user->is_admin()){
+            $orders = new Order();
+            return $orders;
+        }
+        if($user->is_admin_firm()){
+            $orders = Order::where('firm_id', $user->profile->firm_id);
+            return $orders;
+        }
+        if($user->is_client()){
+            echo $user->client->id;
+            $orders = Order::where('client_id', $user->client->id);
+            return $orders;
+        }
+        if($user->is_contractor()){
+            $orders = Order::where('contractor_id', $user->contractor->id);
+            return $orders;
+        }
     }
 
-    public function view_order($id){
+    public function list($orders = [], $filter = false){
+        if(!$filter) {
+            $orders = $this->get_order()->orderBy('updated_at', 'desc')->paginate(20);;
+        }
+        $firms = Firm::where('status', 'on')->orderBy('name')->get();
+        $contractors = Contractor::where('status', 'on')->orderBy('name')->get();
+        $statuses = Status::all();
+        $clients = Client::where('firm_id', \Auth::user()->profile->firm_id)->get();
+
+        $countAllOrder = $this->get_order()->count();
+        $countWaitOrder = $this->get_order()->where('status_id', 1)->count();
+        $countWorkOrder = $this->get_order()->where('status_id', 2)->orwhere('status_id', 3)->count();
+        return view('order.list', [
+            'orders' => $orders,
+            'firms' => $firms,
+            'clients' => $clients,
+            'contractors' => $contractors,
+            'statuses' => $statuses,
+            'countAllOrder' => $countAllOrder,
+            'countWaitOrder' => $countWaitOrder,
+            'countWorkOrder' => $countWorkOrder
+        ]);
+    }
+
+    public function view($id){
         $order = Order::find($id);
         return view('order.view', ['order'=>$order]);
     }
 
-    public function filter_order(Request $request){
+    public function filter(Request $request){
        // var_dump($request);
         $orders = Order::when($request->date_from, function ($q, $date_from){
             return $q->where('created_at', '>=', $date_from);
@@ -39,12 +83,15 @@ class OrderController extends Controller
                 return $q->where('status_id', $status);
             })
             ->orderBy('updated_at', 'desc')->paginate(20);
-        return view('order.list', ['orders'=>$orders]);
+        //return view('order.list', ['orders'=>$orders]);
+        $filter = true;
+        return $this->list($orders, $filter);
     }
 
-    public function add_order(Request $request){
+    public function add(Request $request){
 
         $order = new Order();
+        $user = \Auth::user();
 
         if(Gate::denies('add', $order)){
             return redirect()->back()->with('error_message','Доступ запрещен.');
@@ -61,18 +108,19 @@ class OrderController extends Controller
             $order->contractor_id = $request->contractor;
             $order->date_end = $request->date_end;
             $order->comment = $request->comment;
-            $order->status_id = $request->status;
+            $order->status_id = 1;
             $order->save();
 
             return redirect(route('orders'))->with('ok_message', 'Ваш заказ успешно создан и будет обработан в ближайшее время.');
         }
 
-        return view('order.add', ['order'=>$order]);
+        return view('order.add', ['order'=>$order, 'user'=>$user]);
     }
 
-    public function edit_order(Request $request, $id){
+    public function edit(Request $request, $id){
 
         $order = Order::find($id);
+        $user = \Auth::user();
 
         if(Gate::denies('edit', $order)){
             return redirect()->back()->with('error_message','Доступ запрещен.');
@@ -85,16 +133,16 @@ class OrderController extends Controller
             $order->type_work_id = $request->type_work;
             $order->date_end = $request->date_end;
             $order->comment = $request->comment;
-            $order->status_id = $request->status;
+            $order->status_id = isset($request->status)? $request->status: 1;
             $order->save();
 
             return redirect(route('orders'))->with('ok_message', 'Ваш заказ успешно изменен.');
         }
 
-        return view('order.edit', ['order'=>$order]);
+        return view('order.edit', ['order'=>$order, 'user'=>$user]);
     }
 
-    public function del_order($id){
+    public function del($id){
         $order = Order::find($id);
 
         if(Gate::denies('del', $order)){
@@ -102,6 +150,6 @@ class OrderController extends Controller
         }
 
         $order->delete();
-        return redirect(route('orders'))->with('info_message', 'Ваш заказ успешно удален.');
+        return redirect(route('orders'))->with('info_message', 'Заказ успешно удален.');
     }
 }

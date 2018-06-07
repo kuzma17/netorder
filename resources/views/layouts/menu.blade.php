@@ -33,7 +33,7 @@
     <!-- Right Side Of Navbar -->
     <ul class="nav navbar-nav navbar-right">
         <li class="nav-item"><a href="{{ route('orders') }}" class="nav-link">Заявки</a></li>
-        @can('read_menu', \App\User::class)
+        @can('menu', \App\User::class)
         <li class="nav-item"><a href="{{ route('firms') }}" class="nav-link">Клиенты</a></li>
         <li class="nav-item"><a href="{{ route('contractors') }}" class="nav-link">Подрядчики</a></li>
         <li class="nav-item"><a href="{{ route('users') }}" class="nav-link">Пользователи</a></li>
@@ -46,7 +46,7 @@
         @else
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true">
-                    {{ Auth::user()->name }} <span class="caret"></span>
+                    <i class="fa fa-user" aria-hidden="true"></i> {{ Auth::user()->name }} <span class="caret"></span>
                 </a>
 
                 <ul class="dropdown-menu">

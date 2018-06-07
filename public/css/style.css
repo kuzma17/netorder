@@ -166,3 +166,9 @@ i.fa-caret-down, i.fa-caret-up{
 .btn-success{
     margin: 10px;
 }
+
+.info{
+    padding: 5px;
+    font-size: 13px;
+    font-weight: bold;
+}

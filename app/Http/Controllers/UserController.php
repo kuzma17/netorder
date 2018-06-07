@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Firm;
+use App\Role;
 use App\User;
 use App\UserProfile;
 use Gate;
@@ -16,6 +18,11 @@ class UserController extends Controller
     public function list(){
         $users = User::orderBy('created_at', 'desc')->paginate(20);
         return view('users.list', ['users'=>$users]);
+    }
+
+    public function view($id){
+        $user = User::find($id);
+        return view('users.view', ['user'=>$user]);
     }
 
     public function add(Request $request){
@@ -55,12 +62,15 @@ class UserController extends Controller
 
             $user->roles()->attach($request->role);
 
-            Session::flash('ok_message', 'User created.');
+            Session::flash('ok_message', 'Пользователь успешно создан.');
 
             return redirect(route('users'));
         }
 
-        return view('users.add', ['user'=>$user]);
+        $roles = Role::all();
+        $firms = Firm::where('status', 'on')->orderBy('name')->get();
+
+        return view('users.add', ['user'=>$user, 'roles'=>$roles, 'firms'=>$firms]);
 
     }
 
@@ -92,7 +102,7 @@ class UserController extends Controller
             $user->profile->name = $request->full_name;
             $user->profile->phone = $request->phone;
             $user->profile->firm_id = $request->firm;
-           // $user->profile->branch_id = $request->branch;
+            $user->profile->branch_id = $request->branch;
             $user->profile->status = $request->status;
             $user->profile->save();
             $user->save();
@@ -101,12 +111,39 @@ class UserController extends Controller
             //$user->roles()->attach($request->role);
             $user->roles()->sync($request->role);
 
-            Session::flash('ok_message', 'User updated.');
+            Session::flash('ok_message', 'Пользователь изменен.');
 
             return redirect(route('users'));
         }
 
-        return view('users.edit', ['user'=>$user]);
+        $roles = Role::all();
+        $firms = Firm::where('status', 'on')->orderBy('name')->get();
+        $branches = Client::where('firm_id', $user->profile->firm_id)->where('status', 'on')->orderBy('name')->get();
+
+        return view('users.edit', ['user'=>$user, 'roles'=>$roles, 'firms'=>$firms, 'branches'=>$branches]);
+    }
+
+    public function edit_passwd(Request $request, $id){
+        $user = User::find($id);
+
+        if(Gate::denies('edit', $user)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
+
+        if($request->isMethod('post')) {
+
+            $this->validate($request, [
+                'password' => 'required|string|min:6|confirmed'
+            ]);
+
+            $user->password = Hash::make($request->password);
+            $user->save();
+
+            Session::flash('ok_message', 'Пароль успешно изменен.');
+            return $this->view($id);
+        }
+
+        return view('users.edit_passwd', ['user'=>$user]);
     }
 
     public function del($id){
@@ -120,7 +157,7 @@ class UserController extends Controller
         $user->delete();
         $user->roles()->detach();
         $user->profile()->delete();
-        return redirect(route('users'));
+        return redirect(route('users'))->with('info_message', 'Пользователь успешно удален.');;
     }
 
     public function branch_list(Request $request){

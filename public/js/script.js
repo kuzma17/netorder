@@ -56,7 +56,6 @@ $(document).ready(function () {
     $('#firm div select[name=firm]').change(function () {
         var token = $('input[name=_token]').val();
         var firm_id = $('#firm div select[name=firm]').val();
-        //alert(firm_id);
         $.post('/branch', {'_token': token, id: firm_id}, function (data) {
             $('#branch').show();
             $('#branch div select[name=branch]').html(data);
@@ -100,5 +99,12 @@ $(document).ready(function () {
         $("#branch option:first").prop('selected', true);
         $("#contractor option:first").prop('selected', true);
         $("#status option:first").prop('selected', true);
+    });
+
+    $('a i.fa-trash').click(function () {
+        if(confirm('Вы уверены что хотите удалить?')){
+            return true;
+        }
+        return false;
     });
 });

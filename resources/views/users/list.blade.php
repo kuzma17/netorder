@@ -29,7 +29,9 @@
                                 <td>{{$user->profile->phone}}</td>
                                 <td>@foreach($user->roles as $role) {{ $role->name.' ' }} @endforeach</td>
                                 <td>
+                                    <a title="Просмотр пользователя" href="{{route('user.view', ['id'=>$user->id])}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     <a title="Редактировать пользователя" href="{{route('user.edit', ['id'=>$user->id])}}" ><i class="fa fa-edit"></i></a>
+                                    <a title="Изменить пароль" href="{{route('user.passwd.edit', ['id'=>$user->id])}}" ><i class="fa fa-key" aria-hidden="true"></i></a>
                                     <a title="Удалить пользователя" href="{{route('user.del', ['id'=>$user->id])}}" ><i class="fa fa-trash"></i></a>
                                 </td>
                             </tr>

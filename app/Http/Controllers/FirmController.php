@@ -51,7 +51,7 @@ class FirmController extends Controller
             $Firm->status = $request->status;
             $Firm->save();
 
-            Session::flash('ok_message', 'Firm created.');
+            Session::flash('ok_message', 'Организация успешно создана.');
 
             return redirect(route('firms'));
         }
@@ -76,7 +76,7 @@ class FirmController extends Controller
             $firm->status = $request->status;
             $firm->save();
 
-            Session::flash('ok_message', 'Firm edited');
+            Session::flash('ok_message', 'Организация успешно отредактирована.');
 
             return redirect(route('firms'));
         }
@@ -93,7 +93,7 @@ class FirmController extends Controller
         }
 
         $firm->delete();
-        Session::flash('ok_message', 'Firm deleted');
+        Session::flash('ok_message', 'Организация успешно удалена.');
         return redirect(route('firms'));
     }
 }

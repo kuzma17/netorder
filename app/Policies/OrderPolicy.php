@@ -22,7 +22,7 @@ class OrderPolicy
 
     public function add(User $user){
         foreach ($user->roles as $role){
-            if($role->label == 'admin' || $role->label == 'client'){
+            if($role->label == 'client'){
                 return true;
             }
         }
@@ -35,21 +35,24 @@ class OrderPolicy
                 return true;
             }
             if($role->label == 'client'){
-                if($order->user_id == $user->id && $order->status->label == 'wait'){
+                if($order->status->label == 'wait'){
                     return true;
                 }
+            }
+            if($role->label == 'contractor'){
+                return true;
             }
         }
         return false;
     }
 
-    public function del(User $user, $order){
+    public function del(User $user, Order $order){
         foreach ($user->roles as $role){
             if($role->label == 'admin'){
                 return true;
             }
             if($role->label == 'client'){
-                if($order->user_id == $user->id && $order->status->label == 'wait'){
+                if($order->status->label == 'wait'){
                     return true;
                 }
             }

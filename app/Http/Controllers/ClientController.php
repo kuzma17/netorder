@@ -36,7 +36,7 @@ class ClientController extends Controller
             $client->status = $request->status;
             $client->save();
 
-            Session::flash('ok_message', 'Client created.');
+            Session::flash('ok_message', 'Филиал успешно создан.');
 
             //return redirect(route('clients'));
             //return redirect(route('firms'));
@@ -68,7 +68,7 @@ class ClientController extends Controller
             $client->status = $request->status;
             $client->save();
 
-            Session::flash('ok_message', 'Client update.');
+            Session::flash('ok_message', 'Филиал успешно отредактирован.');
 
             //return redirect(route('clients'));
             //return redirect(route('firms'));
@@ -87,7 +87,7 @@ class ClientController extends Controller
         }
 
         $client->delete();
-        Session::flash('ok_message', 'Client deleted');
+        Session::flash('ok_message', 'Филиал успешно удален.');
         //return redirect(route('clients'));
         return redirect(route('firms'));
     }

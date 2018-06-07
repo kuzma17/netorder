@@ -11,7 +11,7 @@
                 <form name="order_order" method="post" class="form-horizontal" action="{{ route('user.add') }}">
                     {{ csrf_field() }}
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                        <label class="col-md-3 control-label">Логин<span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Логин <span class="red">*</span></label>
                         <div class="col-md-9">
                             <input class="form-control" type="text" name="name" value="{{old('name', null)}}">
                             @if ($errors->has('name'))
@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                        <label for="email" class="col-md-4 control-label">E-Mail</label>
+                        <label for="email" class="col-md-4 control-label">E-Mail <span class="red">*</span></label>
 
                         <div class="col-md-6">
                             <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}"
@@ -37,7 +37,7 @@
                     </div>
 
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                        <label for="password" class="col-md-4 control-label">Пароль</label>
+                        <label for="password" class="col-md-4 control-label">Пароль <span class="red">*</span></label>
 
                         <div class="col-md-6">
                             <input id="password" type="password" class="form-control" name="password" required>
@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="password-confirm" class="col-md-4 control-label">Пароль повторно</label>
+                        <label for="password-confirm" class="col-md-4 control-label">Пароль повторно <span class="red">*</span></label>
 
                         <div class="col-md-6">
                             <input id="password-confirm" type="password" class="form-control"
@@ -59,17 +59,17 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Тип пользователя<span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Тип пользователя <span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="role[]" class="form-control" multiple="multiple">
-                                @foreach($user->role_list() as $role)
+                                @foreach($roles as $role)
                                     <option value="{{ $role->id }}">{{ $role->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="form-group{{ $errors->has('full_name') ? ' has-error' : '' }}">
-                        <label class="col-md-3 control-label">full name<span class="red">*</span></label>
+                        <label class="col-md-3 control-label">ФИО <span class="red">*</span></label>
                         <div class="col-md-9">
                             <input class="form-control" type="text" name="full_name" value="{{old('full_name', null)}}">
                             @if ($errors->has('full_name'))
@@ -91,18 +91,18 @@
                         </div>
                     </div>
                     <div class="form-group" id="firm">
-                        <label class="col-md-3 control-label">Организация<span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Организация <span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="firm" class="form-control">
                                 <option value="0">выберите фирму</option>
-                                @foreach($user->firm_list() as $firm)
+                                @foreach($firms as $firm)
                                     <option value="{{ $firm->id }}">{{ $firm->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
                     <div class="form-group" id="branch" style="display: none">
-                        <label class="col-md-3 control-label">Филиал<span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Филиал <span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="branch" class="form-control">
                             </select>
@@ -112,8 +112,8 @@
                         <label class="col-md-3 control-label">Статус</label>
                         <div class="col-md-9">
                             <select name="status" class="form-control">
-                                <option value="off" @if(old('status') == 'off') selected @endif>off</option>
                                 <option value="on" @if(old('status') == 'on') selected @endif>on</option>
+                                <option value="off" @if(old('status') == 'off') selected @endif>off</option>
                             </select>
                         </div>
                     </div>

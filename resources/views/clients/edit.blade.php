@@ -34,7 +34,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label class="col-md-3 control-label">Город(населенный пункт))<span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Город, населенный пункт<span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="town" class="form-control">
                                 @foreach($client->towns() as $town)

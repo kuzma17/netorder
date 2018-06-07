@@ -47,6 +47,7 @@
                             <textarea class="form-control" name="comment">{{old('comment', null)}}</textarea>
                         </div>
                     </div>
+                    @if($user->is_admin() || $user->is_contractor())
                     <div class="form-group">
                         <label class="col-md-3 control-label">Status<span class="red">*</span></label>
                         <div class="col-md-9">
@@ -57,6 +58,7 @@
                             </select>
                         </div>
                     </div>
+                    @endif
                     <div class="form-group">
                         <div class="col-md-9">
                             <input type="submit" class="btn btn-primary" name="add_all_order" value="Сохранить">
