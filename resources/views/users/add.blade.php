@@ -22,9 +22,9 @@
                         </div>
                     </div>
                     <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                        <label for="email" class="col-md-4 control-label">E-Mail <span class="red">*</span></label>
+                        <label for="email" class="col-md-3 control-label">E-Mail <span class="red">*</span></label>
 
-                        <div class="col-md-6">
+                        <div class="col-md-9">
                             <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}"
                                    required>
 
@@ -35,11 +35,10 @@
                             @endif
                         </div>
                     </div>
-
                     <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                        <label for="password" class="col-md-4 control-label">Пароль <span class="red">*</span></label>
+                        <label for="password" class="col-md-3 control-label">Пароль <span class="red">*</span></label>
 
-                        <div class="col-md-6">
+                        <div class="col-md-9">
                             <input id="password" type="password" class="form-control" name="password" required>
 
                             @if ($errors->has('password'))
@@ -49,21 +48,21 @@
                             @endif
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <label for="password-confirm" class="col-md-4 control-label">Пароль повторно <span class="red">*</span></label>
+                        <label for="password-confirm" class="col-md-3 control-label">Пароль повторно <span class="red">*</span></label>
 
-                        <div class="col-md-6">
+                        <div class="col-md-9">
                             <input id="password-confirm" type="password" class="form-control"
                                    name="password_confirmation" required>
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="role">
                         <label class="col-md-3 control-label">Тип пользователя <span class="red">*</span></label>
                         <div class="col-md-9">
-                            <select name="role[]" class="form-control" multiple="multiple">
+                            <select name="role" class="form-control">
+                                <option value="0">Выберите тип пользователя</option>
                                 @foreach($roles as $role)
-                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                    <option value="{{ $role->label }}">{{ $role->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -90,14 +89,10 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-group" id="firm">
+                    <div class="form-group" id="firm" style="display: none">
                         <label class="col-md-3 control-label">Организация <span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="firm" class="form-control">
-                                <option value="0">выберите фирму</option>
-                                @foreach($firms as $firm)
-                                    <option value="{{ $firm->id }}">{{ $firm->name }}</option>
-                                @endforeach
                             </select>
                         </div>
                     </div>

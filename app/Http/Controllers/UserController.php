@@ -57,10 +57,11 @@ class UserController extends Controller
             $profile->firm_id = $request->firm;
             $profile->branch_id = 0;
             $profile->status = $request->status;
+            $profile->role_id = $request->role;
 
             $user->profile()->save($profile);
 
-            $user->roles()->attach($request->role);
+            //$user->roles()->attach($request->role);
 
             Session::flash('ok_message', 'Пользователь успешно создан.');
 
@@ -100,6 +101,7 @@ class UserController extends Controller
             $user->name = $request->name;
             $user->email = $request->email;
             $user->profile->name = $request->full_name;
+            $user->profile->role_id = $request->role;
             $user->profile->phone = $request->phone;
             $user->profile->firm_id = $request->firm;
             $user->profile->branch_id = $request->branch;
@@ -107,9 +109,7 @@ class UserController extends Controller
             $user->profile->save();
             $user->save();
 
-            //$user->roles()->detach();
-            //$user->roles()->attach($request->role);
-            $user->roles()->sync($request->role);
+           // $user->roles()->sync($request->role);
 
             Session::flash('ok_message', 'Пользователь изменен.');
 
@@ -160,14 +160,4 @@ class UserController extends Controller
         return redirect(route('users'))->with('info_message', 'Пользователь успешно удален.');;
     }
 
-    public function branch_list(Request $request){
-        $id = $request->id;
-        $htm = '';
-        $branches = Client::where('firm_id', $id)->get();
-        $htm .= '<option value="0">-</option>';
-        foreach ($branches as $branch){
-            $htm .= '<option value="'.$branch->id.'">'.$branch->name.'</option>';
-        }
-        return $htm;
-    }
 }

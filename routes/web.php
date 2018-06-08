@@ -42,7 +42,9 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/order/del/{id}', ['as'=>'order.del', 'uses'=>'OrderController@del']);
 
     Route::post('/upload', ['as'=>'upload_act', 'uses'=>'UploadController@upload']);
-    Route::post('/branch', ['as'=>'branch_act', 'uses'=>'UserController@branch_list']);
+    Route::post('/ajax_firm', ['as'=>'firm_act', 'uses'=>'AjaxController@ajax_firm']);
+    Route::post('/ajax_branch', ['as'=>'branch_act', 'uses'=>'AjaxController@branch_list']);
+    Route::post('/ajax_contractor', ['as'=>'contractor_act', 'uses'=>'AjaxController@contractor_list']);
 
     Route::get('/firms', ['as'=>'firms', 'uses'=>'FirmController@list']);
     Route::get('/firms/{id}', ['as'=>'firms.id', 'uses'=>'FirmController@list']);

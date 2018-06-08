@@ -23,8 +23,7 @@ class OrderController extends Controller
             return $orders;
         }
         if($user->is_client()){
-            echo $user->client->id;
-            $orders = Order::where('client_id', $user->client->id);
+            $orders = Order::where('client_id', $user->profile->branch_id);
             return $orders;
         }
         if($user->is_contractor()){

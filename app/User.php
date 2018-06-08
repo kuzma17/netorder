@@ -36,9 +36,9 @@ class User extends Authenticatable
             'password' => 'required|string|min:6|confirmed',
         ]);
     }
-    public function roles(){
-        return $this->belongsToMany(Role::class);
-    }
+   // public function roles(){
+   //     return $this->belongsToMany(Role::class);
+   // }
 
     public function profile(){
         return $this->hasOne(UserProfile::class);
@@ -80,40 +80,52 @@ class User extends Authenticatable
     }
 
     public function is_admin(){
-        foreach ($this->roles as $role){
-            if($role->label == 'admin'){
-                return true;
-            }
+       // foreach ($this->roles as $role){
+        //    if($role->label == 'admin'){
+         //       return true;
+           // }
+        //}
+        if($this->profile->role->label == 'admin'){
+            return true;
         }
-
         return false;
     }
 
     public function is_admin_firm(){
-        foreach ($this->roles as $role){
-            if($role->label == 'admin_firm'){
-                return true;
-            }
-        }
+       // foreach ($this->roles as $role){
+      //      if($role->label == 'admin_firm'){
+     //           return true;
+      //      }
+      //  }
 
+        if($this->profile->role->label == 'admin_firm'){
+            return true;
+        }
         return false;
     }
 
     public function is_client(){
-        foreach ($this->roles as $role){
-            if($role->label == 'client'){
-                return true;
-            }
+        //foreach ($this->roles as $role){
+         //   if($role->label == 'client'){
+         //       return true;
+        //    }
+      //  }
+        if($this->profile->role->label == 'client'){
+            return true;
         }
 
         return false;
     }
 
     public function is_contractor(){
-        foreach ($this->roles as $role){
-            if($role->label == 'contractor'){
-                return true;
-            }
+        //foreach ($this->roles as $role){
+         //   if($role->label == 'contractor'){
+          //      return true;
+           // }
+        //}
+
+        if($this->profile->role->label == 'contractor'){
+            return true;
         }
 
         return false;
