@@ -14,6 +14,11 @@ class ContractorController extends Controller
         return view('contractors.list', ['contractors'=>$contractors]);
     }
 
+    public function view($id){
+        $contractor = Contractor::find($id);
+        return view('contractors.view', ['contractor'=>$contractor]);
+    }
+
     public function add(Request $request){
 
         $contractor = new Contractor();

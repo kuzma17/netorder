@@ -29,6 +29,7 @@
                                 <td class="col-md-1">
                                     <a title="Филиалы" href="#" class="firm_dropdown"><i class="fa fa-caret-down down"
                                                                          aria-hidden="true"></i></a>
+                                    <a title="Просмотр организации" href="{{route('firm.view', ['id'=>$firm->id])}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     <a title="Редактировать организацию" href="{{route('firm.edit', ['id'=>$firm->id])}}"><i
                                                 class="fa fa-edit"></i></a>
                                     <a title="Удалить организацию" href="{{route('firm.del', ['id'=>$firm->id])}}"><i
@@ -45,6 +46,7 @@
                                                     <td class="col-md-8">{{$client->name}}</td>
                                                     <td class="col-md-1">{{$client->status}}</td>
                                                     <td class="col-md-1">
+                                                        <a title="Просмотр филиала" href="{{route('client.view', ['id'=>$client->id])}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                                         <a title="Редактировать филиал" href="{{route('client.edit', ['id'=>$client->id])}}"><i
                                                                     class="fa fa-edit" style="color: green"></i></a>
                                                         <a title="Удалить филиал" href="{{route('client.del', ['id'=>$client->id])}}"><i

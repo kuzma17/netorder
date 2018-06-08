@@ -24,6 +24,7 @@
                                     <td>{{$contractor->phone}}</td>
                                     <td>{{$contractor->status}}</td>
                                     <td>
+                                        <a title="Просмотр подрядчика" href="{{route('contractor.view', ['id'=>$contractor->id])}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                         <a title="Редактировать подрядчика" href="{{route('contractor.edit', ['id'=>$contractor->id])}}" ><i class="fa fa-edit"></i></a>
                                         <a title="Удалить подрядчика" href="{{route('contractor.del', ['id'=>$contractor->id])}}" ><i class="fa fa-trash"></i></a>
                                     </td>

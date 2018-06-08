@@ -107,22 +107,22 @@
                     <tr>
                         <th>id</th>
                         <th>Тип</th>
-                        <th>Дата</th>
+                        <th>Дата выполнения</th>
                         <th>Комментарий</th>
                         <th>Статус</th>
-                        <th>Дата создания</th>
+                        <th>время созд./изм.</th>
                         <th>Дата изм.</th>
                         <th></th>
                     </tr>
                     </thead>
                     @foreach($orders as $order)
-                        <tr class="list-group-item-{{$order->status->color}}">
+                        <tr class="list-group-item-{{$order->status->style}}">
                             <td>{{$order->id}}</td>
                             <td>{{$order->typeWork->name}}</td>
-                            <td>{{ date('d.m.Y', strtotime($order->date_end))}}</td>
+                            <td>{{ date('Y.m.d', strtotime($order->date_end))}}</td>
                             <td>{{$order->comment}}</td>
-                            <td><span class="label label-{{$order->status->color}}">{{$order->status->name}}</span></td>
-                            <td>{{$order->created_at}}</td>
+                            <td><span class="label label-{{$order->status->style}}">{{$order->status->name}}</span></td>
+                            <td>{{ date("Y.m.d h:i", strtotime($order->updated_at)) }}</td>
                             <td>{{$order->updated_at}}</td>
                             <td>
                                 <a title="Просмотр заказа" href="{{route('order.view', ['id'=>$order->id])}}"><i

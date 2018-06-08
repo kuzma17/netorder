@@ -34,6 +34,11 @@ class FirmController extends Controller
         return view('firms.list', ['firms'=>$firms, 'id'=>$id]);
     }
 
+    public function view($id){
+        $firm = Firm::find($id);
+        return view('firms.view', ['firm'=>$firm]);
+    }
+
     public function add(Request $request){
 
         $Firm = new Firm();

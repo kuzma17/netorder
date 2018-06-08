@@ -46,6 +46,7 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::get('/firms', ['as'=>'firms', 'uses'=>'FirmController@list']);
     Route::get('/firms/{id}', ['as'=>'firms.id', 'uses'=>'FirmController@list']);
+    Route::get('/firm/view/{id}', ['as'=>'firm.view', 'uses'=>'FirmController@view']);
     Route::get('/firm/add', ['as'=>'firm.add', 'uses'=>'FirmController@add']);
     Route::post('/firm/add', ['as'=>'firm.add', 'uses'=>'FirmController@add']);
     Route::get('/firm/edit/{id}', ['as'=>'firm.edit', 'uses'=>'FirmController@edit']);
@@ -53,6 +54,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/firm/del/{id}', ['as'=>'firm.del', 'uses'=>'FirmController@del']);
 
    // Route::get('/clients', ['as'=>'clients', 'uses'=>'ClientController@list']);
+    Route::get('/client/view/{id}', ['as'=>'client.view', 'uses'=>'ClientController@view']);
     Route::get('/client/add', ['as'=>'client.add', 'uses'=>'ClientController@add']);
     Route::post('/client/add', ['as'=>'client.add', 'uses'=>'ClientController@add']);
     //Route::get('/firm/{id}/client/add', ['as'=>'client.add', 'uses'=>'ClientController@add']);
@@ -62,6 +64,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/client/del/{id}', ['as'=>'client.del', 'uses'=>'ClientController@del']);
 
     Route::get('/contractors', ['as'=>'contractors', 'uses'=>'ContractorController@list']);
+    Route::get('/contractor/view/{id}', ['as'=>'contractor.view', 'uses'=>'ContractorController@view']);
     Route::get('/contractor/add', ['as'=>'contractor.add', 'uses'=>'ContractorController@add']);
     Route::post('/contractor/add', ['as'=>'contractor.add', 'uses'=>'ContractorController@add']);
     Route::get('/contractor/edit/{id}', ['as'=>'contractor.edit', 'uses'=>'ContractorController@edit']);

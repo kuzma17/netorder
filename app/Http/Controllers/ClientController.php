@@ -14,6 +14,11 @@ class ClientController extends Controller
         return view('clients.list', ['clients'=>$clients]);
     }
 
+    public function view($id){
+        $client = Client::find($id);
+        return view('clients.view', ['client'=>$client]);
+    }
+
     public function add(Request $request){
 
         $client = new Client();
