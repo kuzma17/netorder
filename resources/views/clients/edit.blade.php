@@ -11,22 +11,12 @@
                 <form name="order_order" method="post" class="form-horizontal"
                       action="{{ route('client.edit', ['id'=>$client->id]) }}">
                     {{ csrf_field() }}
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Организация<span class="red">*</span></label>
-                        <div class="col-md-9">
-                            <select name="firm" class="form-control">
-                                @foreach($client->firms() as $firm)
-                                    <option value="{{ $firm->id }}"
-                                            @if($client->firm_id == $firm->id) selected @endif >{{ $firm->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
+                    <input type="hidden" name="firm" value="{{$client->firm_id}}">
                     <div class="form-group">
                         <label class="col-md-3 control-label">Регион<span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="region" class="form-control">
-                                @foreach($client->regions() as $region)
+                                @foreach($client->list_regions() as $region)
                                     <option value="{{ $region->id }}"
                                             @if($client->region_id == $region->id) selected @endif>{{ $region->name }}</option>
                                 @endforeach
@@ -37,9 +27,20 @@
                         <label class="col-md-3 control-label">Город, населенный пункт<span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="town" class="form-control">
-                                @foreach($client->towns() as $town)
+                                @foreach($client->list_towns() as $town)
                                     <option value="{{ $town->id }}"
                                             @if($client->town_id == $town->id) selected @endif>{{ $town->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Подрядчик <span class="red">*</span></label>
+                        <div class="col-md-9">
+                            <select name="contractor" class="form-control">
+                                <option value="0">Выберите подрядчика</option>
+                                @foreach($client->list_contractors() as $contractor)
+                                    <option value="{{ $contractor->id }}"  @if($client->contractor_id == $contractor->id) selected @endif>{{ $contractor->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -48,7 +49,7 @@
                         <label class="col-md-3 control-label">User<span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="user" class="form-control">
-                                @foreach($client->users() as $user)
+                                @foreach($client->list_users() as $user)
                                     <option value="{{ $user->id }}"
                                             @if($client->user_id == $user->id) selected @endif>{{ $user->name }}</option>
                                 @endforeach

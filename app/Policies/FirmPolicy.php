@@ -20,28 +20,22 @@ class FirmPolicy
     }
 
     public function add(User $user){
-        foreach ($user->roles as $role){
-            if($role->label == 'admin'){
-                return true;
-            }
+        if($user->is_admin()){
+            return true;
         }
         return false;
     }
 
     public function edit(User $user){
-        foreach ($user->roles as $role){
-            if($role->label == 'admin'){
-                return true;
-            }
+        if($user->is_admin()){
+            return true;
         }
         return false;
     }
 
     public function del(User $user){
-        foreach ($user->roles as $role){
-            if($role->label == 'admin'){
-                return true;
-            }
+        if($user->is_admin()){
+            return true;
         }
         return false;
     }

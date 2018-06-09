@@ -29,19 +29,23 @@ class Client extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function firms(){
-        return Firm::where('status', 'on')->get();
+    public function list_firms(){
+        return Firm::where('status', 'on')->orderBy('name')->get();
     }
 
-    public function regions(){
-        return Region::all();
+    public function list_regions(){
+        return Region::orderBy('name')->get();
     }
 
-    public function towns(){
-        return Town::all();
+    public function list_towns(){
+        return Town::orderBy('name')->get();
     }
 
-    public function users(){
-        return User::all();
+    public function list_users(){
+        return User::orderBy('name')->get();
+    }
+
+    public function list_contractors(){
+        return Contractor::where('status', 'on')->orderBy('name')->get();
     }
 }

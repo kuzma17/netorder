@@ -123,7 +123,7 @@
                             <td>{{$order->comment}}</td>
                             <td><span class="label label-{{$order->status->style}}">{{$order->status->name}}</span></td>
                             <td>{{ date("Y.m.d h:i", strtotime($order->updated_at)) }}</td>
-                            <td>{{$order->updated_at}}</td>
+                            <td>f:{{$order->firm_id}} b:{{$order->client_id}} c:{{$order->contractor_id}}</td>
                             <td>
                                 <a title="Просмотр заказа" href="{{route('order.view', ['id'=>$order->id])}}"><i
                                             class="fa fa-eye" aria-hidden="true"></i></a>

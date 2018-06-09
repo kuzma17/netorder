@@ -20,6 +20,10 @@ class Order extends Model
         return $this->belongsTo(Status::class);
     }
 
+    public function firm(){
+        return $this->belongsTo(Firm::class);
+    }
+
     public function client(){
         return $this->belongsTo(Client::class);
     }

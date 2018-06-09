@@ -27,7 +27,7 @@ class OrderController extends Controller
             return $orders;
         }
         if($user->is_contractor()){
-            $orders = Order::where('contractor_id', $user->contractor->id);
+            $orders = Order::where('contractor_id', $user->profile->firm_id);
             return $orders;
         }
     }
@@ -62,10 +62,12 @@ class OrderController extends Controller
     }
 
     public function filter(Request $request){
-       // var_dump($request);
-        $orders = Order::when($request->date_from, function ($q, $date_from){
+
+        //$orders = Order::when($request->date_from, function ($q, $date_from){
+        $orders = $this->get_order()
+            ->when($request->date_from, function ($q, $date_from){
             return $q->where('created_at', '>=', $date_from);
-        })
+            })
             ->when($request->date_to, function ($q, $date_to){
                 return $q->where('created_at', '<', $date_to);
             })
@@ -101,9 +103,9 @@ class OrderController extends Controller
             $this->validate($request, $order->rules );
 
             $order->type_work_id = $request->type_work;
-            $order->firm_id = \Auth::user()->client->firm_id;
-            $order->client_id = \Auth::user()->client->id;
-            $order->user_id = \Auth::id();
+            $order->firm_id = $user->profile->firm_id;
+            $order->client_id = $user->profile->branch_id;
+            $order->user_id = $user->id;
             $order->contractor_id = $request->contractor;
             $order->date_end = $request->date_end;
             $order->comment = $request->comment;

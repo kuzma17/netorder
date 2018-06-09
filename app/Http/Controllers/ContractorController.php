@@ -31,7 +31,6 @@ class ContractorController extends Controller
 
             $this->validate($request, $contractor->rules );
 
-            $contractor->user_id = $request->user;
             $contractor->name = $request->name;
             $contractor->phone = $request->phone;
             $contractor->address = $request->address;
@@ -58,7 +57,6 @@ class ContractorController extends Controller
 
             $this->validate($request, $contractor->rules);
 
-            $contractor->user_id = $request->user;
             $contractor->name = $request->name;
             $contractor->phone = $request->phone;
             $contractor->address = $request->address;

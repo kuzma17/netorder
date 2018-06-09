@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Contractor;
 use App\Firm;
 use App\Role;
 use App\User;
@@ -43,6 +44,7 @@ class UserController extends Controller
                'password' => 'required|string|min:6|confirmed',
                'full_name' => 'required|string',
                'phone' => 'required|string|numeric',
+               'role' => 'required'
            ]);
 
             $user->name = $request->name;
@@ -54,14 +56,13 @@ class UserController extends Controller
             $profile = new UserProfile();
             $profile->name = $request->full_name;
             $profile->phone = $request->phone;
-            $profile->firm_id = $request->firm;
-            $profile->branch_id = 0;
+            $profile->firm_id = isset($request->firm)?$request->firm:0;
+            $profile->branch_id = isset($request->branch)?$request->branch:0;
+           // $profile->contractor_id = $request->contractor;
             $profile->status = $request->status;
             $profile->role_id = $request->role;
 
             $user->profile()->save($profile);
-
-            //$user->roles()->attach($request->role);
 
             Session::flash('ok_message', 'Пользователь успешно создан.');
 
@@ -84,8 +85,7 @@ class UserController extends Controller
         }
 
         if($request->isMethod('post')){
-
-            $this->validate($request, [
+            $rule = [
                 'name' => 'required|string|max:255',
                 'email' => [
                     'required',
@@ -96,20 +96,22 @@ class UserController extends Controller
                 ],
                 'full_name' => 'required|string',
                 'phone' => 'required|string|numeric',
-            ]);
+                'role' => 'required'
+                ];
+
+            $this->validate($request, $rule);
 
             $user->name = $request->name;
             $user->email = $request->email;
             $user->profile->name = $request->full_name;
             $user->profile->role_id = $request->role;
             $user->profile->phone = $request->phone;
-            $user->profile->firm_id = $request->firm;
-            $user->profile->branch_id = $request->branch;
+            $user->profile->firm_id = isset($request->firm)?$request->firm:0;
+            $user->profile->branch_id = isset($request->branch)?$request->branch:0;
+            //$user->profile->contarctor_id = isset($request->contarctor)?$request->contarctor:0;
             $user->profile->status = $request->status;
             $user->profile->save();
             $user->save();
-
-           // $user->roles()->sync($request->role);
 
             Session::flash('ok_message', 'Пользователь изменен.');
 
@@ -117,8 +119,20 @@ class UserController extends Controller
         }
 
         $roles = Role::all();
-        $firms = Firm::where('status', 'on')->orderBy('name')->get();
-        $branches = Client::where('firm_id', $user->profile->firm_id)->where('status', 'on')->orderBy('name')->get();
+        $firms = [];
+        $branches = [];
+        if($user->is_client()) {
+            $firms = Firm::where('status', 'on')->orderBy('name')->get();
+            $branches = Client::where('firm_id', $user->profile->firm_id)->where('status', 'on')->orderBy('name')->get();
+        }
+        if($user->is_admin_firm()) {
+            $firms = Firm::where('status', 'on')->orderBy('name')->get();
+            $branches = [];
+        }
+        if($user->is_contractor()) {
+            $firms = Contractor::where('status', 'on')->orderBy('name')->get();
+            $branches = [];
+        }
 
         return view('users.edit', ['user'=>$user, 'roles'=>$roles, 'firms'=>$firms, 'branches'=>$branches]);
     }
@@ -155,7 +169,6 @@ class UserController extends Controller
         }
 
         $user->delete();
-        $user->roles()->detach();
         $user->profile()->delete();
         return redirect(route('users'))->with('info_message', 'Пользователь успешно удален.');;
     }

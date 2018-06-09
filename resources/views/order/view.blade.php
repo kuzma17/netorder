@@ -14,8 +14,13 @@
                         <td>Тип заявки</td><td>{{ $order->typeWork->name }}</td>
                     </tr>
                     <tr>
-                        <td>Заказчик</td><td>{{ $order->client->name }}</td>
+                        <td>Заказчик фирма</td><td>{{ $order->firm->name }}</td>
                     </tr>
+                    @if($order->client)
+                    <tr>
+                        <td>Заказчик филиал</td><td>{{ $order->client->name }}</td>
+                    </tr>
+                    @endif
                     <tr>
                         <td>Подрядчик</td><td>{{ $order->contractor->name }}</td>
                     </tr>

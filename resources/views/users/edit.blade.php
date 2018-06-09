@@ -36,10 +36,10 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-group">
+                    <div class="form-group" id="role">
                         <label class="col-md-3 control-label">Тип пользователя <span class="red">*</span></label>
                         <div class="col-md-9">
-                            <select name="role" class="form-control">
+                            <select name="role" class="form-control" required>
                                 @foreach($roles as $role)
                                     <option value="{{ $role->id }}" @if($user->profile->role_id == $role->id) selected @endif>{{ $role->name }}</option>
                                 @endforeach
@@ -62,7 +62,7 @@
                         <label class="col-md-3 control-label">Телефон <span class="red">*</span></label>
                         <div class="col-md-9">
                             <input class="form-control" type="text" name="phone"
-                                   value="{{old('phone', $user->profile->phone)}}">
+                                   value="{{old('phone', $user->profile->phone)}}" required>
                             @if ($errors->has('phone'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('phone') }}</strong>
@@ -70,10 +70,10 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-group" id="firm">
+                    <div class="form-group" id="firm" @if(count($firms) < 1) style="display: none" @endif>
                         <label class="col-md-3 control-label">Организация <span class="red">*</span></label>
                         <div class="col-md-9">
-                            <select name="firm" class="form-control">
+                            <select name="firm" class="form-control" required>
                                 @foreach($firms as $firm)
                                     <option value="{{ $firm->id }}"
                                             @if($firm->id == $user->profile->firm_id) selected @endif>{{ $firm->name }}</option>
@@ -81,10 +81,10 @@
                             </select>
                         </div>
                     </div>
-                    <div class="form-group" id="branch">
+                    <div class="form-group" id="branch" @if(count($branches) < 1) style="display: none" @endif>
                         <label class="col-md-3 control-label">Филиал <span class="red">*</span></label>
                         <div class="col-md-9">
-                            <select name="branch" class="form-control">
+                            <select name="branch" class="form-control" required>
                                 @foreach($branches as $branch)
                                     <option value="{{ $branch->id }}" @if($user->profile->branch_id == $branch->id) selected @endif>{{ $branch->name }}</option>
                                 @endforeach

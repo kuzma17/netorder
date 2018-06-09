@@ -21,11 +21,6 @@ class UserPolicy
     }
 
     public function add(User $user){
-       // foreach ($user->roles as $role){
-        //    if($role->label == 'admin'){
-        //        return true;
-       //     }
-       // }
         if($user->is_admin()){
             return true;
         }
@@ -33,10 +28,6 @@ class UserPolicy
     }
 
     public function edit(User $user, $user_param){
-        //foreach ($user->roles as $role){
-        //    if($role->label == 'admin'){
-         //       return true;
-        //    }
         if($user->is_admin()){
             return true;
         }
@@ -48,11 +39,6 @@ class UserPolicy
     }
 
     public function del(User $user){
-        //foreach ($user->roles as $role){
-        //    if($role->label == 'admin'){
-       //         return true;
-        //    }
-       // }
         if($user->is_admin()){
             return true;
         }
@@ -60,11 +46,6 @@ class UserPolicy
     }
 
     public function menu(User $user){
-        //foreach ($user->roles as $role){
-        //    if($role->label == 'admin'){
-          //      return true;
-        //    }
-      //  }
         if($user->is_admin()){
             return true;
         }
@@ -72,11 +53,6 @@ class UserPolicy
     }
 
     public function filter(User $user){
-       // foreach ($user->roles as $role){
-       //     if($role->label == 'admin'){
-         //       return true;
-        //    }
-       // }
         if($user->is_admin()){
             return true;
         }
@@ -84,11 +60,6 @@ class UserPolicy
     }
 
     public function filter_branch(User $user){
-       // foreach ($user->roles as $role){
-      //      if($role->label == 'admin' || $role->label == 'admin_firm'){
-       //         return true;
-       //     }
-     //   }
         if($user->is_admin() || $user->is_admin_firm()){
             return true;
         }

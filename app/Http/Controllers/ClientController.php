@@ -34,6 +34,7 @@ class ClientController extends Controller
             $client->firm_id = $request->firm;
             $client->region_id = $request->region;
             $client->town_id = $request->town;
+            $client->contractor_id = $request->contractor;
             $client->user_id = $request->user;
             $client->name = $request->name;
             $client->phone = $request->phone;
@@ -43,8 +44,6 @@ class ClientController extends Controller
 
             Session::flash('ok_message', 'Филиал успешно создан.');
 
-            //return redirect(route('clients'));
-            //return redirect(route('firms'));
             return redirect(route('firms.id', $client->firm_id));
         }
 
@@ -66,6 +65,7 @@ class ClientController extends Controller
             $client->firm_id = $request->firm;
             $client->region_id = $request->region;
             $client->town_id = $request->town;
+            $client->contractor_id = $request->contractor;
             $client->user_id = $request->user;
             $client->name = $request->name;
             $client->phone = $request->phone;

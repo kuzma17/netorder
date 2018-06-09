@@ -56,28 +56,45 @@ $(document).ready(function () {
     $('#role div select[name=role]').change(function () {
         var token = $('input[name=_token]').val();
         var role = $(this).val();
-        if(role == 'admin_firm' || role == 'client'){
+        if(role == 1){
+            $('#firm').hide();
+            $('#branch').hide();
+        }
+        if(role == 2 || role == 3){
+            if(role == 2){
+                $('#branch').hide();
+            }
             $.post('/ajax_firm', {'_token': token}, function (data) {
-                $('#firm').show();
-                $('#firm div select[name=firm]').html(data);
+                if(data) {
+                    $('#firm').show();
+                    $('#firm div select[name=firm]').html(data);
+                }
             })
         }
-        if(role == 'contractor'){
+        if(role == 4){
+            $('#branch').hide();
             $.post('/ajax_contractor', {'_token': token}, function (data) {
-                $('#firm').show();
-                $('#firm div select[name=firm]').html(data);
+                if(data) {
+                    $('#firm').show();
+                    $('#firm div select[name=firm]').html(data);
+                }
             })
         }
-
     });
 
     $('#firm div select[name=firm]').change(function () {
-        var token = $('input[name=_token]').val();
-        var firm_id = $('#firm div select[name=firm]').val();
-        $.post('/ajax_branch', {'_token': token, id: firm_id}, function (data) {
-            $('#branch').show();
-            $('#branch div select[name=branch]').html(data);
-        })
+        var role = $('#role div select[name=role]').val();
+        if(role == 3) {
+            var token = $('input[name=_token]').val();
+            var firm_id = $('#firm div select[name=firm]').val();
+            $.post('/ajax_branch', {'_token': token, id: firm_id}, function (data) {
+                $('#branch').hide();
+                if (data) {
+                    $('#branch').show();
+                    $('#branch div select[name=branch]').html(data);
+                }
+            })
+        }
     });
 
 

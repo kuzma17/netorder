@@ -13,10 +13,6 @@
                         <td>{{ $contractor->name }}</td>
                     </tr>
                     <tr>
-                        <td>Ответственное лицо</td>
-                        <td>{{ $contractor->user->name }}</td>
-                    </tr>
-                    <tr>
                         <td>Телефон</td>
                         <td>{{ $contractor->phone }}</td>
                     </tr>

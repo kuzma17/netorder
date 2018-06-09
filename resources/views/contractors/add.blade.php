@@ -10,16 +10,6 @@
 
                 <form name="order_order" method="post" class="form-horizontal" action="{{ route('contractor.add') }}">
                     {{ csrf_field() }}
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">User<span class="red">*</span></label>
-                        <div class="col-md-9">
-                            <select name="user" class="form-control">
-                                @foreach($contractor->users() as $user)
-                                    <option value="{{ $user->id }}">{{ $user->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label class="col-md-3 control-label">Name<span class="red">*</span></label>
                         <div class="col-md-9">

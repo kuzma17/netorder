@@ -56,15 +56,20 @@
                                    name="password_confirmation" required>
                         </div>
                     </div>
-                    <div class="form-group" id="role">
+                    <div class="form-group{{ $errors->has('role') ? ' has-error' : '' }}" id="role">
                         <label class="col-md-3 control-label">Тип пользователя <span class="red">*</span></label>
                         <div class="col-md-9">
-                            <select name="role" class="form-control">
-                                <option value="0">Выберите тип пользователя</option>
+                            <select name="role" class="form-control" required>
+                                <option value="">Выберите тип пользователя</option>
                                 @foreach($roles as $role)
-                                    <option value="{{ $role->label }}">{{ $role->name }}</option>
+                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
                                 @endforeach
                             </select>
+                            @if ($errors->has('role'))
+                                <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                            @endif
                         </div>
                     </div>
                     <div class="form-group{{ $errors->has('full_name') ? ' has-error' : '' }}">
@@ -92,14 +97,14 @@
                     <div class="form-group" id="firm" style="display: none">
                         <label class="col-md-3 control-label">Организация <span class="red">*</span></label>
                         <div class="col-md-9">
-                            <select name="firm" class="form-control">
+                            <select name="firm" class="form-control" required>
                             </select>
                         </div>
                     </div>
                     <div class="form-group" id="branch" style="display: none">
                         <label class="col-md-3 control-label">Филиал <span class="red">*</span></label>
                         <div class="col-md-9">
-                            <select name="branch" class="form-control">
+                            <select name="branch" class="form-control" required>
                             </select>
                         </div>
                     </div>

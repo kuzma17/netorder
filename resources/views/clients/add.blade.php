@@ -9,22 +9,13 @@
                             class="red">*</span> обязательны для заполнения.</p>
                 <form name="order_order" method="post" class="form-horizontal" action="{{ route('client.add') }}">
                     {{ csrf_field() }}
-                    <div class="form-group">
-                        <label class="col-md-3 control-label">Организация<span class="red">*</span></label>
-                        <div class="col-md-9">
-                            <select name="firm" class="form-control">
-                                @foreach($client->firms() as $firm)
-                                    <option value="{{ $firm->id }}"
-                                            @if($firm->id == Request::get('firm')) selected @endif>{{ $firm->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>
+                        <input type="hidden" name="firm" value="{{Request::get('firm')}}">
                     <div class="form-group">
                         <label class="col-md-3 control-label">Регион<span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="region" class="form-control">
-                                @foreach($client->regions() as $region)
+                                <option value="0">Выберите регион</option>
+                                @foreach($client->list_regions() as $region)
                                     <option value="{{ $region->id }}">{{ $region->name }}</option>
                                 @endforeach
                             </select>
@@ -34,8 +25,20 @@
                         <label class="col-md-3 control-label">Город, населенный пункт<span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="town" class="form-control">
-                                @foreach($client->towns() as $town)
+                                <option value="0">Выберите город, населенный пункт</option>
+                                @foreach($client->list_towns() as $town)
                                     <option value="{{ $town->id }}">{{ $town->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Подрядчик <span class="red">*</span></label>
+                        <div class="col-md-9">
+                            <select name="contractor" class="form-control">
+                                <option value="0">Выберите подрядчика</option>
+                                @foreach($client->list_contractors() as $contractor)
+                                    <option value="{{ $contractor->id }}">{{ $contractor->name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -44,7 +47,8 @@
                         <label class="col-md-3 control-label">User<span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="user" class="form-control">
-                                @foreach($client->users() as $user)
+                                <option value="0">Выберите пользователя</option>
+                                @foreach($client->list_users() as $user)
                                     <option value="{{ $user->id }}">{{ $user->name }}</option>
                                 @endforeach
                             </select>

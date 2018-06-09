@@ -68,23 +68,18 @@ class User extends Authenticatable
     //    return Client::where('firm_id', $id)->get();
    // }
 
-    public function is_role($role_id)
-    {
-        foreach ($this->roles as $role){
-            if($role->id == $role_id){
-                return true;
-            }
-        }
+   // public function is_role($role_id)
+  //  {
+   //     foreach ($this->roles as $role){
+     //       if($role->id == $role_id){
+     //           return true;
+    //        }
+    //    }
 
-        return false;
-    }
+    //    return false;
+    //}
 
     public function is_admin(){
-       // foreach ($this->roles as $role){
-        //    if($role->label == 'admin'){
-         //       return true;
-           // }
-        //}
         if($this->profile->role->label == 'admin'){
             return true;
         }
@@ -92,12 +87,6 @@ class User extends Authenticatable
     }
 
     public function is_admin_firm(){
-       // foreach ($this->roles as $role){
-      //      if($role->label == 'admin_firm'){
-     //           return true;
-      //      }
-      //  }
-
         if($this->profile->role->label == 'admin_firm'){
             return true;
         }
@@ -105,29 +94,16 @@ class User extends Authenticatable
     }
 
     public function is_client(){
-        //foreach ($this->roles as $role){
-         //   if($role->label == 'client'){
-         //       return true;
-        //    }
-      //  }
         if($this->profile->role->label == 'client'){
             return true;
         }
-
         return false;
     }
 
     public function is_contractor(){
-        //foreach ($this->roles as $role){
-         //   if($role->label == 'contractor'){
-          //      return true;
-           // }
-        //}
-
         if($this->profile->role->label == 'contractor'){
             return true;
         }
-
         return false;
     }
 

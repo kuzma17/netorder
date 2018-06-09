@@ -21,11 +21,6 @@ class OrderPolicy
     }
 
     public function add(User $user){
-       // foreach ($user->roles as $role){
-         //   if($role->label == 'client'){
-           //     return true;
-            //}
-        //}
         if($user->is_client()){
             return true;
         }
@@ -33,19 +28,6 @@ class OrderPolicy
     }
 
     public function edit(User $user, Order $order){
-       // foreach ($user->roles as $role){
-         //   if($role->label == 'admin'){
-           //     return true;
-           // }
-            //if($role->label == 'client'){
-             //   if($order->status->label == 'wait'){
-              //      return true;
-               // }
-           // }
-           // if($role->label == 'contractor'){
-            //    return true;
-           // }
-        //}
         if($user->is_admin()){
             return true;
         }
@@ -59,16 +41,6 @@ class OrderPolicy
     }
 
     public function del(User $user, Order $order){
-       // foreach ($user->roles as $role){
-         //   if($role->label == 'admin'){
-          //      return true;
-           // }
-            //if($role->label == 'client'){
-            //    if($order->status->label == 'wait'){
-             //       return true;
-              //  }
-            //}
-        //}
         if($user->is_admin()){
             return true;
         }
