@@ -42,6 +42,7 @@ $(document).ready(function () {
                }
                if(respond.type != 'application/pdf') {
                    $('.ajax-respond img').attr('src', respond.src);
+                   $('.ajax-respond input[name=act_complete]').val(respond.src);
                }
            }
        });

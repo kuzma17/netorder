@@ -43,7 +43,7 @@ class OrderController extends Controller
 
         $countAllOrder = $this->get_order()->count();
         $countWaitOrder = $this->get_order()->where('status_id', 1)->count();
-        $countWorkOrder = $this->get_order()->where('status_id', 2)->orwhere('status_id', 3)->count();
+        $countWorkOrder = $this->get_order()->whereIn('status_id', [2,3])->count();
         return view('order.list', [
             'orders' => $orders,
             'firms' => $firms,
@@ -58,7 +58,8 @@ class OrderController extends Controller
 
     public function view($id){
         $order = Order::find($id);
-        return view('order.view', ['order'=>$order]);
+        $user = \Auth::user();
+        return view('order.view', ['order'=>$order, 'user'=>$user]);
     }
 
     public function filter(Request $request){
@@ -134,6 +135,7 @@ class OrderController extends Controller
             $order->type_work_id = $request->type_work;
             $order->date_end = $request->date_end;
             $order->comment = $request->comment;
+            $order->act_complete = isset($request->act_complete)?$request->act_complete: '';
             $order->status_id = isset($request->status)? $request->status: 1;
             $order->save();
 

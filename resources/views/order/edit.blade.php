@@ -43,7 +43,8 @@
                     @if($user->is_admin() || $user->is_contractor())
                     <div class="form-group">
                         <div class="ajax-respond col-md-12 control-label">
-                            <img src="" style="width:200px;height:200px">
+                            <img src="{{$order->act_complete or ''}}" style="width:200px;height:200px">
+                            <input type="hidden" name="act_complete" id="act_complete" value="{{$order->act_complete or ''}}">
                             <div style="clear: both"></div>
                         </div>
                         <label class="col-md-3 control-label">Акт</label>
