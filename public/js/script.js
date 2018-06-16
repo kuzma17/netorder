@@ -143,4 +143,15 @@ $(document).ready(function () {
         }
         return false;
     });
+
+    $('#equipment_add').click(function () {
+        var html_item = '<div class="form-group"><label class="col-md-2 control-label">Название</label><div class="col-md-9"><input class="form-control" type="text" name="equipment[]"></div><div class="col-md-1"><a href="#" class="equipment_del" title="Удалить оборудование"><i class="fa fa-trash red"></i></a></div></div>';
+        $('#equipment_list').append(html_item);
+        return false;
+    });
+
+    $(document).on('click', '.equipment_del', function () {
+        $(this).closest('.form-group').remove();
+        return false;
+    })
 });

@@ -108,6 +108,7 @@ class OrderController extends Controller
             $order->client_id = $user->profile->branch_id;
             $order->user_id = $user->id;
             $order->contractor_id = $request->contractor;
+            $order->equipment = isset($request->equipment)? $request->equipment: '';
             $order->date_end = $request->date_end;
             $order->comment = $request->comment;
             $order->status_id = 1;
@@ -134,6 +135,7 @@ class OrderController extends Controller
 
             $order->type_work_id = $request->type_work;
             $order->date_end = $request->date_end;
+            $order->equipment = isset($request->equipment)? $request->equipment: '';
             $order->comment = $request->comment;
             $order->act_complete = isset($request->act_complete)?$request->act_complete: '';
             $order->status_id = isset($request->status)? $request->status: 1;

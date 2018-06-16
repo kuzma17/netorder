@@ -29,6 +29,10 @@ class Client extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function equipments(){
+        return $this->hasMany(Equipment::class);
+    }
+
     public function list_firms(){
         return Firm::where('status', 'on')->orderBy('name')->get();
     }

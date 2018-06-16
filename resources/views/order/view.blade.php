@@ -14,6 +14,9 @@
                         <td>Тип заявки</td><td>{{ $order->typeWork->name }}</td>
                     </tr>
                     <tr>
+                        <td>Оборудование</td><td>{{ $order->equipment }}</td>
+                    </tr>
+                    <tr>
                         <td>Заказчик фирма</td><td>{{ $order->firm->name }}</td>
                     </tr>
                     @if($order->client)

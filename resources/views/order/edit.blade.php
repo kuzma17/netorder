@@ -22,6 +22,18 @@
                             </select>
                         </div>
                     </div>
+                    @if(($user->is_client() || $user->is_admin) && \App\Equipment::where('client_id', $order->client_id)->count() > 0)
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Оборудование</label>
+                            <div class="col-md-9">
+                                <select name="equipment" class="form-control">
+                                    @foreach(\App\Equipment::where('client_id', $order->client_id)->get() as $equipment)
+                                        <option value="{{ $equipment->name }}">{{ $equipment->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    @endif
                     <div class="form-group{{ $errors->has('date_end') ? ' has-error' : '' }}">
                         <label class="col-md-3 control-label">дата выполнения</label>
                         <div class="col-md-9">

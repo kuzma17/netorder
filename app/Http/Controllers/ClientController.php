@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Client;
+use App\Equipment;
 use Gate;
 use Illuminate\Http\Request;
 use Session;
@@ -42,6 +43,14 @@ class ClientController extends Controller
             $client->status = $request->status;
             $client->save();
 
+            if(count($request->equipment) > 0) {
+                $equipments = [];
+                foreach ($request->equipment as $item) {
+                    $equipments[] = new Equipment(['name' => $item]);
+                }
+                $client->equipments()->saveMany($equipments);
+            }
+
             Session::flash('ok_message', 'Филиал успешно создан.');
 
             return redirect(route('firms.id', $client->firm_id));
@@ -73,7 +82,23 @@ class ClientController extends Controller
             $client->status = $request->status;
             $client->save();
 
-            Session::flash('ok_message', 'Филиал успешно отредактирован.');
+            if(count($request->equipment) > 0) {
+                $client->equipments()->delete();
+                //foreach ($client->equipments() as $equipment){
+                //     $equipment->delete();
+                // }
+                $equipments = [];
+                foreach ($request->equipment as $item) {
+                    //  $client->equipments()->create([
+                    //    'client_id' => $client->id,
+                    //   'name' => $item
+                    //]);
+                    $equipments[] = new Equipment(['name' => $item]);
+                }
+                $client->equipments()->saveMany($equipments);
+            }
+
+            Session::flash('ok_message', 'Филиал успешно отредактирован.'.count($request->equipment));
 
             //return redirect(route('clients'));
             //return redirect(route('firms'));
