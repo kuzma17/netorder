@@ -12,7 +12,7 @@
                       action="{{ route('contractor.edit', ['id'=>$contractor->id]) }}">
                     {{ csrf_field() }}
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                        <label class="col-md-3 control-label">Name<span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Название<span class="red">*</span></label>
                         <div class="col-md-9">
                             <input class="form-control" type="text" name="name"
                                    value="{{old('name', $contractor->name)}}">

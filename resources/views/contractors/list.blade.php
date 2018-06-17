@@ -9,9 +9,9 @@
                             <thead>
                             <tr>
                                 <th>id</th>
-                                <th>name</th>
-                                <th>phone</th>
-                                <th>status</th>
+                                <th>Название</th>
+                                <th>телефон</th>
+                                <th>статус</th>
                                 <th></th>
                             </tr>
                             </thead>
