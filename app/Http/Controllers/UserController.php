@@ -38,14 +38,20 @@ class UserController extends Controller
 
         if($request->isMethod('post')){
 
-           $this->validate($request, [
+           $rules = [
                'name' => 'required|string|max:255',
                'email' => 'required|string|email|max:255|unique:users',
                'password' => 'required|string|min:6|confirmed',
                'full_name' => 'required|string',
                'phone' => 'required|string|numeric',
                'role' => 'required'
-           ]);
+           ];
+
+            if($request->role != 1){
+                $rules['firm'] = 'required|not_in:0';
+            }
+
+            $this->validate($request, $rules);
 
             $user->name = $request->name;
             $user->email = $request->email;
@@ -85,7 +91,7 @@ class UserController extends Controller
         }
 
         if($request->isMethod('post')){
-            $rule = [
+            $rules = [
                 'name' => 'required|string|max:255',
                 'email' => [
                     'required',
@@ -96,17 +102,21 @@ class UserController extends Controller
                 ],
                 'full_name' => 'required|string',
                 'phone' => 'required|string|numeric',
-                'role' => 'required'
+                'role' => 'required',
                 ];
 
-            $this->validate($request, $rule);
+            if($request->role != 1){
+                $rules['firm'] = 'required|not_in:0';
+            }
+
+            $this->validate($request, $rules);
 
             $user->name = $request->name;
             $user->email = $request->email;
             $user->profile->name = $request->full_name;
             $user->profile->role_id = $request->role;
             $user->profile->phone = $request->phone;
-            $user->profile->firm_id = isset($request->firm)?$request->firm:0;
+            $user->profile->firm_id = isset($request->firm)?$request->firm:0; // фирма клиент/подрядчик
             $user->profile->branch_id = isset($request->branch)?$request->branch:0;
             //$user->profile->contarctor_id = isset($request->contarctor)?$request->contarctor:0;
             $user->profile->status = $request->status;

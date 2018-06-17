@@ -44,40 +44,6 @@ class User extends Authenticatable
         return $this->hasOne(UserProfile::class);
     }
 
-    public function contractor(){
-        return $this->hasOne(Contractor::class);
-    }
-
-    public function firm(){
-        return $this->hasOne(Firm::class);
-    }
-
-    public function client(){
-        return $this->hasOne(Client::class);
-    }
-
-    //public function role_list(){
-    //    return Role::all();
-   // }
-
-    //public function firm_list(){
-      //  return Firm::all();
-    //}
-
-  //  public function branch_list($id){
-    //    return Client::where('firm_id', $id)->get();
-   // }
-
-   // public function is_role($role_id)
-  //  {
-   //     foreach ($this->roles as $role){
-     //       if($role->id == $role_id){
-     //           return true;
-    //        }
-    //    }
-
-    //    return false;
-    //}
 
     public function is_admin(){
         if($this->profile->role->label == 'admin'){

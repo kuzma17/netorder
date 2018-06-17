@@ -20,7 +20,7 @@
                             </select>
                         </div>
                     </div>
-                    @if($user->is_client() && count($user->client->equipments) > 0)
+                    @if($user->is_client() && isset($user->client->equipments) && count($user->client->equipments) > 0)
                         <div class="form-group">
                             <label class="col-md-3 control-label">Оборудование</label>
                             <div class="col-md-9">

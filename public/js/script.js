@@ -57,6 +57,8 @@ $(document).ready(function () {
     $('#role div select[name=role]').change(function () {
         var token = $('input[name=_token]').val();
         var role = $(this).val();
+        $('#firm div select[name=firm]').prop('required',false);
+        $('#branch div select[name=branch]').prop('required',false);
         if(role == 1){
             $('#firm').hide();
             $('#branch').hide();
@@ -69,6 +71,7 @@ $(document).ready(function () {
                 if(data) {
                     $('#firm').show();
                     $('#firm div select[name=firm]').html(data);
+                    $('#firm div select[name=firm]').prop('required',true);
                 }
             })
         }
@@ -78,6 +81,7 @@ $(document).ready(function () {
                 if(data) {
                     $('#firm').show();
                     $('#firm div select[name=firm]').html(data);
+                    $('#firm div select[name=firm]').prop('required',true);
                 }
             })
         }
@@ -93,6 +97,7 @@ $(document).ready(function () {
                 if (data) {
                     $('#branch').show();
                     $('#branch div select[name=branch]').html(data);
+                    $('#branch div select[name=branch]').prop('required',true);
                 }
             })
         }

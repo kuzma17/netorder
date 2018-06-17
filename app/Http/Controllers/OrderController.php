@@ -131,12 +131,15 @@ class OrderController extends Controller
 
         if($request->isMethod('post')){
 
-            $this->validate($request, $order->rules);
+            if($user->is_admin() || $user->is_client()) {
 
-            $order->type_work_id = $request->type_work;
-            $order->date_end = $request->date_end;
-            $order->equipment = isset($request->equipment)? $request->equipment: '';
-            $order->comment = $request->comment;
+                $this->validate($request, $order->rules);
+
+                $order->type_work_id = $request->type_work;
+                $order->date_end = $request->date_end;
+                $order->equipment = isset($request->equipment) ? $request->equipment : '';
+                $order->comment = $request->comment;
+            }
             $order->act_complete = isset($request->act_complete)?$request->act_complete: '';
             $order->status_id = isset($request->status)? $request->status: 1;
             $order->save();

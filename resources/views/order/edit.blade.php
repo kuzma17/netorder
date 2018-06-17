@@ -22,7 +22,7 @@
                             </select>
                         </div>
                     </div>
-                    @if(($user->is_client() || $user->is_admin) && \App\Equipment::where('client_id', $order->client_id)->count() > 0)
+                    @if(($user->is_client() || $user->is_admin()) && \App\Equipment::where('client_id', $order->client_id)->count() > 0)
                         <div class="form-group">
                             <label class="col-md-3 control-label">Оборудование</label>
                             <div class="col-md-9">

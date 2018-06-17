@@ -62,7 +62,7 @@
                             <select name="role" class="form-control" required>
                                 <option value="">Выберите тип пользователя</option>
                                 @foreach($roles as $role)
-                                    <option value="{{ $role->id }}">{{ $role->name }}</option>
+                                    <option value="{{ $role->id }}" @if(old() && old('role') == $role->id) selected="selected" @endif>{{ $role->name }}</option>
                                 @endforeach
                             </select>
                             @if ($errors->has('role'))
@@ -75,7 +75,7 @@
                     <div class="form-group{{ $errors->has('full_name') ? ' has-error' : '' }}">
                         <label class="col-md-3 control-label">ФИО <span class="red">*</span></label>
                         <div class="col-md-9">
-                            <input class="form-control" type="text" name="full_name" value="{{old('full_name', null)}}">
+                            <input class="form-control" type="text" name="full_name" value="{{old('full_name', null)}}" required>
                             @if ($errors->has('full_name'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('full_name') }}</strong>
@@ -86,7 +86,7 @@
                     <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                         <label class="col-md-3 control-label">Телефон <span class="red">*</span></label>
                         <div class="col-md-9">
-                            <input class="form-control" type="text" name="phone" value="{{old('phone', null)}}">
+                            <input class="form-control" type="text" name="phone" value="{{old('phone', null)}}" required>
                             @if ($errors->has('phone'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('phone') }}</strong>
@@ -94,17 +94,22 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-group" id="firm" style="display: none">
+                    <div class="form-group{{ $errors->has('firm') ? ' has-error' : '' }}" id="firm" style="display: none">
                         <label class="col-md-3 control-label">Организация <span class="red">*</span></label>
                         <div class="col-md-9">
-                            <select name="firm" class="form-control" required>
+                            <select name="firm" class="form-control">
                             </select>
+                            @if ($errors->has('firm'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('firm') }}</strong>
+                                </span>
+                            @endif
                         </div>
                     </div>
                     <div class="form-group" id="branch" style="display: none">
                         <label class="col-md-3 control-label">Филиал <span class="red">*</span></label>
                         <div class="col-md-9">
-                            <select name="branch" class="form-control" required>
+                            <select name="branch" class="form-control">
                             </select>
                         </div>
                     </div>

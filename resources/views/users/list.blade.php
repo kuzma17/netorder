@@ -17,6 +17,7 @@
                             <th>email</th>
                             <th>Телефон</th>
                             <th>Тип</th>
+                            <th>Фирма</th>
                             <th>Статус</th>
                             <th></th>
                         </tr>
@@ -28,6 +29,8 @@
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->profile->phone}}</td>
                                 <td>{{$user->profile->role->name}}</td>
+                                <td>{{$user->profile->firm->name or ''}}</td>
+                                <td>{{$user->profile->status}}</td>
                                 <td>
                                     <a title="Просмотр пользователя" href="{{route('user.view', ['id'=>$user->id])}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
                                     <a title="Редактировать пользователя" href="{{route('user.edit', ['id'=>$user->id])}}" ><i class="fa fa-edit"></i></a>

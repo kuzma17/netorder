@@ -31,13 +31,13 @@
                     @if($user->profile->firm)
                         <tr>
                             <td>Организация</td>
-                            <td>{{ $user->profile->firm }}</td>
+                            <td>{{ $user->profile->firm->name }}</td>
                         </tr>
                     @endif
                     @if($user->profile->client)
                         <tr>
                             <td>Филиал</td>
-                            <td>{{ $user->profile->client }}</td>
+                            <td>{{ $user->profile->client->name }}</td>
                         </tr>
                     @endif
                     <tr>

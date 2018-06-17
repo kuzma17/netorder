@@ -70,21 +70,26 @@
                             @endif
                         </div>
                     </div>
-                    <div class="form-group" id="firm" @if(count($firms) < 1) style="display: none" @endif>
+                    <div class="form-group{{ $errors->has('firm') ? ' has-error' : '' }}" id="firm" @if(count($firms) < 1) style="display: none" @endif>
                         <label class="col-md-3 control-label">Организация <span class="red">*</span></label>
                         <div class="col-md-9">
-                            <select name="firm" class="form-control" required>
+                            <select name="firm" class="form-control">
                                 @foreach($firms as $firm)
                                     <option value="{{ $firm->id }}"
                                             @if($firm->id == $user->profile->firm_id) selected @endif>{{ $firm->name }}</option>
                                 @endforeach
                             </select>
+                            @if ($errors->has('firm'))
+                                <span class="help-block">
+                                    <strong>{{ $errors->first('firm') }}</strong>
+                                </span>
+                            @endif
                         </div>
                     </div>
                     <div class="form-group" id="branch" @if(count($branches) < 1) style="display: none" @endif>
                         <label class="col-md-3 control-label">Филиал <span class="red">*</span></label>
                         <div class="col-md-9">
-                            <select name="branch" class="form-control" required>
+                            <select name="branch" class="form-control">
                                 @foreach($branches as $branch)
                                     <option value="{{ $branch->id }}" @if($user->profile->branch_id == $branch->id) selected @endif>{{ $branch->name }}</option>
                                 @endforeach

@@ -127,6 +127,9 @@ i.fa-edit{
 i.fa-trash{
     color: red;
 }
+i.fa-key{
+    color: orange;
+}
 i.fa-caret-down, i.fa-caret-up{
     font-size: 20px;
 }
