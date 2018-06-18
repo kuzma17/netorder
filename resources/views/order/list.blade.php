@@ -20,12 +20,12 @@
                                        value="{{ Request::get('date_to')}}">
                             </div>
                         </div>
-                        @can('filter', \App\User::class)
-                            <div class="col-md-6 form-group" id="firm">
+                        @can('filter_firm', \App\User::class)
+                            <div class="col-md-6 form-group">
                                 <label class="col-md-3 control-label">Фирма</label>
                                 <div class="col-md-9 input-group-sm">
                                     <select name="firm" id="firm" class="form-control">
-                                        <option value="0">-</option>
+                                        <option value=""></option>
                                         @foreach($firms as $firm)
                                             <option value="{{ $firm->id }}"
                                                     @if(Request::get('firm') == $firm->id) selected @endif>{{ $firm->name }}</option>
@@ -35,11 +35,11 @@
                             </div>
                         @endcan
                         @can('filter_branch', \App\User::class)
-                            <div class="col-md-6 form-group" id="branch">
-                                <label class="col-md-3 control-label">Филиал</label>
+                            <div class="col-md-6 form-group">
+                                <label class="col-md-3 control-label">Офис</label>
                                 <div class="col-md-9 input-group-sm">
-                                    <select name="branch" id="branch" class="form-control">
-                                        <option value="0">-</option>
+                                    <select id="branch" name="branch" class="form-control">
+                                        <option value=""></option>
                                         @foreach($clients as $client)
                                             <option value="{{ $client->id }}"
                                                     @if(Request::get('branch') == $client->id) selected @endif>{{ $client->name }}</option>
@@ -48,12 +48,12 @@
                                 </div>
                             </div>
                         @endcan
-                        @can('filter', \App\User::class)
+                        @can('filter_contractor', \App\User::class)
                             <div class="col-md-6 form-group">
                                 <label class="col-md-3 control-label">Подрядчик</label>
                                 <div class="col-md-9 input-group-sm">
                                     <select name="contractor" id="contractor" class="form-control">
-                                        <option value="0">-</option>
+                                        <option value=""></option>
                                         @foreach($contractors as $contractor)
                                             <option value="{{ $contractor->id }}"
                                                     @if(Request::get('contractor') == $contractor->id) selected @endif>{{ $contractor->name }}</option>
@@ -66,7 +66,7 @@
                             <label class="col-md-3 control-label">Статус</label>
                             <div class="col-md-9 input-group-sm">
                                 <select name="status" id="status" class="form-control">
-                                    <option value="0">-</option>
+                                    <option value=""></option>
                                     @foreach($statuses as $status)
                                         <option value="{{ $status->id }}"
                                                 @if(Request::get('status') == $status->id) selected @endif>{{ $status->name }}</option>
@@ -108,9 +108,10 @@
                         <th>id</th>
                         <th>Тип</th>
                         <th>Дата выполнения</th>
-                        <th>Комментарий</th>
+                        <th>Форма</th>
+                        <th>Офис</th>
                         <th>Статус</th>
-                        <th>время созд./изм.</th>
+                        <th>Время созд./изм.</th>
                         <th>test</th>
                         <th></th>
                     </tr>
@@ -120,7 +121,8 @@
                             <td>{{$order->id}}</td>
                             <td>{{$order->typeWork->name}}</td>
                             <td>{{ date('Y.m.d', strtotime($order->date_end))}}</td>
-                            <td>{{$order->comment}}</td>
+                            <td>{{$order->firm->name}}</td>
+                            <td>{{$order->client->name}}</td>
                             <td><span class="label label-{{$order->status->style}}">{{$order->status->name}}</span></td>
                             <td>{{ date("Y.m.d h:i", strtotime($order->updated_at)) }}</td>
                             <td>f:{{$order->firm_id}} b:{{$order->client_id}} c:{{$order->contractor_id}}</td>

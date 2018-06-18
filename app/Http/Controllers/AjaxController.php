@@ -26,7 +26,7 @@ class AjaxController extends Controller
         $htm = '';
         $branches = Client::where('firm_id', $id)->where('status', 'on')->orderBy('name')->get();
         if(count($branches) > 0) {
-            $htm .= '<option value="">Выберите филиал</option>';
+            $htm .= '<option value="">Выберите офис</option>';
             foreach ($branches as $branch) {
                 $htm .= '<option value="' . $branch->id . '">' . $branch->name . '</option>';
             }

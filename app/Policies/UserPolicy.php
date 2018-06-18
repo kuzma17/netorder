@@ -52,15 +52,22 @@ class UserPolicy
         return false;
     }
 
-    public function filter(User $user){
-        if($user->is_admin()){
+    public function filter_firm(User $user){
+        if($user->is_admin() || $user->is_contractor()){
             return true;
         }
         return false;
     }
 
     public function filter_branch(User $user){
-        if($user->is_admin() || $user->is_admin_firm()){
+        if($user->is_admin() || $user->is_admin_firm() || $user->is_contractor()){
+            return true;
+        }
+        return false;
+    }
+
+    public function filter_contractor(User $user){
+        if($user->is_admin()){
             return true;
         }
         return false;

@@ -32,14 +32,19 @@ class OrderController extends Controller
         }
     }
 
-    public function list($orders = [], $filter = false){
+    public function list($orders = [], $firm_id = '', $filter = false){
         if(!$filter) {
             $orders = $this->get_order()->orderBy('updated_at', 'desc')->paginate(20);;
+        }
+        if($firm_id){
+            $firmId = $firm_id;
+        }else{
+            $firmId = \Auth::user()->profile->firm_id;
         }
         $firms = Firm::where('status', 'on')->orderBy('name')->get();
         $contractors = Contractor::where('status', 'on')->orderBy('name')->get();
         $statuses = Status::all();
-        $clients = Client::where('firm_id', \Auth::user()->profile->firm_id)->get();
+        $clients = Client::where('firm_id', $firmId)->get();
 
         $countAllOrder = $this->get_order()->count();
         $countWaitOrder = $this->get_order()->where('status_id', 1)->count();
@@ -87,7 +92,8 @@ class OrderController extends Controller
             ->orderBy('updated_at', 'desc')->paginate(20);
         //return view('order.list', ['orders'=>$orders]);
         $filter = true;
-        return $this->list($orders, $filter);
+        $firm_id = $request->firm;
+        return $this->list($orders, $firm_id, $filter);
     }
 
     public function add(Request $request){

@@ -107,7 +107,7 @@
                         </div>
                     </div>
                     <div class="form-group" id="branch" style="display: none">
-                        <label class="col-md-3 control-label">Филиал <span class="red">*</span></label>
+                        <label class="col-md-3 control-label">Офис <span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="branch" class="form-control">
                             </select>

@@ -175,3 +175,15 @@ i.fa-caret-down, i.fa-caret-up{
     font-size: 13px;
     font-weight: bold;
 }
+
+.badge-error {
+    background-color: #b94a48;
+}
+
+.badge-warning {
+    background-color: #f89406;
+}
+
+.badge-info {
+    background-color: #3a87ad;
+}

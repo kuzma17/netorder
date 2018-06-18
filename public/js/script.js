@@ -103,6 +103,16 @@ $(document).ready(function () {
         }
     });
 
+    $('#firm').change(function () {
+        var token = $('input[name=_token]').val();
+        var firm_id = $('#firm').val();
+        $.post('/ajax_branch', {'_token': token, id: firm_id}, function (data) {
+            if (data) {
+                $('#branch').html(data);
+            }
+        });
+    });
+
 
     $('td.firm_dropdown').click(function () {
         $(this).parent().next('.branch').toggle(500);
@@ -158,5 +168,7 @@ $(document).ready(function () {
     $(document).on('click', '.equipment_del', function () {
         $(this).closest('.form-group').remove();
         return false;
-    })
+    });
+
+    $('.tooltip-info').tooltip();
 });

@@ -7,7 +7,7 @@
     </div>
 @endif
 @if($message = Session::pull('info_message'))
-    <div class="alert alert-warning alert-message">
+    <div class="alert alert-info alert-message">
         <button type="button" class="close" data-dismiss="alert" aria-label="Close">
             <span aria-hidden="true">&times;</span>
         </button>

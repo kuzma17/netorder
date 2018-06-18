@@ -57,6 +57,7 @@ class FirmController extends Controller
             $Firm->save();
 
             Session::flash('ok_message', 'Организация успешно создана.');
+            Session::flash('info_message', 'Необходимо создать хотя-бы 1 филиал.');
 
             return redirect(route('firms'));
         }

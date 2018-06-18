@@ -47,6 +47,8 @@
                         </div>
                     </div>
                 </form>
+
+                <p class="panel-info"><i class="fa fa-info-circle" aria-hidden="true"></i> Необходимо создать хотя-бы 1 офис.</p>
             </div>
         </div>
     </div>
