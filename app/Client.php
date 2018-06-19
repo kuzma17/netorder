@@ -33,6 +33,10 @@ class Client extends Model
         return $this->hasMany(Equipment::class);
     }
 
+    public function contractor(){
+        return $this->belongsTo(Contractor::class);
+    }
+
     public function list_firms(){
         return Firm::where('status', 'on')->orderBy('name')->get();
     }

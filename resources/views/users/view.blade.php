@@ -18,7 +18,7 @@
                     </tr>
                     <tr>
                         <td>Тип пользователя</td>
-                        <td></td>
+                        <td>{{ $user->profile->role->name }}</td>
                     </tr>
                     <tr>
                         <td>ФИО</td>
@@ -28,6 +28,7 @@
                         <td>Телефон</td>
                         <td>{{ $user->profile->phone }}</td>
                     </tr>
+                    @if($user->is_admin_firm() || $user->is_client())
                     @if($user->profile->firm)
                         <tr>
                             <td>Организация</td>
@@ -38,6 +39,13 @@
                         <tr>
                             <td>Филиал</td>
                             <td>{{ $user->profile->client->name }}</td>
+                        </tr>
+                    @endif
+                    @endif
+                    @if($user->is_contractor())
+                        <tr>
+                            <td>Организация</td>
+                            <td>{{ $user->profile->contractor->name }}</td>
                         </tr>
                     @endif
                     <tr>

@@ -113,7 +113,8 @@ class OrderController extends Controller
             $order->firm_id = $user->profile->firm_id;
             $order->client_id = $user->profile->branch_id;
             $order->user_id = $user->id;
-            $order->contractor_id = $request->contractor;
+            //$order->contractor_id = $request->contractor;
+            $order->contractor_id = $user->profile->client->contractor_id;
             $order->equipment = isset($request->equipment)? $request->equipment: '';
             $order->date_end = $request->date_end;
             $order->comment = $request->comment;

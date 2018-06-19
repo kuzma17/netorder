@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Firm;
-use DB;
 use Gate;
 use Illuminate\Http\Request;
 use Session;
@@ -12,25 +11,6 @@ class FirmController extends Controller
 {
     public function list($id = 0){
         $firms = Firm::orderBy('updated_at', 'asc')->paginate(20);
-        //$firms = DB::table('firms')
-          //  ->select('firms.id as firm_id', 'firms.name as firm', 'firms.status as firm_status',
-           //     'clients.id as client_id', 'clients.name as client', 'clients.status as client_status')
-           // ->leftJoin('clients', 'firms.id', '=', 'clients.firm_id')
-           // ->orderBy('firm_id', 'asc')
-           // ->orderBy('client_id', 'asc')
-           // ->get();
-       // $list = [];
-
-        //foreach ($firms as $firm){
-            //$list[$firm->id]['name'] = $firm->name;
-            //$list[$firm->id]['status'] = $firm->status;
-           // echo $firm->id.'<br>';
-          //  dd($firm->clients);
-          // echo '<br>';
-        //}
-
-        //dd($firms);
-
         return view('firms.list', ['firms'=>$firms, 'id'=>$id]);
     }
 
@@ -57,7 +37,7 @@ class FirmController extends Controller
             $Firm->save();
 
             Session::flash('ok_message', 'Организация успешно создана.');
-            Session::flash('info_message', 'Необходимо создать хотя-бы 1 филиал.');
+            Session::flash('info_message', 'Необходимо создать хотя-бы 1 филиал. Можно также создать для организации администратора предприятия в разделе пользователи.');
 
             return redirect(route('firms'));
         }

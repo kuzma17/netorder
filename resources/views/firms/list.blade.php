@@ -70,7 +70,7 @@
                                                 <br>
                                                 <a href="{{route('client.add', ['firm'=>$firm->id])}}"
                                                    style="float: right; margin-top: -20px">
-                                                    <button type="button" class="btn btn-default" style="border-color: green">Создать филиал
+                                                    <button type="button" class="btn btn-default" style="border-color: green">Создать офис
                                                     </button>
                                                 </a>
 

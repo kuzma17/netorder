@@ -56,17 +56,6 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">User<span class="red">*</span></label>
-                                <div class="col-md-9">
-                                    <select name="user" class="form-control">
-                                        @foreach($client->list_users() as $user)
-                                            <option value="{{ $user->id }}"
-                                                    @if($client->user_id == $user->id) selected @endif>{{ $user->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                            </div>
                             <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                                 <label class="col-md-3 control-label">Название<span class="red">*</span></label>
                                 <div class="col-md-9">

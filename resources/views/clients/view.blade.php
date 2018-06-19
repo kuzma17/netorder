@@ -3,7 +3,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-8 col-md-offset-2">
-                <h3>Просмотр филиала</h3>
+                <h3>Просмотр офиса</h3>
                 <div style="clear: both"></div>
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#main">Основные данные</a></li>
@@ -31,10 +31,6 @@
                             <tr>
                                 <td>Название</td>
                                 <td>{{ $client->name }}</td>
-                            </tr>
-                            <tr>
-                                <td>Ответственное лицо, менеджер</td>
-                                <td>{{ $client->user->name }}</td>
                             </tr>
                             <tr>
                                 <td>Телефон</td>

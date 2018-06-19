@@ -36,7 +36,6 @@ class ClientController extends Controller
             $client->region_id = $request->region;
             $client->town_id = $request->town;
             $client->contractor_id = $request->contractor;
-            $client->user_id = $request->user;
             $client->name = $request->name;
             $client->phone = $request->phone;
             $client->address = $request->address;
@@ -51,7 +50,8 @@ class ClientController extends Controller
                 $client->equipments()->saveMany($equipments);
             }
 
-            Session::flash('ok_message', 'Филиал успешно создан.');
+            Session::flash('ok_message', 'Офис успешно создан.');
+            Session::flash('info_message', 'Необходимо создать пользователя, ответственного за данный офис в разделе пользователи.');
 
             return redirect(route('firms.id', $client->firm_id));
         }
@@ -75,7 +75,6 @@ class ClientController extends Controller
             $client->region_id = $request->region;
             $client->town_id = $request->town;
             $client->contractor_id = $request->contractor;
-            $client->user_id = $request->user;
             $client->name = $request->name;
             $client->phone = $request->phone;
             $client->address = $request->address;
@@ -84,15 +83,8 @@ class ClientController extends Controller
 
             if(count($request->equipment) > 0) {
                 $client->equipments()->delete();
-                //foreach ($client->equipments() as $equipment){
-                //     $equipment->delete();
-                // }
                 $equipments = [];
                 foreach ($request->equipment as $item) {
-                    //  $client->equipments()->create([
-                    //    'client_id' => $client->id,
-                    //   'name' => $item
-                    //]);
                     $equipments[] = new Equipment(['name' => $item]);
                 }
                 $client->equipments()->saveMany($equipments);
@@ -100,8 +92,6 @@ class ClientController extends Controller
 
             Session::flash('ok_message', 'Филиал успешно отредактирован.'.count($request->equipment));
 
-            //return redirect(route('clients'));
-            //return redirect(route('firms'));
             return redirect(route('firms.id', $client->firm_id));
         }
 
@@ -118,7 +108,6 @@ class ClientController extends Controller
 
         $client->delete();
         Session::flash('ok_message', 'Филиал успешно удален.');
-        //return redirect(route('clients'));
         return redirect(route('firms'));
     }
 }

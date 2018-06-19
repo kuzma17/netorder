@@ -20,7 +20,6 @@
     <div class="content">
         <div style="height: 35px"></div>
         @include('layouts.menu')
-
         @yield('content')
     </div>
     <div class="footer">

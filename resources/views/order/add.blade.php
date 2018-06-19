@@ -20,19 +20,19 @@
                             </select>
                         </div>
                     </div>
-                    @if($user->is_client() && isset($user->client->equipments) && count($user->client->equipments) > 0)
+                    @if($user->is_client() && isset($user->profile->client->equipments) && count($user->profile->client->equipments) > 0)
                         <div class="form-group">
                             <label class="col-md-3 control-label">Оборудование</label>
                             <div class="col-md-9">
                                 <select name="equipment" class="form-control">
-                                    @foreach($user->client->equipments as $equipment)
+                                    @foreach($user->profile->client->equipments as $equipment)
                                         <option value="{{ $equipment->name }}">{{ $equipment->name }}</option>
                                     @endforeach
                                 </select>
                             </div>
                         </div>
                     @endif
-                    <div class="form-group">
+                    <!--<div class="form-group">
                         <label class="col-md-3 control-label">Подрядчик <span class="red">*</span></label>
                         <div class="col-md-9">
                             <select name="contractor" class="form-control">
@@ -41,7 +41,7 @@
                                 @endforeach
                             </select>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="form-group{{ $errors->has('date_end') ? ' has-error' : '' }}">
                         <label class="col-md-3 control-label">дата выполнения <span class="red">*</span></label>
                         <div class="col-md-9">

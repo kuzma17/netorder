@@ -73,4 +73,6 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('/contractor/edit/{id}', ['as'=>'contractor.edit', 'uses'=>'ContractorController@edit']);
     Route::get('/contractor/del/{id}', ['as'=>'contractor.del', 'uses'=>'ContractorController@del']);
 
+    Route::get('/help', ['as'=>'help', 'uses'=>'HelpController@help']);
+
 });
