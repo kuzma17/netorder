@@ -27,7 +27,7 @@ class UploadController extends Controller
             if($mime_type == 'application/pdf') {
                 $file->move($dir, $filename);
             }else{
-                Image::make($tmp_name)->resize(200, 300)->save($dir . $filename);
+                Image::make($tmp_name)->resize(700, 1000)->save($dir . $filename);
             }
 
             return response()->json(['src'=> $src, 'type'=>$tmp_name]);

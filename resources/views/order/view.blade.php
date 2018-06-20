@@ -60,7 +60,7 @@
     @if($user->is_admin() || $user->is_contractor())
         <div id="myModal" class="modal fade">
             <div class="modal-dialog">
-                <div class="modal-content">
+                <div class="modal-content" style="width: 750px">
                     <div class="modal-header"><button class="close" type="button" data-dismiss="modal">×</button>
                         <h4 class="modal-title">Заголовок окна</h4>
                     </div>
