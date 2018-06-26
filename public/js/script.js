@@ -159,7 +159,7 @@ $(document).ready(function () {
         return false;
     });
 
-    $('#equipment_add').click(function () {
+   /* $('#equipment_add').click(function () {
         var html_item = '<div class="form-group"><label class="col-md-2 control-label">Название</label><div class="col-md-9"><input class="form-control" type="text" name="equipment[]"></div><div class="col-md-1"><a href="#" class="equipment_del" title="Удалить оборудование"><i class="fa fa-trash red"></i></a></div></div>';
         $('#equipment_list').append(html_item);
         return false;
@@ -167,6 +167,47 @@ $(document).ready(function () {
 
     $(document).on('click', '.equipment_del', function () {
         $(this).closest('.form-group').remove();
+        return false;
+    });*/
+
+    $('#equipment_add').click(function () {
+        var html_item = '<div class="printer">' +
+            '<div class="form-group">' +
+            '<label class="col-md-3 control-label">Модель принтера</label>' +
+            '<div class="col-md-8"><input class="form-control" type="text" name="equipment[]"></div>' +
+            '<div class="col-md-1"><a href="#" class="equipment_del" title="Удалить принтер"><i class="fa fa-trash red"></i></a></div>' +
+            '</div>' +
+            '<div class="regenerate">' +
+            '<div class="form-group cartridge">' +
+            '<label class="col-md-3 control-label">Картридж/Стоимость</label>' +
+            '<div class="col-md-6"><input class="form-control" type="text" name="cartridge[]"></div>' +
+            '<div class="col-md-2"><input class="form-control" type="text" name="cartridge[]"></div>' +
+            '<div class="col-md-1"><a href="#" class="equipment_del" title="Удалить картриджа"><i class="fa fa-times red"></i></a></div>' +
+            '</div>' +
+            '</div>' +
+            '<button type="button" class="add_cartridge">добавить картридж</button>' +
+            '</div>';
+        $('#equipment_list').append(html_item);
+        return false;
+    });
+
+    $(document).on('click', '.add_cartridge', function () {
+        var html_cartridge = '<div class="form-group cartridge">' +
+            '<label class="col-md-3 control-label">Картридж/Стоимость</label>' +
+            '<div class="col-md-6"><input class="form-control" type="text" name="cartridge[]"></div>' +
+            '<div class="col-md-2"><input class="form-control" type="text" name="cartridge[]"></div>' +
+            '<div class="col-md-1"><a href="#" class="cartridge_del" title="Удалить картриджа"><i class="fa fa-times red"></i></a></div>' +
+            '</div>';
+        $(this).prev().append(html_cartridge);
+    });
+
+    $(document).on('click', '.cartridge_del', function () {
+        $(this).closest('.cartridge').remove();
+        return false;
+    });
+
+    $(document).on('click', '.equipment_del', function () {
+        $(this).closest('.printer').remove();
         return false;
     });
 
