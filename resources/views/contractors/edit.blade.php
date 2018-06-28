@@ -8,9 +8,11 @@
                 <p class="panel-info"><i class="fa fa-info-circle" aria-hidden="true"></i> Поля отмеченные <span
                             class="red">*</span> обязательны для заполнения.</p>
 
-                <form name="order_order" method="post" class="form-horizontal"
-                      action="{{ route('contractor.edit', ['id'=>$contractor->id]) }}">
+                <form name="contarctor_form" method="post" class="form-horizontal"
+                      action="{{ route('contractors.update', ['id'=>$contractor->id]) }}">
                     {{ csrf_field() }}
+                    <!--<input name="_method" type="hidden" value="PUT">-->
+                        {{ method_field('PUT') }}
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label class="col-md-3 control-label">Название<span class="red">*</span></label>
                         <div class="col-md-9">

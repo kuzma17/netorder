@@ -8,7 +8,7 @@
                 <p class="panel-info"><i class="fa fa-info-circle" aria-hidden="true"></i> Поля отмеченные <span
                             class="red">*</span> обязательны для заполнения.</p>
 
-                <form name="order_order" method="post" class="form-horizontal" action="{{ route('contractor.add') }}">
+                <form name="contarctor_form" method="post" class="form-horizontal" action="{{ route('contractors.store') }}">
                     {{ csrf_field() }}
                     <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
                         <label class="col-md-3 control-label">Название<span class="red">*</span></label>

@@ -65,13 +65,15 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('/client/edit/{id}', ['as'=>'client.edit', 'uses'=>'ClientController@edit']);
     Route::get('/client/del/{id}', ['as'=>'client.del', 'uses'=>'ClientController@del']);
 
-    Route::get('/contractors', ['as'=>'contractors', 'uses'=>'ContractorController@list']);
-    Route::get('/contractor/view/{id}', ['as'=>'contractor.view', 'uses'=>'ContractorController@view']);
-    Route::get('/contractor/add', ['as'=>'contractor.add', 'uses'=>'ContractorController@add']);
-    Route::post('/contractor/add', ['as'=>'contractor.add', 'uses'=>'ContractorController@add']);
-    Route::get('/contractor/edit/{id}', ['as'=>'contractor.edit', 'uses'=>'ContractorController@edit']);
-    Route::post('/contractor/edit/{id}', ['as'=>'contractor.edit', 'uses'=>'ContractorController@edit']);
-    Route::get('/contractor/del/{id}', ['as'=>'contractor.del', 'uses'=>'ContractorController@del']);
+   // Route::get('/contractors', ['as'=>'contractors', 'uses'=>'ContractorController@list']);
+   // Route::get('/contractor/view/{id}', ['as'=>'contractor.view', 'uses'=>'ContractorController@view']);
+    //Route::get('/contractor/add', ['as'=>'contractor.add', 'uses'=>'ContractorController@add']);
+    //Route::post('/contractor/add', ['as'=>'contractor.add', 'uses'=>'ContractorController@add']);
+    //Route::get('/contractor/edit/{id}', ['as'=>'contractor.edit', 'uses'=>'ContractorController@edit']);
+    //Route::post('/contractor/edit/{id}', ['as'=>'contractor.edit', 'uses'=>'ContractorController@edit']);
+    Route::get('/contractor/del/{id}', ['as'=>'contractor.del', 'uses'=>'ContractorController@delete']);
+
+    Route::resource('contractors', 'ContractorController');
 
     Route::get('/help', ['as'=>'help', 'uses'=>'HelpController@help']);
 

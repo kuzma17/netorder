@@ -4,7 +4,7 @@
         <div class="row">
             <div class="col-md-12">
                         @include('layouts.message')
-                        <a href="{{route('contractor.add')}}" ><button type="button" class="btn btn-success">Создать подрядчика</button></a>
+                        <a href="{{route('contractors.create')}}" ><button type="button" class="btn btn-success">Создать подрядчика</button></a>
                         <table class="table table-bordered">
                             <thead>
                             <tr>
@@ -22,8 +22,8 @@
                                     <td>{{$contractor->phone}}</td>
                                     <td>{{$contractor->status}}</td>
                                     <td>
-                                        <a title="Просмотр подрядчика" href="{{route('contractor.view', ['id'=>$contractor->id])}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                        <a title="Редактировать подрядчика" href="{{route('contractor.edit', ['id'=>$contractor->id])}}" ><i class="fa fa-edit"></i></a>
+                                        <a title="Просмотр подрядчика" href="{{route('contractors.show', ['id'=>$contractor->id])}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
+                                        <a title="Редактировать подрядчика" href="{{route('contractors.edit', ['id'=>$contractor->id])}}" ><i class="fa fa-edit"></i></a>
                                         <a title="Удалить подрядчика" href="{{route('contractor.del', ['id'=>$contractor->id])}}" ><i class="fa fa-trash"></i></a>
                                     </td>
                                 </tr>

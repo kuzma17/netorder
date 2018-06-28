@@ -30,10 +30,10 @@
                     </tr>
                     </tbody>
                 </table>
-                <a href="{{route('contractor.edit', $contractor->id)}}">
+                <a href="{{route('contractors.edit', $contractor->id)}}">
                     <button type="button" class="btn btn-success">Редактировать</button>
                 </a>
-                <a href="{{route('contractors')}}">
+                <a href="{{route('contractors.index')}}">
                     <button type="button" class="btn btn-success">Все подрядчики</button>
                 </a>
 
