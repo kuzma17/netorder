@@ -187,3 +187,7 @@ i.fa-caret-down, i.fa-caret-up{
 .badge-info {
     background-color: #3a87ad;
 }
+
+.logout a{
+    color: #3465A4;
+}

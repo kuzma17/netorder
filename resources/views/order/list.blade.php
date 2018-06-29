@@ -112,7 +112,7 @@
                         <th>Офис</th>
                         <th>Статус</th>
                         <th>Время созд./изм.</th>
-                        <th>test</th>
+                        <!--<th>test</th>-->
                         <th></th>
                     </tr>
                     </thead>
@@ -125,7 +125,7 @@
                             <td>{{$order->client->name}}</td>
                             <td><span class="label label-{{$order->status->style}}">{{$order->status->name}}</span></td>
                             <td>{{ date("Y.m.d h:i", strtotime($order->updated_at)) }}</td>
-                            <td>f:{{$order->firm_id}} b:{{$order->client_id}} c:{{$order->contractor_id}}</td>
+                            <!--<td>f:{{$order->firm_id}} b:{{$order->client_id}} c:{{$order->contractor_id}}</td>-->
                             <td>
                                 <a title="Просмотр заказа" href="{{route('order.view', ['id'=>$order->id])}}"><i
                                             class="fa fa-eye" aria-hidden="true"></i></a>

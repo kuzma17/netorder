@@ -32,7 +32,7 @@
 
     <!-- Right Side Of Navbar -->
     <ul class="nav navbar-nav navbar-right">
-        <li class="nav-item"><a href="{{ route('orders') }}" class="nav-link">Заявки</a></li>
+        <li class="nav-item"><a href="{{ route('orders') }}" class="nav-link">Заказы</a></li>
         @can('menu', \App\User::class)
         <li class="nav-item"><a href="{{ route('firms') }}" class="nav-link">Клиенты</a></li>
         <li class="nav-item"><a href="{{ route('contractors.index') }}" class="nav-link">Подрядчики</a></li>
@@ -52,11 +52,12 @@
                 </a>
 
                 <ul class="dropdown-menu">
-                    <li>
-                        <a href="{{ route('logout') }}"
+                    <li class="logout">
+                        <a style="color: #3465A4" href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                            Logout
+                            <i class="fa fa-sign-out" aria-hidden="true"></i>
+                            <strong>выход</strong>
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

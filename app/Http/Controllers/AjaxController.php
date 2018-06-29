@@ -27,7 +27,7 @@ class AjaxController extends Controller
         $htm = '';
         $branches = Client::where('firm_id', $id)->where('status', 'on')->orderBy('name')->get();
         if(count($branches) > 0) {
-            $htm .= '<option value="">Выберите офис</option>';
+            //$htm .= '<option value="">Выберите офис</option>';
             foreach ($branches as $branch) {
                 $htm .= '<option value="' . $branch->id . '">' . $branch->name . '</option>';
             }
@@ -39,7 +39,7 @@ class AjaxController extends Controller
         $htm = '';
         $contractors = Contractor::where('status', 'on')->orderBy('name')->get();
         if(count($contractors) > 0) {
-            $htm .= '<option value="">Выберите организацию</option>';
+            //$htm .= '<option value="">Выберите организацию</option>';
             foreach ($contractors as $contractor) {
                 $htm .= '<option value="' . $contractor->id . '">' . $contractor->name . '</option>';
             }

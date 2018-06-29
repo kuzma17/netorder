@@ -48,7 +48,7 @@
                                 <label class="col-md-3 control-label">Подрядчик <span class="red">*</span></label>
                                 <div class="col-md-9">
                                     <select name="contractor" class="form-control">
-                                        <option value="0">Выберите подрядчика</option>
+                                        <!--<option value="0">Выберите подрядчика</option>-->
                                         @foreach($client->list_contractors() as $contractor)
                                             <option value="{{ $contractor->id }}"
                                                     @if($client->contractor_id == $contractor->id) selected @endif>{{ $contractor->name }}</option>

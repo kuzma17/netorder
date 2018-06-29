@@ -29,7 +29,15 @@
                                 <td>{{$user->email}}</td>
                                 <td>{{$user->profile->phone}}</td>
                                 <td>{{$user->profile->role->name}}</td>
-                                <td>{{$user->profile->firm->name or ''}}</td>
+                                <td>
+                                    @if($user->is_admin_firm() || $user->is_client())
+                                        {{$user->profile->firm->name}}
+                                    @elseif($user->is_contractor())
+                                        {{$user->profile->contractor->name}}
+                                    @else
+                                        {{ '' }}
+                                    @endif
+                                </td>
                                 <td>{{$user->profile->status}}</td>
                                 <td>
                                     <a title="Просмотр пользователя" href="{{route('user.view', ['id'=>$user->id])}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
