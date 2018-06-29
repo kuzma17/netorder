@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cartridge;
 use App\Client;
 use App\Contractor;
 use App\Firm;
@@ -42,6 +43,23 @@ class AjaxController extends Controller
             foreach ($contractors as $contractor) {
                 $htm .= '<option value="' . $contractor->id . '">' . $contractor->name . '</option>';
             }
+        }
+        return $htm;
+    }
+
+    public function cartridge_list(){
+        $htm = '';
+        $cartridges = Cartridge::orderBy('name')->get();
+        if(count($cartridges) > 0) {
+            $htm = '<div class="form-group cartridge">
+            <label class="col-md-3 control-label">Картридж</label>
+            <div class="col-md-8"><select class="form-control" name="cartridge[]">';
+            foreach ($cartridges as $cartridge) {
+                $htm .= '<option value="' . $cartridge->id . '">' . $cartridge->name . '</option>';
+            }
+            $htm .= '</select></div>
+                    <div class="col-md-1" ><a href = "#" class="cartridge_del" title = "Удалить картридж" ><i class="fa fa-times red" ></i ></a ></div>
+            </div>';
         }
         return $htm;
     }

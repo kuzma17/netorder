@@ -45,6 +45,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('/ajax_firm', ['as'=>'firm_act', 'uses'=>'AjaxController@ajax_firm']);
     Route::post('/ajax_branch', ['as'=>'branch_act', 'uses'=>'AjaxController@branch_list']);
     Route::post('/ajax_contractor', ['as'=>'contractor_act', 'uses'=>'AjaxController@contractor_list']);
+    Route::post('/ajax_cartridge', ['as'=>'cartridge_act', 'uses'=>'AjaxController@cartridge_list']);
 
     Route::get('/firms', ['as'=>'firms', 'uses'=>'FirmController@list']);
     Route::get('/firms/{id}', ['as'=>'firms.id', 'uses'=>'FirmController@list']);
@@ -74,6 +75,12 @@ Route::group(['middleware' => 'auth'], function (){
     Route::get('/contractor/del/{id}', ['as'=>'contractor.del', 'uses'=>'ContractorController@delete']);
 
     Route::resource('contractors', 'ContractorController');
+
+    Route::resource('printers', 'PrinterController');
+    Route::get('/printers/del/{id}', ['as'=>'printers.del', 'uses'=>'ContractorController@delete']);
+
+    Route::resource('cartridges', 'CartridgeController');
+    Route::get('/cartridges/del/{id}', ['as'=>'cartridges.del', 'uses'=>'CartridgeController@delete']);
 
     Route::get('/help', ['as'=>'help', 'uses'=>'HelpController@help']);
 

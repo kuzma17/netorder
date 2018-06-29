@@ -37,6 +37,8 @@
         <li class="nav-item"><a href="{{ route('firms') }}" class="nav-link">Клиенты</a></li>
         <li class="nav-item"><a href="{{ route('contractors.index') }}" class="nav-link">Подрядчики</a></li>
         <li class="nav-item"><a href="{{ route('users') }}" class="nav-link">Пользователи</a></li>
+            <li class="nav-item"><a href="{{ route('printers.index') }}" class="nav-link">Принтеры</a></li>
+            <li class="nav-item"><a href="{{ route('cartridges.index') }}" class="nav-link">Картриджи</a></li>
         @endcan
         <li class="nav-item"><a href="{{ route('help') }}" class="nav-link">Помощь</a></li>
         <!-- Authentication Links -->

@@ -212,4 +212,14 @@ $(document).ready(function () {
     });
 
     $('.tooltip-info').tooltip();
+
+
+    $("#addCartridge").click(function () {
+        var token = $('input[name=_token]').val();
+        $.post('/ajax_cartridge', {'_token': token }, function (data) {
+            if (data) {
+                $('#cartridge_list').append(data);
+            }
+        });
+    });
 });

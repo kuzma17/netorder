@@ -34,7 +34,7 @@ class OrderController extends Controller
 
     public function list($orders = [], $firm_id = '', $filter = false){
         if(!$filter) {
-            $orders = $this->get_order()->orderBy('updated_at', 'desc')->paginate(20);;
+            $orders = $this->get_order()->orderBy('updated_at', 'desc')->paginate(20);
         }
         if($firm_id){
             $firmId = $firm_id;
