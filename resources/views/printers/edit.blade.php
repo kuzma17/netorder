@@ -17,7 +17,7 @@
                         <label class="col-md-3 control-label">Название<span class="red">*</span></label>
                         <div class="col-md-9">
                             <input class="form-control" type="text" name="name"
-                                   value="{{old('name', $cartridge->name)}}">
+                                   value="{{old('name', $printer->name)}}">
                             @if ($errors->has('name'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('name') }}</strong>
@@ -25,7 +25,21 @@
                             @endif
                         </div>
                     </div>
-                    <div style="cartridges"></div>
+                    <div id="cartridge_list">
+                        @foreach($printer->cartridges as $cartridge)
+                            <div class="form-group cartridge">
+                                <label class="col-md-3 control-label">Картридж</label>
+                                <div class="col-md-8"><select class="form-control" name="cartridge[]">';
+                                        @foreach ($cartList as $cart)
+                                            <option value="{{$cart->id}}"@if($cart->id == $cartridge->id) selected="selected" @endif>{{$cart->name}}</option>
+                                        @endforeach
+                                        </select>
+                                    </div>
+                                <div class="col-md-1" ><a href = "#" class="cartridge_del" title = "Удалить картридж" ><i class="fa fa-times red" ></i ></a ></div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <button id="addCartridge" type="button" style="float: right">добавить картридж</button>
                     <div class="form-group">
                         <div class="col-md-9">
                             <input type="submit" class="btn btn-primary" name="add_all_order" value="Сохранить">

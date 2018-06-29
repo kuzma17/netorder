@@ -23,7 +23,7 @@
         @yield('content')
     </div>
     <div class="footer">
-        <span class="copyright">Copyright 2018 @ design by <a href="mailto:v.kuzma@mail.ru">kuzma</a></span>
+        <span class="copyright">Copyright 2018 © Designed by <a href="mailto:v.kuzma@mail.ru">kuzma</a></span>
     </div>
 </div>
 

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Cartridge;
 use App\Printer;
 use Illuminate\Http\Request;
 use Session;
@@ -41,11 +42,11 @@ class PrinterController extends Controller
         $this->validate($request, $printer->rules );
         $printer->name = $request->name;
         $printer->save();
+        $printer->cartridges()->sync($request->cartridge);
 
         Session::flash('ok_message', 'Принтер успешно создан.');
 
-        return redirect(route('cartridges.index'));
-
+        return redirect(route('printers.index'));
     }
 
     /**
@@ -56,7 +57,8 @@ class PrinterController extends Controller
      */
     public function show($id)
     {
-        //
+        $printer = Printer::find($id);
+        return view('printers.show', ['printer'=>$printer]);
     }
 
     /**
@@ -67,7 +69,9 @@ class PrinterController extends Controller
      */
     public function edit($id)
     {
-        //
+        $printer = Printer::find($id);
+        $cartList = Cartridge::all();
+        return view('printers.edit', ['printer'=>$printer, 'cartList'=>$cartList]);
     }
 
     /**
@@ -79,7 +83,15 @@ class PrinterController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $printer = Printer::find($id);
+        $this->validate($request, $printer->rules );
+        $printer->name = $request->name;
+        $printer->save();
+        $printer->cartridges()->sync($request->cartridge);
+
+        Session::flash('ok_message', 'Принтер успешно обновлен.');
+
+        return redirect(route('printers.index'));
     }
 
     /**
@@ -96,8 +108,8 @@ class PrinterController extends Controller
     public function delete($id){
 
         $printer = Printer::find($id);
-
         $printer->delete();
+        $printer->cartridges()->detach();
         return redirect(route('printers.index'))->with('info_message', 'Принтер успешно удален.');;
     }
 }

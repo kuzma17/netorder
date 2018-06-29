@@ -77,7 +77,7 @@ Route::group(['middleware' => 'auth'], function (){
     Route::resource('contractors', 'ContractorController');
 
     Route::resource('printers', 'PrinterController');
-    Route::get('/printers/del/{id}', ['as'=>'printers.del', 'uses'=>'ContractorController@delete']);
+    Route::get('/printers/del/{id}', ['as'=>'printers.del', 'uses'=>'PrinterController@delete']);
 
     Route::resource('cartridges', 'CartridgeController');
     Route::get('/cartridges/del/{id}', ['as'=>'cartridges.del', 'uses'=>'CartridgeController@delete']);
