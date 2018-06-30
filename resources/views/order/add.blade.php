@@ -32,6 +32,18 @@
                             </div>
                         </div>
                     @endif
+                    @if($user->is_client() )
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Принтер</label>
+                            <div class="col-md-9">
+                                <select name="equipment" class="form-control">
+                                    @foreach($user->profile->client->equipments as $equipment)
+                                        <option value="{{ $equipment->name }}">{{ $equipment->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                    @endif
                     <!--<div class="form-group">
                         <label class="col-md-3 control-label">Подрядчик <span class="red">*</span></label>
                         <div class="col-md-9">

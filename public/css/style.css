@@ -108,9 +108,17 @@ h3{
     height: 30px;
 }
 
-.form-group label{
+.form-group label, .cartridge label{
     color: #2a88bd;
     font-size: 13px;
+}
+
+.cartridge{
+ margin-bottom: 5px;
+}
+
+.regenerate{
+    margin-top: -10px;
 }
 
 .panel-info{
@@ -124,7 +132,7 @@ h3{
 i.fa-edit{
     color: green;
 }
-i.fa-trash{
+i.fa-trash, i.fa-times{
     color: red;
 }
 i.fa-key{
@@ -190,4 +198,17 @@ i.fa-caret-down, i.fa-caret-up{
 
 .logout a{
     color: #3465A4;
+}
+.printer{
+    background-color: #f2f2f2;
+    padding: 10px;
+    border: 1px solid #CCCCCC;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+.cartridge_model{
+    border: 1px solid #CCCCCC;
+    padding: 6px 10px 6px 10px;
+    border-radius: 4px;
+    background-color: white;
 }

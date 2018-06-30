@@ -7,7 +7,7 @@
                 <div style="clear: both"></div>
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#main">Основные данные</a></li>
-                    <li><a data-toggle="tab" href="#equipment">Оборудование</a></li>
+                    <li><a data-toggle="tab" href="#equipment">Принтеры</a></li>
                 </ul>
                 <p class="panel-info"><i class="fa fa-info-circle" aria-hidden="true"></i> Поля отмеченные <span
                             class="red">*</span> обязательны для заполнения.</p>
@@ -101,12 +101,12 @@
                             </div>
                         </div>
                         <div id="equipment" class="tab-pane fade">
-                            <h4>Оборудование</h4>
+                            <h4>Принтеры</h4>
                             <div style="clear: both"></div>
                             <div id="equipment_list">
                             </div>
                             <button id="equipment_add" type="button" class="btn btn-default" style="float: right">
-                                Добавить оборудование
+                                <i class="fa fa-plus-circle"></i> принтер
                             </button>
                             <div class="form-group">
                                 <div class="col-md-9">

@@ -46,6 +46,8 @@ Route::group(['middleware' => 'auth'], function (){
     Route::post('/ajax_branch', ['as'=>'branch_act', 'uses'=>'AjaxController@branch_list']);
     Route::post('/ajax_contractor', ['as'=>'contractor_act', 'uses'=>'AjaxController@contractor_list']);
     Route::post('/ajax_cartridge', ['as'=>'cartridge_act', 'uses'=>'AjaxController@cartridge_list']);
+    Route::post('/ajax_add_printer', ['as'=>'printer_add_act', 'uses'=>'AjaxController@add_printer']);
+    Route::post('/ajax_add_cartridge', ['as'=>'printer_add_act', 'uses'=>'AjaxController@add_cartridge']);
 
     Route::get('/firms', ['as'=>'firms', 'uses'=>'FirmController@list']);
     Route::get('/firms/{id}', ['as'=>'firms.id', 'uses'=>'FirmController@list']);

@@ -8,7 +8,7 @@
 
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#main">Основные данные</a></li>
-                    <li><a data-toggle="tab" href="#equipment">Оборудование</a></li>
+                    <li><a data-toggle="tab" href="#equipment">Принтеры</a></li>
                 </ul>
                 <p class="panel-info"><i class="fa fa-info-circle" aria-hidden="true"></i> Поля отмеченные <span
                             class="red">*</span> обязательны для заполнения.</p>
@@ -108,25 +108,39 @@
                             </div>
                         </div>
                         <div id="equipment" class="tab-pane fade">
-                            <h4>Оборудование</h4>
+                            <h4>Принтеры</h4>
                             <div style="clear: both"></div>
                             <div id="equipment_list">
-                                @foreach($client->equipments as $equipment)
+                                @foreach($client->printers as $printer)
+                                    <div class="printer">
                                     <div class="form-group">
-                                        <label class="col-md-2 control-label">Название</label>
-                                        <div class="col-md-9">
-                                            <input class="form-control" type="text" name="equipment[]"
-                                                   value="{{$equipment->name}}">
+                                        <label class="col-md-3 control-label">Модель принтера</label>
+                                        <div class="col-md-8">
+                                            <select class="form-control select_printer" name="printer[]" required>
+                                                @foreach($allPrinters as $print)
+                                                    <option value="{{$print->id}}" @if($print->id == $printer->id) selected @endif>{{$print->name}}</option>';
+                                                @endforeach
+                                            </select>
                                         </div>
                                         <div class="col-md-1">
-                                            <a href="#" class="equipment_del" title="Удалить оборудование"><i
-                                                        class="fa fa-trash red"></i></a>
+                                            <a href="#" class="equipment_del" title="Удалить принтер"><i class="fa fa-trash red"></i></a>
+                                        </div>
+                                    </div>
+                                        <div class="regenerate">
+                                            @foreach($printer->cartridges as $cartridge)
+                                                {{ $cartridge->name }}<br>
+                                             @endforeach
+                                            <!--<div class="row cartridge">
+                                                <label class="col-md-3 control-label">Картридж/Стоимость</label>
+                                                <div class="col-md-6"><select class="form-control" name="cartridge[]"></select></div>
+                                                <div class="col-md-2"><input class="form-control" type="text" name="price[]"></div>
+                                            </div> -->
                                         </div>
                                     </div>
                                 @endforeach
                             </div>
                             <button id="equipment_add" type="button" class="btn btn-default" style="float: right">
-                                Добавить оборудование
+                                <i class="fa fa-plus-circle"></i> принтер
                             </button>
                             <div class="form-group">
                                 <div class="col-md-9">

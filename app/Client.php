@@ -29,12 +29,16 @@ class Client extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function equipments(){
-        return $this->hasMany(Equipment::class);
-    }
-
     public function contractor(){
         return $this->belongsTo(Contractor::class);
+    }
+
+    public function printers(){
+        return $this->belongsToMany(Printer::class);
+    }
+
+    public function prices(){
+        return $this->hasMany(Price::class);
     }
 
     public function list_firms(){

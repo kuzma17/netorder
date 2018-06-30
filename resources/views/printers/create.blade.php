@@ -22,7 +22,7 @@
                         </div>
                     </div>
                     <div id="cartridge_list"></div>
-                    <button id="addCartridge" type="button" style="float: right">добавить картридж</button>
+                    <button id="addCartridge" type="button" style="float: right"><i class="fa fa-plus-circle"></i> картридж</button>
                     <div class="form-group">
                         <div class="col-md-9">
                             <input type="submit" class="btn btn-primary" name="add" value="Сохранить">

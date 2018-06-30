@@ -6,6 +6,7 @@ use App\Cartridge;
 use App\Client;
 use App\Contractor;
 use App\Firm;
+use App\Printer;
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
@@ -47,14 +48,18 @@ class AjaxController extends Controller
         return $htm;
     }
 
-    public function cartridge_list(){
+    public function cartridge_list(Request $request){
+        $select_cartridges = $request->cartridges;
         $htm = '';
         $cartridges = Cartridge::orderBy('name')->get();
         if(count($cartridges) > 0) {
             $htm = '<div class="form-group cartridge">
             <label class="col-md-3 control-label">Картридж</label>
-            <div class="col-md-8"><select class="form-control" name="cartridge[]">';
+            <div class="col-md-8"><select class="form-control select_cartridge" name="cartridge[]">';
             foreach ($cartridges as $cartridge) {
+                if (in_array($cartridge->id, $select_cartridges)) {
+                    continue;
+                }
                 $htm .= '<option value="' . $cartridge->id . '">' . $cartridge->name . '</option>';
             }
             $htm .= '</select></div>
@@ -62,5 +67,115 @@ class AjaxController extends Controller
             </div>';
         }
         return $htm;
+    }
+    
+    public function add_printer___(){
+
+        $printers = Printer::orderBy('name')->get();
+        $htm = '<div class="printer">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Модель принтера</label>
+                        <div class="col-md-8">
+                            <select class="form-control" name="printer[]">';
+        foreach ($printers as $printer) {
+            $htm .= '<option value="' . $printer->id . '">' . $printer->name . '</option>';
+        }
+
+        $htm .= '</select>
+                 </div>
+                        <div class="col-md-1">
+                            <!--<a href="#" class="add_cartridge" title="Добавить картридж"><i class="fa fa-recycle"></i></a>&nbsp;-->
+                            <a href="#" class="equipment_del" title="Удалить принтер"><i class="fa fa-trash red"></i></a>
+                        </div> 
+                     </div> 
+                    <div class="regenerate"> 
+                        <div class="row cartridge"> 
+                            <label class="col-md-3 control-label">Картридж/Стоимость</label> 
+                            <div class="col-md-6"><select class="form-control" name="cartridge[]"></select></div>
+                            <div class="col-md-2"><input class="form-control" type="text" name="price[]"></div> 
+                            <!--<div class="col-md-1"><a href="#" class="equipment_del" title="Удалить картриджа"><i class="fa fa-times"></i></a></div> -->
+                        </div> 
+                    </div> 
+            </div>';
+
+        return $htm;
+    }
+
+    public function add_printer(Request $request){
+
+        $select_printers = $request->printers;
+        $printers = Printer::orderBy('name')->get();
+
+        $htm = '<div class="printer">
+                    <div class="form-group">
+                        <label class="col-md-3 control-label">Модель принтера</label>
+                        <div class="col-md-8">
+                            <select class="form-control select_printer" name="printer[]" required>
+                            <option value="">Выберите модель принтера</option>';
+        foreach ($printers as $printer) {
+            if (in_array($printer->id, $select_printers)) {
+                continue;
+            }
+
+            $htm .= '<option value="' . $printer->id . '">' . $printer->name . '</option>';
+        }
+
+        $htm .= '</select>
+                 </div>
+                        <div class="col-md-1">
+                            <a href="#" class="equipment_del" title="Удалить принтер"><i class="fa fa-trash red"></i></a>
+                        </div> 
+                     </div> 
+                    <div class="regenerate"> 
+                        <!--<div class="row cartridge"> 
+                            <label class="col-md-3 control-label">Картридж/Стоимость</label> 
+                            <div class="col-md-6"><select class="form-control" name="cartridge[]"></select></div>
+                            <div class="col-md-2"><input class="form-control" type="text" name="price[]"></div> 
+                        </div> -->
+                    </div> 
+            </div>';
+
+        return $htm;
+    }
+
+    public function add_cartridge(Request $request){
+        $printer_id = $request->printer;
+        $printer = Printer::find($printer_id);
+        $cartridges = $printer->cartridges;
+
+        if(count($cartridges) > 0){
+            $htm = '';
+            foreach ($cartridges as $cartridge) {
+                $htm .= '<div class="row cartridge"> 
+                            <label class="col-md-3 control-label">Картридж/Стоимость</label> 
+                            <div class="col-md-6">
+                            <input type="hidden" name="cartridge['.$printer_id.'][]" value="'.$cartridge->id.'">
+                            <div class="cartridge_model">'.$cartridge->name.'</div></div>
+                            <div class="col-md-2"><input class="form-control" type="text" name="price['.$printer_id.']['.$cartridge->id.']" required></div>
+                            </div>';
+            }
+            return $htm;
+        }
+    }
+
+    public function add_cartridge___(Request $request){
+        $printer_id = $request->printer;
+        $printer = Printer::find($printer_id);
+        $cartridges = $printer->cartridges;
+
+        if(count($cartridges) > 0){
+            $htm = '<div class="row cartridge"> 
+                            <label class="col-md-3 control-label">Картридж/Стоимость</label> 
+                            <div class="col-md-6"><select class="form-control" name="cartridge[]">';
+            foreach ($cartridges as $cartridge){
+                $htm .= '<option value="' . $cartridge->id . '">' . $cartridge->name . '</option>';
+            }
+            $htm .= '</select></div>
+                            <div class="col-md-2"><input class="form-control" type="text" name="price[]"></div> 
+                            <div class="col-md-1"><a href="#" class="equipment_del" title="Удалить картриджа"><i class="fa fa-times"></i></a></div> 
+                        </div> 
+                    </div';
+            return $htm;
+        }
     }
 }

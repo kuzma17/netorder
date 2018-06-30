@@ -29,7 +29,7 @@
                         @foreach($printer->cartridges as $cartridge)
                             <div class="form-group cartridge">
                                 <label class="col-md-3 control-label">Картридж</label>
-                                <div class="col-md-8"><select class="form-control" name="cartridge[]">';
+                                <div class="col-md-8"><select class="form-control select_cartridge" name="cartridge[]">';
                                         @foreach ($cartList as $cart)
                                             <option value="{{$cart->id}}"@if($cart->id == $cartridge->id) selected="selected" @endif>{{$cart->name}}</option>
                                         @endforeach
@@ -39,7 +39,7 @@
                             </div>
                         @endforeach
                     </div>
-                    <button id="addCartridge" type="button" style="float: right">добавить картридж</button>
+                    <button id="addCartridge" type="button" style="float: right"><i class="fa fa-plus-circle"></i> картридж</button>
                     <div class="form-group">
                         <div class="col-md-9">
                             <input type="submit" class="btn btn-primary" name="add_all_order" value="Сохранить">

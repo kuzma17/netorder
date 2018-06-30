@@ -152,53 +152,40 @@ $(document).ready(function () {
         $("#status option:first").prop('selected', true);
     });
 
-    $('a i.fa-trash').click(function () {
+    $(document).on("click", "a i.fa-trash", function () {
         if(confirm('Вы уверены что хотите удалить?')){
             return true;
         }
         return false;
     });
 
-   /* $('#equipment_add').click(function () {
-        var html_item = '<div class="form-group"><label class="col-md-2 control-label">Название</label><div class="col-md-9"><input class="form-control" type="text" name="equipment[]"></div><div class="col-md-1"><a href="#" class="equipment_del" title="Удалить оборудование"><i class="fa fa-trash red"></i></a></div></div>';
-        $('#equipment_list').append(html_item);
-        return false;
-    });
-
-    $(document).on('click', '.equipment_del', function () {
-        $(this).closest('.form-group').remove();
-        return false;
-    });*/
 
     $('#equipment_add').click(function () {
-        var html_item = '<div class="printer">' +
-            '<div class="form-group">' +
-            '<label class="col-md-3 control-label">Модель принтера</label>' +
-            '<div class="col-md-8"><input class="form-control" type="text" name="equipment[]"></div>' +
-            '<div class="col-md-1"><a href="#" class="equipment_del" title="Удалить принтер"><i class="fa fa-trash red"></i></a></div>' +
-            '</div>' +
-            '<div class="regenerate">' +
-            '<div class="form-group cartridge">' +
-            '<label class="col-md-3 control-label">Картридж/Стоимость</label>' +
-            '<div class="col-md-6"><input class="form-control" type="text" name="cartridge[]"></div>' +
-            '<div class="col-md-2"><input class="form-control" type="text" name="cartridge[]"></div>' +
-            '<div class="col-md-1"><a href="#" class="equipment_del" title="Удалить картриджа"><i class="fa fa-times red"></i></a></div>' +
-            '</div>' +
-            '</div>' +
-            '<button type="button" class="add_cartridge">добавить картридж</button>' +
-            '</div>';
-        $('#equipment_list').append(html_item);
+        var token = $('input[name=_token]').val();
+        var printers = $('.select_printer').map(function() {
+            return $(this).val();
+        }).get();
+        $.post('/ajax_add_printer', {'_token': token, 'printers': printers}, function (data) {
+            if (data) {
+                $('#equipment_list').append(data);
+            }
+        });
+        $(this).prop("disabled",true);
         return false;
     });
 
-    $(document).on('click', '.add_cartridge', function () {
-        var html_cartridge = '<div class="form-group cartridge">' +
-            '<label class="col-md-3 control-label">Картридж/Стоимость</label>' +
-            '<div class="col-md-6"><input class="form-control" type="text" name="cartridge[]"></div>' +
-            '<div class="col-md-2"><input class="form-control" type="text" name="cartridge[]"></div>' +
-            '<div class="col-md-1"><a href="#" class="cartridge_del" title="Удалить картриджа"><i class="fa fa-times red"></i></a></div>' +
-            '</div>';
-        $(this).prev().append(html_cartridge);
+
+    $(document).on('change', '.select_printer', function () {
+        var token = $('input[name=_token]').val();
+        var printer = $(this).val();
+        var regenerate = $(this).parents(1).next('.regenerate');
+        $.post('/ajax_add_cartridge', {'_token': token, 'printer': printer}, function (data) {
+            if (data) {
+                regenerate.html(data);
+                $('#equipment_add').prop("disabled", false);
+            }
+        });
+        return false;
     });
 
     $(document).on('click', '.cartridge_del', function () {
@@ -208,6 +195,7 @@ $(document).ready(function () {
 
     $(document).on('click', '.equipment_del', function () {
         $(this).closest('.printer').remove();
+        $('#equipment_add').prop("disabled", false);
         return false;
     });
 
@@ -216,7 +204,10 @@ $(document).ready(function () {
 
     $("#addCartridge").click(function () {
         var token = $('input[name=_token]').val();
-        $.post('/ajax_cartridge', {'_token': token }, function (data) {
+        var cartridges = $('.select_cartridge').map(function() {
+            return $(this).val();
+        }).get();
+        $.post('/ajax_cartridge', {'_token': token, 'cartridges': cartridges}, function (data) {
             if (data) {
                 $('#cartridge_list').append(data);
             }
