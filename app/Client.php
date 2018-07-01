@@ -41,6 +41,37 @@ class Client extends Model
         return $this->hasMany(Price::class);
     }
 
+    public function save_prices($request){
+        $this->prices()->delete();
+        $prices = [];
+        foreach ($request->printer as $printer){
+            foreach ($request->cartridge[$printer] as $cartridge){
+                $cost = $request->price[$printer][$cartridge];
+                $prices[] = new Price([
+                    'printer_id' => $printer,
+                    'cartridge_id'=>$cartridge,
+                    'price'=>$cost
+                ]);
+            }
+        }
+        $this->prices()->saveMany($prices);
+    }
+
+    public function price($printer_id, $cartridge_id){
+        return $this->prices()->where([
+            'printer_id'=>$printer_id,
+            'cartridge_id'=>$cartridge_id
+        ])->first();
+    }
+
+    public function price2($client_id, $printer_id, $cartridge_id){
+        return Price::where([
+            'client_id' => $client_id,
+            'printer_id'=>$printer_id,
+            'cartridge_id'=>$cartridge_id
+        ])->get();
+    }
+
     public function list_firms(){
         return Firm::where('status', 'on')->orderBy('name')->get();
     }

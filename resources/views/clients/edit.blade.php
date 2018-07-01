@@ -128,13 +128,18 @@
                                     </div>
                                         <div class="regenerate">
                                             @foreach($printer->cartridges as $cartridge)
-                                                {{ $cartridge->name }}<br>
+                                                <div class="row cartridge">
+                                                    <label class="col-md-3 control-label">Картридж/Стоимость</label>
+                                                    <div class="col-md-6">
+                                                        <input type="hidden" name="cartridge[{{$printer->id}}][]" value="{{$cartridge->id}}">
+                                                        <div class="cartridge_model">{{$cartridge->name}}</div></div>
+                                                    <div class="col-md-2">
+                                                        <input class="form-control" type="text"
+                                                               name="price[{{$printer->id}}][{{$cartridge->id}}]]"
+                                                               value="{{$client->price($printer->id, $cartridge->id)->price or ''}}" required>
+                                                    </div>
+                                                </div>
                                              @endforeach
-                                            <!--<div class="row cartridge">
-                                                <label class="col-md-3 control-label">Картридж/Стоимость</label>
-                                                <div class="col-md-6"><select class="form-control" name="cartridge[]"></select></div>
-                                                <div class="col-md-2"><input class="form-control" type="text" name="price[]"></div>
-                                            </div> -->
                                         </div>
                                     </div>
                                 @endforeach

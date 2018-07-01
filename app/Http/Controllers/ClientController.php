@@ -45,13 +45,24 @@ class ClientController extends Controller
             $client->save();
             $client->printers()->sync($request->printer);
 
-            $prices = [
-                new Price(['printer_id' => 1, 'cartridge_id'=>1, 'price'=>100]),
-                new Price(['printer_id' => 2, 'cartridge_id'=>1, 'price'=>110]),
-            ];
+           // $client->prices()->delete();
 
+          //  $prices = [];
+          //  foreach ($request->printer as $printer){
+            //    foreach ($request->cartridge[$printer] as $cartridge){
+           //         $cost = $request->price[$printer][$cartridge];
+            //        $prices[] = new Price([
+             //           'printer_id' => $printer,
+            //            'cartridge_id'=>$cartridge,
+              //          'price'=>$cost
+           //         ]);
 
-            $client->prices()->saveMany($prices);
+                    //echo $printer.' '.$cartridge.' '.$cost.'<br>';
+              ///  }
+          //  }
+
+          //  $client->prices()->saveMany($prices);
+            $client->save_prices($request);
 
             Session::flash('ok_message', 'Офис успешно создан.');
             Session::flash('info_message', 'Необходимо создать пользователя, ответственного за данный офис в разделе пользователи.');
@@ -86,29 +97,11 @@ class ClientController extends Controller
             $client->save();
             $client->printers()->sync($request->printer);
 
-            //dd($request);
+            $client->save_prices($request);
 
-            $client->prices()->delete();
+            Session::flash('ok_message', 'Офис успешно отредактирован.');
 
-            $prices = [];
-            foreach ($request->printer as $printer){
-                foreach ($request->cartridge[$printer] as $cartridge){
-                    $cost = $request->price[$printer][$cartridge];
-                    $prices[] = new Price([
-                        'printer_id' => $printer,
-                        'cartridge_id'=>$cartridge,
-                        'price'=>$cost
-                    ]);
-
-                   //echo $printer.' '.$cartridge.' '.$cost.'<br>';
-                }
-            }
-
-            $client->prices()->saveMany($prices);
-
-            //Session::flash('ok_message', 'Филиал успешно отредактирован.'.count($request->equipment));
-
-           // return redirect(route('firms.id', $client->firm_id));
+            return redirect(route('firms.id', $client->firm_id));
         }
 
         return view('clients.edit', ['client'=>$client, 'allPrinters'=>$allPrinters]);
@@ -122,6 +115,8 @@ class ClientController extends Controller
             return redirect()->back()->with('error_message','Доступ запрещен.');
         }
 
+        $client->printers()->detach();
+        $client->prices()->delete();
         $client->delete();
         Session::flash('ok_message', 'Филиал успешно удален.');
         return redirect(route('firms'));

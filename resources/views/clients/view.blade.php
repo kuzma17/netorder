@@ -7,8 +7,8 @@
                 <div style="clear: both"></div>
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#main">Основные данные</a></li>
-                    @if(count($client->equipments) > 0)
-                        <li><a data-toggle="tab" href="#equipment">Оборудование</a></li>
+                    @if(count($client->printers) > 0)
+                        <li><a data-toggle="tab" href="#equipment">Принтеры</a></li>
                     @endif
                 </ul>
                 <div class="tab-content">
@@ -57,15 +57,28 @@
                             <button type="button" class="btn btn-success">Все клиенты</button>
                         </a>
                     </div>
-                    @if(count($client->equipments) > 0)
+                    @if(count($client->printers) > 0)
                         <div id="equipment" class="tab-pane fade">
-                            <h4>Оборудование</h4>
+                            <h4>Принтеры</h4>
                             <div style="clear: both"></div>
-                            <table class="table table-bordered">
+                            <table class="table table-responsive">
                                 <tbody>
-                                @foreach($client->equipments as $equipment)
+                                @foreach($client->printers as $printer)
                                     <tr>
-                                        <td>{{ $equipment->name }}</td>
+                                        <td><strong>{{ $printer->name }}</strong>
+                                            @if(count($printer->cartridges) > 0)
+                                                <table class="table table-bordered">
+                                                @foreach($printer->cartridges as $cartridge)
+                                                    <tr>
+                                                        <td>картридж</td>
+                                                        <td>{{$cartridge->name}}</td>
+                                                        <td>{{$client->price($printer->id, $cartridge->id)->price}}</td>
+                                                    </tr>
+                                                @endforeach
+                                                </table>
+                                             @endif
+                                        </td>
+
                                     </tr>
                                 @endforeach
                                 </tbody>
