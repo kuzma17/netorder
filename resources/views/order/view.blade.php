@@ -13,9 +13,17 @@
                     <tr>
                         <td>Тип заявки</td><td>{{ $order->typeWork->name }}</td>
                     </tr>
-                    <tr>
-                        <td>Оборудование</td><td>{{ $order->equipment }}</td>
-                    </tr>
+                    @if($order->typeWork->id == 1)
+                        <tr>
+                            <td>Принтер</td><td>{{ $order->printer->name }}</td>
+                        </tr>
+                        <tr>
+                            <td>картридж</td><td>{{ $order->cartridge->name }}</td>
+                        </tr>
+                        <tr>
+                            <td>количестао картриджей</td><td>{{ $order->count_cartridge }}</td>
+                        </tr>
+                    @endif
                     <tr>
                         <td>Заказчик фирма</td><td>{{ $order->firm->name }}</td>
                     </tr>

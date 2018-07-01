@@ -115,7 +115,9 @@ class OrderController extends Controller
             $order->user_id = $user->id;
             //$order->contractor_id = $request->contractor;
             $order->contractor_id = $user->profile->client->contractor_id;
-            $order->equipment = isset($request->equipment)? $request->equipment: '';
+            $order->printer_id = isset($request->printer)? $request->printer: 0;
+            $order->cartridge_id = isset($request->cartridge)? $request->cartridge: 0;
+            $order->count_cartridge = isset($request->count_cartridge)? $request->count_cartridge: 0;
             $order->date_end = $request->date_end;
             $order->comment = $request->comment;
             $order->status_id = 1;
@@ -138,13 +140,21 @@ class OrderController extends Controller
 
         if($request->isMethod('post')){
 
-            if($user->is_admin() || $user->is_client()) {
+            if($user->is_client()) {
 
                 $this->validate($request, $order->rules);
 
                 $order->type_work_id = $request->type_work;
                 $order->date_end = $request->date_end;
-                $order->equipment = isset($request->equipment) ? $request->equipment : '';
+                if($order->type_work_id ==1) {
+                    $order->printer_id = isset($request->printer) ? $request->printer : 0;
+                    $order->cartridge_id = isset($request->cartridge) ? $request->cartridge : 0;
+                    $order->count_cartridge = isset($request->count_cartridge) ? $request->count_cartridge : 0;
+                }else{
+                    $order->printer_id =  0;
+                    $order->cartridge_id = 0;
+                    $order->count_cartridge = 0;
+                }
                 $order->comment = $request->comment;
             }
             $order->act_complete = isset($request->act_complete)?$request->act_complete: '';

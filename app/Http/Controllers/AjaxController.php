@@ -69,6 +69,32 @@ class AjaxController extends Controller
         return $htm;
     }
 
+    public function cartridge_order(Request $request){
+        $printer_id = $request->printer;
+        $printer = Printer::find($printer_id);
+        $cartridges = $printer->cartridges;
+        $htm = '';
+        if(count($cartridges) > 0) {
+            $htm = '<div class="form-group cartridge">
+            <label class="col-md-3 control-label">Картридж</label>
+            <div class="col-md-9">
+            <select class="form-control select_cartridge" name="cartridge" required>';
+            foreach ($cartridges as $cartridge) {
+                $htm .= '<option value="' . $cartridge->id . '">' . $cartridge->name . '</option>';
+            }
+            $htm .= '</select>
+                </div>
+            </div>
+             <div class="form-group">
+                               <label class="col-md-3 control-label">Количество картриджей</label>
+                               <div class="col-md-9">
+                                   <input type="number" name="count_cartridge" class="form-control select_cartridge" value="1" required>
+                               </div>
+                           </div>';
+        }
+        return $htm;
+    }
+
     public function add_printer(Request $request){
 
         $select_printers = $request->printers;

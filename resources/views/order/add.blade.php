@@ -13,47 +13,29 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label">Тип услуги<span class="red">*</span></label>
                         <div class="col-md-9">
-                            <select name="type_work" class="form-control">
+                            <select id="type_work" name="type_work" class="form-control">
                                 @foreach($order->typeWorks() as $type)
                                     <option value="{{ $type->id }}">{{ $type->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
-                    @if($user->is_client() && isset($user->profile->client->equipments) && count($user->profile->client->equipments) > 0)
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Оборудование</label>
-                            <div class="col-md-9">
-                                <select name="equipment" class="form-control">
-                                    @foreach($user->profile->client->equipments as $equipment)
-                                        <option value="{{ $equipment->name }}">{{ $equipment->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
+                    @if($user->is_client() && isset($user->profile->client->printers) && count($user->profile->client->printers) > 0)
+                       <div id="block_regenerate">
+                           <div class="form-group">
+                               <label class="col-md-3 control-label">Принтер</label>
+                               <div class="col-md-9">
+                                   <select id="printer_order" name="printer" class="form-control" required>
+                                       <option value="">Выберите принтер</option>
+                                       @foreach($user->profile->client->printers as $printer)
+                                           <option value="{{ $printer->id }}">{{ $printer->name }}</option>
+                                       @endforeach
+                                   </select>
+                               </div>
+                           </div>
+                           <div id="cartridge_list"></div>
+                       </div>
                     @endif
-                    @if($user->is_client() )
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Принтер</label>
-                            <div class="col-md-9">
-                                <select name="equipment" class="form-control">
-                                    @foreach($user->profile->client->equipments as $equipment)
-                                        <option value="{{ $equipment->name }}">{{ $equipment->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>
-                    @endif
-                    <!--<div class="form-group">
-                        <label class="col-md-3 control-label">Подрядчик <span class="red">*</span></label>
-                        <div class="col-md-9">
-                            <select name="contractor" class="form-control">
-                                @foreach($order->contractors() as $contractor)
-                                    <option value="{{ $contractor->id }}">{{ $contractor->name }}</option>
-                                @endforeach
-                            </select>
-                        </div>
-                    </div>-->
                     <div class="form-group{{ $errors->has('date_end') ? ' has-error' : '' }}">
                         <label class="col-md-3 control-label">дата выполнения <span class="red">*</span></label>
                         <div class="col-md-9">

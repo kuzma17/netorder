@@ -14,7 +14,7 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label">Тип услуги<span class="red">*</span></label>
                         <div class="col-md-9">
-                            <select name="type_work" class="form-control" @if($user->is_contractor()) disabled @endif>
+                            <select id="type_work" name="type_work" class="form-control" @if($user->is_contractor()) disabled @endif>
                                 @foreach($order->typeWorks() as $type)
                                     <option value="{{ $type->id }}"
                                             @if($type->id == $order->typeWork->id) selected="selected" @endif>{{ $type->name }}</option>
@@ -22,15 +22,39 @@
                             </select>
                         </div>
                     </div>
-                    @if(($user->is_client() || $user->is_admin()) && \App\Equipment::where('client_id', $order->client_id)->count() > 0)
-                        <div class="form-group">
-                            <label class="col-md-3 control-label">Оборудование</label>
-                            <div class="col-md-9">
-                                <select name="equipment" class="form-control">
-                                    @foreach(\App\Equipment::where('client_id', $order->client_id)->get() as $equipment)
-                                        <option value="{{ $equipment->name }}">{{ $equipment->name }}</option>
-                                    @endforeach
-                                </select>
+                    @if($user->is_client() )
+                        <div id="block_regenerate" @if($type->id == $order->typeWork->id) style="display: none" @endif>
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Принтер</label>
+                                <div class="col-md-9">
+                                    <select id="printer_order" name="printer" class="form-control">
+                                        <option value="">Выберите принтер</option>
+                                        @foreach($user->profile->client->printers as $printer)
+                                            <option value="{{ $printer->id }}" @if($printer->id == $order->printer_id) selected @endif>{{ $printer->name }}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                            </div>
+                            <div id="cartridge_list">
+                                @if($order->printer_id != 0)
+                                <div class="form-group cartridge">
+                                    <label class="col-md-3 control-label">Картридж</label>
+                                    <div class="col-md-9">
+                                        <select class="form-control select_cartridge" name="cartridge">';
+                                            @foreach ($order->printer->cartridges as $cartridge)
+                                                <option value="{{$cartridge->id}}" @if($cartridge->id == $order->cartridge_id) selected @endif>{{$cartridge->name}}</option>
+                                            @endforeach
+
+                                            </select>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-md-3 control-label">Количество картриджей</label>
+                                    <div class="col-md-9">
+                                        <input type="number" name="count_cartridge" class="form-control select_cartridge" value="{{$order->count_cartridge}}" required>
+                                    </div>
+                                </div>
+                                    @endif
                             </div>
                         </div>
                     @endif

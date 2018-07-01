@@ -43,4 +43,12 @@ class Order extends Model
     public function statuses(){
         return Status::all();
     }
+
+    public function printer(){
+        return $this->belongsTo(Printer::class);
+    }
+
+    public function cartridge(){
+        return $this->belongsTo(Cartridge::class);
+    }
 }

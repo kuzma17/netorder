@@ -213,4 +213,25 @@ $(document).ready(function () {
             }
         });
     });
+
+    $('#printer_order').change(function () {
+        var token = $('input[name=_token]').val();
+        var printer = $(this).val();
+        $.post('/ajax_cartridge_order', {'_token': token, 'printer': printer}, function (data) {
+            if (data) {
+                $('#cartridge_list').html(data);
+            }
+        });
+    });
+
+    $('#type_work').change(function () {
+       var type_work = $(this).val();
+        if(type_work == 1){
+            $('#block_regenerate').show();
+            $('#block_regenerate').children().find('select').prop('required',true);
+        }else{
+            $('#block_regenerate').children().find('select').prop('required',false);
+            $('#block_regenerate').hide();
+        }
+    });
 });
