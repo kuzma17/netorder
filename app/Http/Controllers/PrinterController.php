@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Cartridge;
 use App\Printer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Session;
 
 class PrinterController extends Controller
@@ -111,5 +112,56 @@ class PrinterController extends Controller
         $printer->delete();
         $printer->cartridges()->detach();
         return redirect(route('printers.index'))->with('info_message', 'Принтер успешно удален.');;
+    }
+
+    public function load_printers(){
+        return view('/printers/load_printers');
+    }
+
+    public function save_load_printers(Request $request){
+
+        $f = '/home/kuzma/printers.csv';
+
+        $row = 1;
+        if (($handle = fopen($f, "r")) !== FALSE) {
+            while (($data = fgetcsv($handle, 1000, ";")) !== FALSE) {
+                $num = count($data);
+                echo "<p> $num полей в строке $row: <br /></p>\n";
+                $row++;
+                for ($c=0; $c < $num; $c++) {
+                    $data[$c] = trim($data[$c]);
+                    if($data[$c]) {
+                      //  echo $data[$c] . "<br />";
+
+                        $id_cartridge = [];
+
+                       // if($c == 0){
+                         //   if (!Printer::where('name', $data[$c])->exists()) {
+                           //     $printer = new Printer();
+                             //   $printer->name = $data[$c];
+                              //  $printer->save();
+                            //}
+                       // }
+
+                        //if($c > 0){
+                          //  if (!Cartridge::where('name', $data[$c])->exists()) {
+                            //    $cartridge = new Cartridge();
+                              //  $cartridge->name = $data[$c];
+                              // $cartridge->save();
+                           // }
+                        //}
+                        if($c >0){
+                            $id_cart = Cartridge::where('name', $data[$c])->first()->id;
+                            $id_print = Printer::where('name', $data[0])->first()->id;
+
+                            DB::insert('insert into cartridge_printer (printer_id, cartridge_id) values (?, ?)', [$id_print, $id_cart]);
+                        }
+
+                    }
+                }
+            }
+            fclose($handle);
+        }
+
     }
 }

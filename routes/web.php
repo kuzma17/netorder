@@ -87,4 +87,8 @@ Route::group(['middleware' => 'auth'], function (){
 
     Route::get('/help', ['as'=>'help', 'uses'=>'HelpController@help']);
 
+    Route::get('/load_printers', ['as'=>'load_printers', 'uses'=>'PrinterController@load_printers']); // Upload printers
+    Route::post('/save_load_printers', ['as'=>'save_load_printers', 'uses'=>'PrinterController@save_load_printers']); // Upload printers
+
+
 });

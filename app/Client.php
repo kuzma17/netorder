@@ -8,6 +8,9 @@ use Illuminate\Foundation\Auth\User;
 class Client extends Model
 {
     public $rules = [
+        'region' => 'required',
+        'town' => 'required',
+        'contractor' => 'required',
         'name' => 'required',
         'phone' => 'required',
         'address' => 'required'
