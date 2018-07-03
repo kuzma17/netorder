@@ -13,10 +13,10 @@
                     <tr>
                         <td>Тип заявки</td><td>{{ $order->typeWork->name }}</td>
                     </tr>
+                    <tr>
+                        <td>Принтер</td><td>{{ $order->printer->name }}</td>
+                    </tr>
                     @if($order->typeWork->id == 1)
-                        <tr>
-                            <td>Принтер</td><td>{{ $order->printer->name }}</td>
-                        </tr>
                         <tr>
                             <td>картридж</td><td>{{ $order->cartridge->name }}</td>
                         </tr>
@@ -24,6 +24,19 @@
                             <td>количестао картриджей</td><td>{{ $order->count_cartridge }}</td>
                         </tr>
                     @endif
+                    @if($user->is_admin() || $user->is_contractor())
+                        <tr>
+                            <td>Стоимость работ</td><td>
+                                @if($order->typeWork->label == 'filling')
+                                    {{ $order->client->price($order->printer_id, $order->cartridge_id)->price * $order->count_cartridge}}
+                                @elseif($order->typeWork->label == 'recovery')
+                                    {{ $order->client->price($order->printer_id, $order->cartridge_id)->price2 * $order->count_cartridge}}
+                                @else
+                                    по согласованию
+                                @endif
+                            </td>
+                        </tr>
+                     @endif
                     <tr>
                         <td>Заказчик фирма</td><td>{{ $order->firm->name }}</td>
                     </tr>

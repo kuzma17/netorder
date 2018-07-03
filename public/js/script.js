@@ -182,6 +182,7 @@ $(document).ready(function () {
         $.post('/ajax_add_cartridge', {'_token': token, 'printer': printer}, function (data) {
             if (data) {
                 regenerate.html(data);
+                $('.head_cartridges').show();
                 $('#equipment_add').prop("disabled", false);
             }
         });

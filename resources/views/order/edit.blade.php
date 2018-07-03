@@ -14,7 +14,7 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label">Тип услуги<span class="red">*</span></label>
                         <div class="col-md-9">
-                            <select id="type_work" name="type_work" class="form-control" @if($user->is_contractor()) disabled @endif>
+                            <select id="type_work" name="type_work" class="form-control" @can('editTypeWork', $order) disabled @endcan>
                                 @foreach($order->typeWorks() as $type)
                                     <option value="{{ $type->id }}"
                                             @if($type->id == $order->typeWork->id) selected="selected" @endif>{{ $type->name }}</option>
@@ -23,18 +23,18 @@
                         </div>
                     </div>
                     @if($user->is_client() )
-                        <div id="block_regenerate" @if($type->id == $order->typeWork->id) style="display: none" @endif>
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">Принтер</label>
-                                <div class="col-md-9">
-                                    <select id="printer_order" name="printer" class="form-control">
-                                        <option value="">Выберите принтер</option>
-                                        @foreach($user->profile->client->printers as $printer)
-                                            <option value="{{ $printer->id }}" @if($printer->id == $order->printer_id) selected @endif>{{ $printer->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Принтер</label>
+                            <div class="col-md-9">
+                                <select id="printer_order" name="printer" class="form-control">
+                                    <option value="">Выберите принтер</option>
+                                    @foreach($user->profile->client->printers as $printer)
+                                        <option value="{{ $printer->id }}" @if($printer->id == $order->printer_id) selected @endif>{{ $printer->name }}</option>
+                                    @endforeach
+                                </select>
                             </div>
+                        </div>
+                        <div id="block_regenerate" @if($order->typeWork->label != 'filling') style="display: none" @endif>
                             <div id="cartridge_list">
                                 @if($order->printer_id != 0)
                                 <div class="form-group cartridge">

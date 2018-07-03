@@ -130,7 +130,7 @@
                                             @foreach($printer->cartridges as $cartridge)
                                                 <div class="row cartridge">
                                                     <label class="col-md-3 control-label">Картридж/Стоимость</label>
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-4">
                                                         <input type="hidden" name="cartridge[{{$printer->id}}][]" value="{{$cartridge->id}}">
                                                         <div class="cartridge_model">{{$cartridge->name}}</div></div>
                                                     <div class="col-md-2">
@@ -138,8 +138,18 @@
                                                                name="price[{{$printer->id}}][{{$cartridge->id}}]]"
                                                                value="{{$client->price($printer->id, $cartridge->id)->price or ''}}" required>
                                                     </div>
+                                                    <div class="col-md-2">
+                                                        <input class="form-control" type="text"
+                                                               name="price2[{{$printer->id}}][{{$cartridge->id}}]]"
+                                                               value="{{$client->price($printer->id, $cartridge->id)->price2 or ''}}" required>
+                                                    </div>
                                                 </div>
                                              @endforeach
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-7"></div>
+                                            <div class="col-md-2"><p class="small">заправка</p></div>
+                                            <div class="col-md-2"><p class="small">восстановление</p></div>
                                         </div>
                                     </div>
                                 @endforeach

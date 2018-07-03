@@ -73,6 +73,7 @@
                                                         <td>картридж</td>
                                                         <td>{{$cartridge->name}}</td>
                                                         <td>{{$client->price($printer->id, $cartridge->id)->price or ''}}</td>
+                                                        <td>{{$client->price($printer->id, $cartridge->id)->price2 or ''}}</td>
                                                     </tr>
                                                 @endforeach
                                                 </table>

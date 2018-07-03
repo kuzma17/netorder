@@ -146,12 +146,11 @@ class OrderController extends Controller
 
                 $order->type_work_id = $request->type_work;
                 $order->date_end = $request->date_end;
+                $order->printer_id = isset($request->printer) ? $request->printer : 0;
                 if($order->type_work_id ==1) {
-                    $order->printer_id = isset($request->printer) ? $request->printer : 0;
                     $order->cartridge_id = isset($request->cartridge) ? $request->cartridge : 0;
                     $order->count_cartridge = isset($request->count_cartridge) ? $request->count_cartridge : 0;
                 }else{
-                    $order->printer_id =  0;
                     $order->cartridge_id = 0;
                     $order->count_cartridge = 0;
                 }

@@ -50,10 +50,12 @@ class Client extends Model
         foreach ($request->printer as $printer){
             foreach ($request->cartridge[$printer] as $cartridge){
                 $cost = $request->price[$printer][$cartridge];
+                $cost2 = $request->price2[$printer][$cartridge];
                 $prices[] = new Price([
                     'printer_id' => $printer,
                     'cartridge_id'=>$cartridge,
-                    'price'=>$cost
+                    'price'=>$cost,
+                    'price2'=>$cost2
                 ]);
             }
         }

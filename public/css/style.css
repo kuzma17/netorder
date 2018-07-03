@@ -201,7 +201,7 @@ i.fa-caret-down, i.fa-caret-up{
 }
 .printer{
     background-color: #f2f2f2;
-    padding: 10px;
+    padding: 10px 10px 5px 10px;
     border: 1px solid #CCCCCC;
     border-radius: 5px;
     margin-bottom: 10px;
@@ -212,3 +212,13 @@ i.fa-caret-down, i.fa-caret-up{
     border-radius: 4px;
     background-color: white;
 }
+
+.small{
+    font-size: 11px;
+    text-align: center;
+    margin: -5px 0 0 0;
+}
+.head_cartridges{
+    display: none;
+}
+

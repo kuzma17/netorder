@@ -49,4 +49,18 @@ class OrderPolicy
         }
         return false;
     }
+
+    public function editTypeWork(User $user, Order $order){
+        if($user->is_client()){
+            if($order->status->label == 'wait'){
+                return false;
+            }
+        }
+        if($user->is_contractor() || $user->is_admin()){
+            if($order->status->label == 'work' || $order->status->label == 'diagnostic'){
+                return false;
+            }
+        }
+        return true;
+    }
 }

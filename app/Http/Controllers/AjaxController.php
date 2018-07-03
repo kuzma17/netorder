@@ -121,12 +121,12 @@ class AjaxController extends Controller
                         </div> 
                      </div> 
                     <div class="regenerate"> 
-                        <!--<div class="row cartridge"> 
-                            <label class="col-md-3 control-label">Картридж/Стоимость</label> 
-                            <div class="col-md-6"><select class="form-control" name="cartridge[]"></select></div>
-                            <div class="col-md-2"><input class="form-control" type="text" name="price[]"></div> 
-                        </div> -->
                     </div> 
+                        <div class="row head_cartridges">
+                            <div class="col-md-7"></div>
+                            <div class="col-md-2"><p class="small">заправка</p></div>
+                            <div class="col-md-2"><p class="small">восстановление</p></div>
+                        </div>    
             </div>';
 
         return $htm;
@@ -142,10 +142,13 @@ class AjaxController extends Controller
             foreach ($cartridges as $cartridge) {
                 $htm .= '<div class="row cartridge"> 
                             <label class="col-md-3 control-label">Картридж/Стоимость</label> 
-                            <div class="col-md-6">
+                            <div class="col-md-4">
                             <input type="hidden" name="cartridge['.$printer_id.'][]" value="'.$cartridge->id.'">
                             <div class="cartridge_model">'.$cartridge->name.'</div></div>
-                            <div class="col-md-2"><input class="form-control" type="text" name="price['.$printer_id.']['.$cartridge->id.']" required></div>
+                            <div class="col-md-2"><input class="form-control" type="text" name="price['.$printer_id.']['.$cartridge->id.']" required>
+                            </div>
+                            <div class="col-md-2"><input class="form-control" type="text" name="price2['.$printer_id.']['.$cartridge->id.']" required>
+                           </div>
                             </div>';
             }
             return $htm;

@@ -21,18 +21,18 @@
                         </div>
                     </div>
                     @if($user->is_client() && isset($user->profile->client->printers) && count($user->profile->client->printers) > 0)
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Принтер</label>
+                            <div class="col-md-9">
+                                <select id="printer_order" name="printer" class="form-control" required>
+                                    <option value="">Выберите принтер</option>
+                                    @foreach($user->profile->client->printers as $printer)
+                                        <option value="{{ $printer->id }}">{{ $printer->name }}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
                        <div id="block_regenerate">
-                           <div class="form-group">
-                               <label class="col-md-3 control-label">Принтер</label>
-                               <div class="col-md-9">
-                                   <select id="printer_order" name="printer" class="form-control" required>
-                                       <option value="">Выберите принтер</option>
-                                       @foreach($user->profile->client->printers as $printer)
-                                           <option value="{{ $printer->id }}">{{ $printer->name }}</option>
-                                       @endforeach
-                                   </select>
-                               </div>
-                           </div>
                            <div id="cartridge_list"></div>
                        </div>
                     @endif
