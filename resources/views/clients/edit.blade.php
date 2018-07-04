@@ -116,11 +116,8 @@
                                     <div class="form-group">
                                         <label class="col-md-3 control-label">Модель принтера</label>
                                         <div class="col-md-8">
-                                            <select class="form-control select_printer" name="printer[]" required>
-                                                @foreach($allPrinters as $print)
-                                                    <option value="{{$print->id}}" @if($print->id == $printer->id) selected @endif>{{$print->name}}</option>';
-                                                @endforeach
-                                            </select>
+                                            <input type="hidden" name="printer[]" class="select_printer" value="{{$printer->id}}">
+                                            <div class="divtoinput">{{$printer->name}}</div>
                                         </div>
                                         <div class="col-md-1">
                                             <a href="#" class="equipment_del" title="Удалить принтер"><i class="fa fa-trash red"></i></a>
@@ -132,7 +129,7 @@
                                                     <label class="col-md-3 control-label">Картридж/Стоимость</label>
                                                     <div class="col-md-4">
                                                         <input type="hidden" name="cartridge[{{$printer->id}}][]" value="{{$cartridge->id}}">
-                                                        <div class="cartridge_model">{{$cartridge->name}}</div></div>
+                                                        <div class="divtoinput">{{$cartridge->name}}</div></div>
                                                     <div class="col-md-2">
                                                         <input class="form-control" type="text"
                                                                name="price[{{$printer->id}}][{{$cartridge->id}}]]"

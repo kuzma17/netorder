@@ -144,7 +144,7 @@ class AjaxController extends Controller
                             <label class="col-md-3 control-label">Картридж/Стоимость</label> 
                             <div class="col-md-4">
                             <input type="hidden" name="cartridge['.$printer_id.'][]" value="'.$cartridge->id.'">
-                            <div class="cartridge_model">'.$cartridge->name.'</div></div>
+                            <div class="divtoinput">'.$cartridge->name.'</div></div>
                             <div class="col-md-2"><input class="form-control" type="text" name="price['.$printer_id.']['.$cartridge->id.']" required>
                             </div>
                             <div class="col-md-2"><input class="form-control" type="text" name="price2['.$printer_id.']['.$cartridge->id.']" required>

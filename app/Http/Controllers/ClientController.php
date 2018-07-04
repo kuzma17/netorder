@@ -76,7 +76,6 @@ class ClientController extends Controller
     public function edit(Request $request, $id){
 
         $client = Client::find($id);
-        $allPrinters = Printer::orderBy('name')->get();
 
         if(Gate::denies('edit', $client)){
             return redirect()->back()->with('error_message','Доступ запрещен.');
@@ -104,7 +103,7 @@ class ClientController extends Controller
             return redirect(route('firms.id', $client->firm_id));
         }
 
-        return view('clients.edit', ['client'=>$client, 'allPrinters'=>$allPrinters]);
+        return view('clients.edit', ['client'=>$client]);
     }
 
     public function del($id){

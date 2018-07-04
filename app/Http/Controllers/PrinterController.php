@@ -71,8 +71,7 @@ class PrinterController extends Controller
     public function edit($id)
     {
         $printer = Printer::find($id);
-        $cartList = Cartridge::all();
-        return view('printers.edit', ['printer'=>$printer, 'cartList'=>$cartList]);
+        return view('printers.edit', ['printer'=>$printer]);
     }
 
     /**

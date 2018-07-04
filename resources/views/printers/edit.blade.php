@@ -29,11 +29,9 @@
                         @foreach($printer->cartridges as $cartridge)
                             <div class="form-group cartridge">
                                 <label class="col-md-3 control-label">Картридж</label>
-                                <div class="col-md-8"><select class="form-control select_cartridge" name="cartridge[]">';
-                                        @foreach ($cartList as $cart)
-                                            <option value="{{$cart->id}}"@if($cart->id == $cartridge->id) selected="selected" @endif>{{$cart->name}}</option>
-                                        @endforeach
-                                        </select>
+                                <div class="col-md-8">
+                                        <input type="hidden" class="select_cartridge" name="cartridge[]" value="{{$cartridge->id}}">
+                                        <div class="divtoinput">{{$cartridge->name}}</div>
                                     </div>
                                 <div class="col-md-1" ><a href = "#" class="cartridge_del" title = "Удалить картридж" ><i class="fa fa-times red" ></i ></a ></div>
                             </div>
