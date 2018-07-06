@@ -138,20 +138,20 @@ class AjaxController extends Controller
         $cartridges = $printer->cartridges;
 
         if(count($cartridges) > 0){
-            $htm = '';
-            foreach ($cartridges as $cartridge) {
-                $htm .= '<div class="row cartridge"> 
-                            <label class="col-md-3 control-label">Картридж/Стоимость</label> 
-                            <div class="col-md-4">
-                            <input type="hidden" name="cartridge['.$printer_id.'][]" value="'.$cartridge->id.'">
-                            <div class="divtoinput">'.$cartridge->name.'</div></div>
-                            <div class="col-md-2"><input class="form-control" type="text" name="price['.$printer_id.']['.$cartridge->id.']" required>
-                            </div>
-                            <div class="col-md-2"><input class="form-control" type="text" name="price2['.$printer_id.']['.$cartridge->id.']" required>
-                           </div>
-                            </div>';
-            }
+            $htm = view('cartridges.add_cartridge', ['cartridges'=>$cartridges, 'printer_id'=>$printer_id]);
             return $htm;
         }
+    }
+
+    public function search_cartridge(Request $request){
+        $search = $request->search;
+        $cartridges = Cartridge::where('name', 'like', '%'.$search.'%')->get();
+        return view('cartridges.table', ['cartridges'=>$cartridges]);
+    }
+
+    public function search_printer(Request $request){
+        $search = $request->search;
+        $printers = Printer::where('name', 'like', '%'.$search.'%')->get();
+        return view('printers.table', ['printers'=>$printers]);
     }
 }

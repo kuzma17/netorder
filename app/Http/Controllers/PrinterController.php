@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cartridge;
+use App\Price;
 use App\Printer;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -39,13 +40,15 @@ class PrinterController extends Controller
      */
     public function store(Request $request)
     {
-        $printer = new Printer();
-        $this->validate($request, $printer->rules );
-        $printer->name = $request->name;
-        $printer->save();
-        $printer->cartridges()->sync($request->cartridge);
+        if($this->check_double($request->name)) {
+            $printer = new Printer();
+            $this->validate($request, $printer->rules);
+            $printer->name = $request->name;
+            $printer->save();
+            $printer->cartridges()->sync($request->cartridge);
 
-        Session::flash('ok_message', 'Принтер успешно создан.');
+            Session::flash('ok_message', 'Принтер успешно создан.');
+        }
 
         return redirect(route('printers.index'));
     }
@@ -112,6 +115,17 @@ class PrinterController extends Controller
         $printer->cartridges()->detach();
         return redirect(route('printers.index'))->with('info_message', 'Принтер успешно удален.');;
     }
+
+    public function check_double($name){
+        if(Printer::where('name', $name)->exists()){
+            Session::flash('error_message', 'Такой принтер уже существует в базе! Попробуйте ввести другое наименование');
+            return false;
+        }
+        return true;
+    }
+
+
+    // Upload price
 
     public function load_printers(){
         return view('/printers/load_printers');

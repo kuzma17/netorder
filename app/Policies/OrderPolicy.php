@@ -35,7 +35,9 @@ class OrderPolicy
             return true;
         }
         if($user->is_contractor()){
-            return true;
+            if($order->status->label != 'done' && $order->status->label != 'field'){
+                return true;
+            }
         }
         return false;
     }
@@ -57,7 +59,7 @@ class OrderPolicy
             }
         }
         if($user->is_contractor() || $user->is_admin()){
-            if($order->status->label == 'work' || $order->status->label == 'diagnostic'){
+            if($order->status->label == 'work'){
                 return false;
             }
         }

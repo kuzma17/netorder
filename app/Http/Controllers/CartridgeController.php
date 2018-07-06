@@ -37,12 +37,14 @@ class CartridgeController extends Controller
      */
     public function store(Request $request)
     {
-        $cartridge = new Cartridge();
-        $this->validate($request, $cartridge->rules );
-        $cartridge->name = $request->name;
-        $cartridge->save();
+        if($this->check_double($request->name)) {
+            $cartridge = new Cartridge();
+            $this->validate($request, $cartridge->rules);
+            $cartridge->name = $request->name;
+            $cartridge->save();
 
-        Session::flash('ok_message', 'Картридж успешно создан.');
+            Session::flash('ok_message', 'Картридж успешно создан.');
+        }
 
         return redirect(route('cartridges.index'));
     }
@@ -106,5 +108,13 @@ class CartridgeController extends Controller
 
         $cartridge->delete();
         return redirect(route('cartridges.index'))->with('info_message', 'Картридж успешно удален.');;
+    }
+
+    public function check_double($name){
+        if(Cartridge::where('name', $name)->exists()){
+            Session::flash('error_message', 'Такой картридж уже существует в базе! Попробуйте ввести другое наименование');
+            return false;
+        }
+        return true;
     }
 }

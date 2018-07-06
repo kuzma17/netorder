@@ -14,7 +14,7 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label">Тип услуги<span class="red">*</span></label>
                         <div class="col-md-9">
-                            <select id="type_work" name="type_work" class="form-control" @can('editTypeWork', $order) disabled @endcan>
+                            <select id="type_work" name="type_work" class="form-control" @can('editTypeWork', $order) readonly @endcan>
                                 @foreach($order->typeWorks() as $type)
                                     <option value="{{ $type->id }}"
                                             @if($type->id == $order->typeWork->id) selected="selected" @endif>{{ $type->name }}</option>
@@ -34,7 +34,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div id="block_regenerate" @if($order->typeWork->label != 'filling') style="display: none" @endif>
+                        <div id="block_regenerate" @if($order->typeWork->label == 'repair') style="display: none" @endif>
                             <div id="cartridge_list">
                                 @if($order->printer_id != 0)
                                 <div class="form-group cartridge">
