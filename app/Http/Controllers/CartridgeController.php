@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cartridge;
+use Gate;
 use Illuminate\Http\Request;
 use Session;
 
@@ -26,6 +27,9 @@ class CartridgeController extends Controller
      */
     public function create()
     {
+        if(Gate::denies('create', Cartridge::class)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
         return view('cartridges.create');
     }
 
@@ -37,6 +41,10 @@ class CartridgeController extends Controller
      */
     public function store(Request $request)
     {
+        if(Gate::denies('store', Cartridge::class)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
+
         if($this->check_double($request->name)) {
             $cartridge = new Cartridge();
             $this->validate($request, $cartridge->rules);
@@ -69,6 +77,11 @@ class CartridgeController extends Controller
     public function edit($id)
     {
         $cartridge = Cartridge::find($id);
+
+        if(Gate::denies('edit', $cartridge)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
+
         return view('cartridges.edit', ['cartridge'=>$cartridge]);
     }
 
@@ -82,6 +95,11 @@ class CartridgeController extends Controller
     public function update(Request $request, $id)
     {
         $cartridge = Cartridge::find($id);
+
+        if(Gate::denies('update', $cartridge)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
+
         $this->validate($request, $cartridge->rules );
         $cartridge->name = $request->name;
         $cartridge->save();
@@ -105,6 +123,10 @@ class CartridgeController extends Controller
     public function delete($id){
 
         $cartridge = Cartridge::find($id);
+
+        if(Gate::denies('delete', $cartridge)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
 
         $cartridge->delete();
         return redirect(route('cartridges.index'))->with('info_message', 'Картридж успешно удален.');;

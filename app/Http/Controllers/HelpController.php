@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Firm;
 use App\Help;
 use Illuminate\Http\Request;
 

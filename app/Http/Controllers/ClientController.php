@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Client;
-use App\Equipment;
 use App\Price;
 use App\Printer;
 use Gate;

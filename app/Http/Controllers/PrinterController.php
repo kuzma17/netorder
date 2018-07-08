@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Cartridge;
-use App\Price;
 use App\Printer;
+use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
@@ -29,6 +29,10 @@ class PrinterController extends Controller
      */
     public function create()
     {
+        if(Gate::denies('create', Printer::class)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
+
         return view('printers.create');
     }
 
@@ -40,6 +44,10 @@ class PrinterController extends Controller
      */
     public function store(Request $request)
     {
+        if(Gate::denies('store', Printer::class)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
+
         if($this->check_double($request->name)) {
             $printer = new Printer();
             $this->validate($request, $printer->rules);
@@ -74,6 +82,10 @@ class PrinterController extends Controller
     public function edit($id)
     {
         $printer = Printer::find($id);
+        if(Gate::denies('edit', $printer)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
+
         return view('printers.edit', ['printer'=>$printer]);
     }
 
@@ -87,6 +99,11 @@ class PrinterController extends Controller
     public function update(Request $request, $id)
     {
         $printer = Printer::find($id);
+
+        if(Gate::denies('update', $printer)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
+
         $this->validate($request, $printer->rules );
         $printer->name = $request->name;
         $printer->save();
@@ -111,6 +128,9 @@ class PrinterController extends Controller
     public function delete($id){
 
         $printer = Printer::find($id);
+        if(Gate::denies('delete', $printer)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
         $printer->delete();
         $printer->cartridges()->detach();
         return redirect(route('printers.index'))->with('info_message', 'Принтер успешно удален.');;
