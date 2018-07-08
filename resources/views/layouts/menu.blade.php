@@ -15,7 +15,7 @@
                     <a class="navbar-brand" href="{{ url('/') }}">
     <div style="position: absolute; top: -31px; width: 300px; z-index: 150; ">
         <div style="float: left;">
-        <img style="height: 80px; width: auto;" src="/images/logo5.jpg">
+        <img style="height: 80px; width: auto;" src="/images/logo.jpg">
         </div>
         <div style="float: left; margin-top: 47px; margin-left: 10px; width: 150px">
             @include('layouts.logo')

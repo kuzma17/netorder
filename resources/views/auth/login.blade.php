@@ -7,7 +7,7 @@
             <div class="panel panel-default panel-auth">
                 <div class="panel-heading">
                     @include('layouts.logo')
-                    <span style="float: right; padding: 7px; padding-right: 20px">Авторизация</span>
+                    <span class="authHead">Авторизация</span>
                 </div>
 
                 <div class="panel-body">
