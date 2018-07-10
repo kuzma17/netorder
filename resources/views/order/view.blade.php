@@ -27,9 +27,9 @@
                     @if($user->is_admin() || $user->is_contractor())
                         <tr>
                             <td>Стоимость работ</td><td>
-                                @if($order->typeWork->label == 'filling')
+                                @if($order->typeWork->label == 'filling' && $order->printer_id && $order->cartridge_id && $order->count_cartridge)
                                     {{ $order->client->price($order->printer_id, $order->cartridge_id)->price * $order->count_cartridge}}
-                                @elseif($order->typeWork->label == 'recovery')
+                                @elseif($order->typeWork->label == 'recovery' && $order->printer_id && $order->cartridge_id && $order->count_cartridge)
                                     {{ $order->client->price($order->printer_id, $order->cartridge_id)->price2 * $order->count_cartridge}}
                                 @else
                                     по согласованию

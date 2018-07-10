@@ -14,15 +14,23 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label">Тип услуги<span class="red">*</span></label>
                         <div class="col-md-9">
+                            @if($user->can('editTypeWork', $order))
+                                <input type="hidden" name="type_work" value="{{$order->typeWork->id}}">
+                                <div class="divtoinput">{{$order->typeWork->name}}</div>
+                            @else
                             <select id="type_work" name="type_work" class="form-control" @can('editTypeWork', $order) readonly @endcan>
                                 @foreach($order->typeWorks() as $type)
+                                    @if(!$user->is_client() && $type->label == 'repair')
+                                        @continue
+                                    @endif
                                     <option value="{{ $type->id }}"
                                             @if($type->id == $order->typeWork->id) selected="selected" @endif>{{ $type->name }}</option>
                                 @endforeach
                             </select>
+                            @endif
                         </div>
                     </div>
-                    @if($user->is_client() )
+                    @if($user->is_client())
                         <div class="form-group">
                             <label class="col-md-3 control-label">Принтер</label>
                             <div class="col-md-9">
@@ -57,7 +65,30 @@
                                     @endif
                             </div>
                         </div>
-                    @endif
+                    @else
+                        <div class="form-group">
+                            <label class="col-md-3 control-label">Принтер</label>
+                            <div class="col-md-9">
+                                <div class="divtoinput">{{$order->printer->name or ''}}</div>
+                            </div>
+                        </div>
+                        @if($order->typeWork->label == 'filling' || $order->typeWork->label == 'recovery')
+
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Картридж</label>
+                                        <div class="col-md-9">
+                                            <div class="divtoinput">{{$order->cartridge->name or ''}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label class="col-md-3 control-label">Количество картриджей</label>
+                                        <div class="col-md-9">
+                                            <div class="divtoinput">{{$order->count_cartridge or ''}}</div>
+                                        </div>
+                                    </div>
+
+                            @endif
+                        @endif
                     <div class="form-group{{ $errors->has('date_end') ? ' has-error' : '' }}">
                         <label class="col-md-3 control-label">дата выполнения</label>
                         <div class="col-md-9">

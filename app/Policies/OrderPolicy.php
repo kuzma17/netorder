@@ -59,10 +59,24 @@ class OrderPolicy
             }
         }
         if($user->is_contractor() || $user->is_admin()){
-            if($order->status->label == 'work'){
+            if($order->status->label == 'work' && $order->typeWork->label != 'repair'){
                 return false;
             }
         }
         return true;
+    }
+
+    public function editPrinterCartridge(User $user, Order $order){
+        if($user->is_client()){
+            if($order->status->label == 'wait'){
+                return true;
+            }
+        }
+        if($user->is_contractor() || $user->is_admin()){
+            if($order->status->label == 'work'){
+                return true;
+            }
+        }
+        return false;
     }
 }
