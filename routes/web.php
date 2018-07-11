@@ -88,6 +88,9 @@ Route::group(['middleware' => 'auth'], function (){
     Route::resource('cartridges', 'CartridgeController');
     Route::get('/cartridges/del/{id}', ['as'=>'cartridges.del', 'uses'=>'CartridgeController@delete']);
 
+    Route::resource('cites', 'CityController');
+    Route::get('/cites/del/{id}', ['as'=>'cites.del', 'uses'=>'CityController@delete']);
+
     Route::get('/help', ['as'=>'help', 'uses'=>'HelpController@help']);
 
     Route::get('/load_printers', ['as'=>'load_printers', 'uses'=>'PrinterController@load_printers']); // Upload printers

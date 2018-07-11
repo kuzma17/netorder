@@ -27,9 +27,9 @@ class CartridgeController extends Controller
      */
     public function create()
     {
-        if(Gate::denies('create', Cartridge::class)){
-            return redirect()->back()->with('error_message','Доступ запрещен.');
-        }
+       // if(Gate::denies('create', Cartridge::class)){
+        //    return redirect()->back()->with('error_message','Доступ запрещен.');
+       // }
         return view('cartridges.create');
     }
 
@@ -41,9 +41,9 @@ class CartridgeController extends Controller
      */
     public function store(Request $request)
     {
-        if(Gate::denies('store', Cartridge::class)){
-            return redirect()->back()->with('error_message','Доступ запрещен.');
-        }
+       // if(Gate::denies('store', Cartridge::class)){
+        //    return redirect()->back()->with('error_message','Доступ запрещен.');
+        //}
 
         if($this->check_double($request->name)) {
             $cartridge = new Cartridge();
@@ -78,9 +78,9 @@ class CartridgeController extends Controller
     {
         $cartridge = Cartridge::find($id);
 
-        if(Gate::denies('edit', $cartridge)){
-            return redirect()->back()->with('error_message','Доступ запрещен.');
-        }
+       /// if(Gate::denies('edit', $cartridge)){
+       //     return redirect()->back()->with('error_message','Доступ запрещен.');
+        //}
 
         return view('cartridges.edit', ['cartridge'=>$cartridge]);
     }
@@ -96,9 +96,9 @@ class CartridgeController extends Controller
     {
         $cartridge = Cartridge::find($id);
 
-        if(Gate::denies('update', $cartridge)){
-            return redirect()->back()->with('error_message','Доступ запрещен.');
-        }
+        //if(Gate::denies('update', $cartridge)){
+        //    return redirect()->back()->with('error_message','Доступ запрещен.');
+       // }
 
         $this->validate($request, $cartridge->rules );
         $cartridge->name = $request->name;
@@ -124,9 +124,9 @@ class CartridgeController extends Controller
 
         $cartridge = Cartridge::find($id);
 
-        if(Gate::denies('delete', $cartridge)){
-            return redirect()->back()->with('error_message','Доступ запрещен.');
-        }
+      //  if(Gate::denies('delete', $cartridge)){
+        //    return redirect()->back()->with('error_message','Доступ запрещен.');
+        //}
 
         $cartridge->delete();
         return redirect(route('cartridges.index'))->with('info_message', 'Картридж успешно удален.');;

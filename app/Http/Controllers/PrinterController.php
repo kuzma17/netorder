@@ -31,9 +31,9 @@ class PrinterController extends Controller
      */
     public function create()
     {
-        if(Gate::denies('create', Printer::class)){
-            return redirect()->back()->with('error_message','Доступ запрещен.');
-        }
+       // if(Gate::denies('create', Printer::class)){
+       //     return redirect()->back()->with('error_message','Доступ запрещен.');
+       // }
 
         return view('printers.create');
     }
@@ -46,9 +46,9 @@ class PrinterController extends Controller
      */
     public function store(Request $request)
     {
-        if(Gate::denies('store', Printer::class)){
-            return redirect()->back()->with('error_message','Доступ запрещен.');
-        }
+        //if(Gate::denies('store', Printer::class)){
+       //     return redirect()->back()->with('error_message','Доступ запрещен.');
+     //   }
 
         if($this->check_double($request->name)) {
             $printer = new Printer();
@@ -102,9 +102,9 @@ class PrinterController extends Controller
     {
         $printer = Printer::find($id);
 
-        if(Gate::denies('update', $printer)){
-            return redirect()->back()->with('error_message','Доступ запрещен.');
-        }
+        //if(Gate::denies('update', $printer)){
+         //   return redirect()->back()->with('error_message','Доступ запрещен.');
+       // }
 
         $this->validate($request, $printer->rules );
         $printer->name = $request->name;
@@ -130,9 +130,9 @@ class PrinterController extends Controller
     public function delete($id){
 
         $printer = Printer::find($id);
-        if(Gate::denies('delete', $printer)){
-            return redirect()->back()->with('error_message','Доступ запрещен.');
-        }
+      //  if(Gate::denies('delete', $printer)){
+        //    return redirect()->back()->with('error_message','Доступ запрещен.');
+        //}
         $printer->delete();
         $printer->cartridges()->detach();
         return redirect(route('printers.index'))->with('info_message', 'Принтер успешно удален.');;
