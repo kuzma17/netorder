@@ -33,9 +33,13 @@ class ClientController extends Controller
 
             $this->validate($request, $client->rules );
 
+            if(!$request->printer){
+                return redirect()->back()->with('error_message', 'Необходимо добавить минимум один принтер на вкладке "Принтеры"!');
+            }
+
             $client->firm_id = $request->firm;
             $client->region_id = $request->region;
-            $client->town_id = $request->town;
+            $client->city_id = $request->city;
             $client->contractor_id = $request->contractor;
             $client->name = $request->name;
             $client->phone = $request->phone;
@@ -43,24 +47,6 @@ class ClientController extends Controller
             $client->status = $request->status;
             $client->save();
             $client->printers()->sync($request->printer);
-
-           // $client->prices()->delete();
-
-          //  $prices = [];
-          //  foreach ($request->printer as $printer){
-            //    foreach ($request->cartridge[$printer] as $cartridge){
-           //         $cost = $request->price[$printer][$cartridge];
-            //        $prices[] = new Price([
-             //           'printer_id' => $printer,
-            //            'cartridge_id'=>$cartridge,
-              //          'price'=>$cost
-           //         ]);
-
-                    //echo $printer.' '.$cartridge.' '.$cost.'<br>';
-              ///  }
-          //  }
-
-          //  $client->prices()->saveMany($prices);
             $client->save_prices($request);
 
             Session::flash('ok_message', 'Офис успешно создан.');
@@ -86,7 +72,7 @@ class ClientController extends Controller
 
             $client->firm_id = $request->firm;
             $client->region_id = $request->region;
-            $client->town_id = $request->town;
+            $client->city_id = $request->city;
             $client->contractor_id = $request->contractor;
             $client->name = $request->name;
             $client->phone = $request->phone;
@@ -94,7 +80,6 @@ class ClientController extends Controller
             $client->status = $request->status;
             $client->save();
             $client->printers()->sync($request->printer);
-
             $client->save_prices($request);
 
             Session::flash('ok_message', 'Офис успешно отредактирован.');

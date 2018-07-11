@@ -17,6 +17,10 @@
                         <td>{{ $contractor->phone }}</td>
                     </tr>
                     <tr>
+                        <td>E-mail</td>
+                        <td>{{ $contractor->email }}</td>
+                    </tr>
+                    <tr>
                         <td>Адрес</td>
                         <td>{{ $contractor->address }}</td>
                     </tr>

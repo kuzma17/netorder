@@ -257,4 +257,15 @@ $(document).ready(function () {
         });
     });
 
+    $('#region').change(function () {
+        var token = $('input[name=_token]').val();
+        var region = $(this).val();
+        $.post('/ajax_city_list', {'_token': token, 'region': region}, function (data) {
+            if (data) {
+                $('#block_city').show();
+                $('#city').html(data);
+            }
+        });
+    });
+
 });

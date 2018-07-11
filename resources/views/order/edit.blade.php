@@ -104,7 +104,7 @@
                     <div class="form-group">
                         <label class="col-md-3 control-label">Комментарий</label>
                         <div class="col-md-9">
-                            <textarea class="form-control" name="comment"  @if($user->is_contractor()) disabled @endif>{{old('comment', $order->comment)}}</textarea>
+                            <textarea class="form-control" name="comment"  @if(!$user->is_client()) readonly @endif>{{old('comment', $order->comment)}}</textarea>
                         </div>
                     </div>
                     @if($user->is_admin() || $user->is_contractor())
@@ -119,6 +119,14 @@
                             <input type="file" class="form-control" name="act" id="act" multiple="multiple">
                         </div>
                     </div>
+                    @can('agreement', $order)
+                            <div class="form-group">
+                                <label class="col-md-3 control-label">Согласования</label>
+                                <div class="col-md-9">
+                                    <textarea class="form-control" name="agreement" @if($user->is_contractor()) readonly @endif>{{old('agreement', $order->agreement)}}</textarea>
+                                </div>
+                            </div>
+                    @endcan
                     <div class="form-group">
                         <label class="col-md-3 control-label">Статус</label>
                         <div class="col-md-9">

@@ -16,7 +16,7 @@
                     <tr>
                         <td>Принтер</td><td>{{ $order->printer->name }}</td>
                     </tr>
-                    @if($order->typeWork->id == 1)
+                    @if($order->typeWork->label == 'filling')
                         <tr>
                             <td>картридж</td><td>{{ $order->cartridge->name }}</td>
                         </tr>
@@ -62,8 +62,13 @@
                         </tr>
                     @endif
                     <tr>
-                        <td>Комментарий</td><td>{{ $order->comment }}</td>
+                        <td>Комментарий</td><td>{{ $order->comment or ''}}</td>
                     </tr>
+                    @can('agreement', $order)
+                        <tr>
+                            <td>Согласования</td><td>{{ $order->agreement or ''}}</td>
+                        </tr>
+                     @endcan
                     <tr>
                         <td>Статус</td><td>{{ $order->status->name }}</td>
                     </tr>

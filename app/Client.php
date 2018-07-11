@@ -8,9 +8,6 @@ use Illuminate\Foundation\Auth\User;
 class Client extends Model
 {
     public $rules = [
-        'region' => 'required',
-        'town' => 'required',
-        'contractor' => 'required',
         'name' => 'required',
         'phone' => 'required',
         'address' => 'required'
@@ -24,8 +21,8 @@ class Client extends Model
         return $this->belongsTo(Region::class);
     }
 
-    public function town(){
-        return $this->belongsTo(Town::class);
+    public function city(){
+        return $this->belongsTo(City::class);
     }
 
     public function user(){
@@ -85,8 +82,8 @@ class Client extends Model
         return Region::orderBy('name')->get();
     }
 
-    public function list_towns(){
-        return Town::orderBy('name')->get();
+    public function list_cites($id){
+        return City::where('region_id', $id)->orderBy('name')->get();
     }
 
     public function list_users(){

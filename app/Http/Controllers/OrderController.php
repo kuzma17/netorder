@@ -5,10 +5,13 @@ namespace App\Http\Controllers;
 use App\Client;
 use App\Contractor;
 use App\Firm;
+use App\Notifications\NewOrder;
 use App\Order;
 use App\Status;
+use App\User;
 use Gate;
 use Illuminate\Http\Request;
+use Notification;
 
 class OrderController extends Controller
 {
@@ -27,7 +30,7 @@ class OrderController extends Controller
             return $orders;
         }
         if($user->is_contractor()){
-            $orders = Order::where('contractor_id', $user->profile->firm_id);
+            $orders = Order::where('contractor_id', $user->profile->contractor_id);
             return $orders;
         }
     }
@@ -48,7 +51,7 @@ class OrderController extends Controller
 
         $countAllOrder = $this->get_order()->count();
         $countWaitOrder = $this->get_order()->where('status_id', 1)->count();
-        $countWorkOrder = $this->get_order()->whereIn('status_id', [2,3])->count();
+        $countWorkOrder = $this->get_order()->whereIn('status_id', [2,3,4])->count();
         return view('order.list', [
             'orders' => $orders,
             'firms' => $firms,
@@ -113,7 +116,6 @@ class OrderController extends Controller
             $order->firm_id = $user->profile->firm_id;
             $order->client_id = $user->profile->branch_id;
             $order->user_id = $user->id;
-            //$order->contractor_id = $request->contractor;
             $order->contractor_id = $user->profile->client->contractor_id;
             $order->printer_id = isset($request->printer)? $request->printer: 0;
             $order->cartridge_id = isset($request->cartridge)? $request->cartridge: 0;
@@ -122,6 +124,14 @@ class OrderController extends Controller
             $order->comment = $request->comment;
             $order->status_id = 1;
             $order->save();
+
+            //foreach ($user->profile->client->contractor->userProfiles as $profile){
+           //     echo $profile->user->email.'<br>';
+           // }
+            //Notification::send(User::all(), new NewOrder($order));
+
+
+            $order->notify(new NewOrder($order));
 
             return redirect(route('orders'))->with('ok_message', 'Ваш заказ успешно создан и будет обработан в ближайшее время.');
         }
@@ -158,6 +168,7 @@ class OrderController extends Controller
             }
             $order->type_work_id = $request->type_work;
             $order->act_complete = isset($request->act_complete)?$request->act_complete: '';
+            $order->agreement = isset($request->agreement)? $request->agreement: '';
             $order->status_id = isset($request->status)? $request->status: 1;
             $order->save();
 

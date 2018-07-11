@@ -7,6 +7,7 @@ use App\Client;
 use App\Contractor;
 use App\Firm;
 use App\Printer;
+use App\Region;
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
@@ -28,7 +29,7 @@ class AjaxController extends Controller
         $htm = '';
         $branches = Client::where('firm_id', $id)->where('status', 'on')->orderBy('name')->get();
         if(count($branches) > 0) {
-            //$htm .= '<option value="">Выберите офис</option>';
+            $htm .= '<option value=""></option>';
             foreach ($branches as $branch) {
                 $htm .= '<option value="' . $branch->id . '">' . $branch->name . '</option>';
             }
@@ -91,5 +92,18 @@ class AjaxController extends Controller
         $search = $request->search;
         $printers = Printer::where('name', 'like', '%'.$search.'%')->get();
         return view('printers.table', ['printers'=>$printers]);
+    }
+
+    public function city_list(Request $request){
+        $region_id = $request->region;
+        $region = Region::find($region_id);
+        $cites = $region->cites;
+        if(count($cites) > 0){
+            $htm = '';
+            foreach($cites as $city){
+                $htm .= '<option value="' . $city->id . '">' . $city->name . '</option>';
+            }
+            return $htm;
+        }
     }
 }

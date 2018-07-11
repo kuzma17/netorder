@@ -25,7 +25,7 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label">Регион<span class="red">*</span></label>
                                 <div class="col-md-9">
-                                    <select name="region" class="form-control">
+                                    <select name="region" id="region" class="form-control">
                                         @foreach($client->list_regions() as $region)
                                             <option value="{{ $region->id }}"
                                                     @if($client->region_id == $region->id) selected @endif>{{ $region->name }}</option>
@@ -36,10 +36,10 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label">Город, населенный пункт<span class="red">*</span></label>
                                 <div class="col-md-9">
-                                    <select name="town" class="form-control">
-                                        @foreach($client->list_towns() as $town)
-                                            <option value="{{ $town->id }}"
-                                                    @if($client->town_id == $town->id) selected @endif>{{ $town->name }}</option>
+                                    <select name="city" id="city" class="form-control">
+                                        @foreach($client->list_cites($client->region_id) as $city)
+                                            <option value="{{ $city->id }}"
+                                                    @if($client->city_id == $city->id) selected @endif>{{ $city->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>

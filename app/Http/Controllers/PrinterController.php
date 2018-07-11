@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Cartridge;
 use App\Printer;
+use App\Region;
+use App\Town;
 use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -153,7 +155,7 @@ class PrinterController extends Controller
 
     public function save_load_printers(Request $request){
 
-        $f = '/home/kuzma/printers.csv';
+        $f = '/home/kuzma/city.csv';
 
         $row = 1;
         if (($handle = fopen($f, "r")) !== FALSE) {
@@ -183,16 +185,35 @@ class PrinterController extends Controller
                               // $cartridge->save();
                            // }
                         //}
-                        if($c >0){
-                            $id_cart = Cartridge::where('name', $data[$c])->first()->id;
-                            $id_print = Printer::where('name', $data[0])->first()->id;
+                        //if($c >0){
+                        //    $id_cart = Cartridge::where('name', $data[$c])->first()->id;
+                        //    $id_print = Printer::where('name', $data[0])->first()->id;
 
-                            DB::insert('insert into cartridge_printer (printer_id, cartridge_id) values (?, ?)', [$id_print, $id_cart]);
-                        }
+                        //    DB::insert('insert into cartridge_printer (printer_id, cartridge_id) values (?, ?)', [$id_print, $id_cart]);
+                        //}
+
+                      // if($c ==0){
+                          // $id = Town::where('name', $data[0])->first()->id;
+                          // $region_id = Region::where('name', $data[1])->first()->id;
+
+                      //  $town = Town::find($id);
+                       // $town->region_id = $region_id;
+                      //  $town->save();
+
+                           ///echo $id.' '.$region_id.'<br>';
+                      // }
+                      //  if($c ==1){
+                       //     if (!Region::where('name', $data[$c])->exists()) {
+                       //         $town = new Region();
+                        //        $town->name = $data[$c];
+                        //        $town->save();
+                       //     }
+                       // }
 
                     }
                 }
             }
+            echo 'complete';
             fclose($handle);
         }
 

@@ -3,10 +3,13 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Notifications\Notifiable;
 use Request;
 
 class Order extends Model
 {
+    use Notifiable;
+
     public $rules = [
         'type_work' => 'required',
         'date_end' => 'required',
@@ -50,5 +53,9 @@ class Order extends Model
 
     public function cartridge(){
         return $this->belongsTo(Cartridge::class);
+    }
+
+    public function routeNotificationForMail(){
+        return $this->contractor->email;
     }
 }

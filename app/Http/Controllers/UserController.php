@@ -62,11 +62,30 @@ class UserController extends Controller
             $profile = new UserProfile();
             $profile->name = $request->full_name;
             $profile->phone = $request->phone;
-            $profile->firm_id = isset($request->firm)?$request->firm:0;
-            $profile->branch_id = isset($request->branch)?$request->branch:0;
-           // $profile->contractor_id = $request->contractor;
-            $profile->status = $request->status;
             $profile->role_id = $request->role;
+            if($request->role == 1){
+                $profile->firm_id = 0;
+                $profile->branch_id = 0;
+                $profile->contractor_id = 0;
+            }elseif($request->role == 2){
+                $profile->firm_id = $request->firm;
+                $profile->branch_id = 0;
+                $profile->contractor_id = 0;
+            }elseif($request->role == 3){
+                $profile->firm_id = $request->firm;
+                $profile->branch_id = $request->branch;
+                $profile->contractor_id = 0;
+            }elseif($request->role == 4){
+                $profile->firm_id = 0;
+                $profile->branch_id = 0;
+                $profile->contractor_id = $request->firm;
+            }
+
+            //$profile->firm_id = isset($request->firm)?$request->firm:0;
+            //$profile->branch_id = isset($request->branch)?$request->branch:0;
+          //  $profile->contractor_id = isset($request->contractor)?$request->contractor:0;
+            $profile->status = $request->status;
+
 
             $user->profile()->save($profile);
 
@@ -116,8 +135,27 @@ class UserController extends Controller
             $user->profile->name = $request->full_name;
             $user->profile->role_id = $request->role;
             $user->profile->phone = $request->phone;
-            $user->profile->firm_id = isset($request->firm)?$request->firm:0; // фирма клиент/подрядчик
-            $user->profile->branch_id = isset($request->branch)?$request->branch:0;
+
+            if($request->role == 1){
+                $user->profile->firm_id = 0;
+                $user->profile->branch_id = 0;
+                $user->profile->contractor_id = 0;
+            }elseif($request->role == 2){
+                $user->profile->firm_id = $request->firm;
+                $user->profile->branch_id = 0;
+                $user->profile->contractor_id = 0;
+            }elseif($request->role == 3){
+                $user->profile->firm_id = $request->firm;
+                $user->profile->branch_id = $request->branch;
+                $user->profile->contractor_id = 0;
+            }elseif($request->role == 4){
+                $user->profile->firm_id = 0;
+                $user->profile->branch_id = 0;
+                $user->profile->contractor_id = $request->firm;
+            }
+
+            //$user->profile->firm_id = isset($request->firm)?$request->firm:0; // фирма клиент/подрядчик
+            //$user->profile->branch_id = isset($request->branch)?$request->branch:0;
             //$user->profile->contarctor_id = isset($request->contarctor)?$request->contarctor:0;
             $user->profile->status = $request->status;
             $user->profile->save();

@@ -26,7 +26,7 @@
                             </tr>
                             <tr>
                                 <td>Город, населенный пункт</td>
-                                <td>{{ $client->town->name }}</td>
+                                <td>{{ $client->city->name }}</td>
                             </tr>
                             <tr>
                                 <td>Название</td>

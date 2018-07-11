@@ -79,4 +79,11 @@ class OrderPolicy
         }
         return false;
     }
+
+    public function agreement(User $user){
+        if($user->is_contractor() || $user->is_admin()){
+            return true;
+        }
+        return false;
+    }
 }

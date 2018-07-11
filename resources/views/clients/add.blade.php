@@ -5,6 +5,7 @@
             <div class="col-md-8 col-md-offset-2">
                 <h3>Создание нового офиса</h3>
                 <div style="clear: both"></div>
+                @include('layouts.message')
                 <ul class="nav nav-tabs">
                     <li class="active"><a data-toggle="tab" href="#main">Основные данные</a></li>
                     <li><a data-toggle="tab" href="#equipment">Принтеры</a></li>
@@ -21,22 +22,18 @@
                             <div class="form-group">
                                 <label class="col-md-3 control-label">Регион<span class="red">*</span></label>
                                 <div class="col-md-9">
-                                    <select name="region" class="form-control">
-                                        <option value="0">Выберите регион</option>
+                                    <select name="region" id="region" class="form-control" required>
+                                        <option value="">Выберите регион</option>
                                         @foreach($client->list_regions() as $region)
                                             <option value="{{ $region->id }}">{{ $region->name }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                             </div>
-                            <div class="form-group">
+                            <div id="block_city" class="form-group" style="display: none">
                                 <label class="col-md-3 control-label">Город, населенный пункт<span class="red">*</span></label>
                                 <div class="col-md-9">
-                                    <select name="town" class="form-control">
-                                        <option value="0">Выберите город, населенный пункт</option>
-                                        @foreach($client->list_towns() as $town)
-                                            <option value="{{ $town->id }}">{{ $town->name }}</option>
-                                        @endforeach
+                                    <select name="city" id="city" class="form-control">
                                     </select>
                                 </div>
                             </div>
@@ -65,7 +62,7 @@
                             <div class="form-group{{ $errors->has('phone') ? ' has-error' : '' }}">
                                 <label class="col-md-3 control-label">Телефон <span class="red">*</span></label>
                                 <div class="col-md-9">
-                                    <input class="form-control" type="text" name="phone" value="{{old('phone', null)}}">
+                                    <input class="form-control" type="text" name="phone" value="{{old('phone') or ''}}">
                                     @if ($errors->has('phone'))
                                         <span class="help-block">
                                         <strong>{{ $errors->first('phone') }}</strong>

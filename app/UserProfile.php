@@ -13,7 +13,7 @@ class UserProfile extends Model
     }
 
     public function contractor(){
-        return $this->belongsTo(Contractor::class, 'firm_id', 'id');
+        return $this->belongsTo(Contractor::class);
     }
 
     public function firm(){
@@ -22,5 +22,9 @@ class UserProfile extends Model
 
     public function client(){
         return $this->belongsTo(Client::class, 'branch_id', 'id');
+    }
+
+    public function user(){
+        return $this->belongsTo(User::class);
     }
 }

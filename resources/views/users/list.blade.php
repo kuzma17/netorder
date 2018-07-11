@@ -27,7 +27,7 @@
                                 <td>{{$user->id}}</td>
                                 <td>{{$user->name}}</td>
                                 <td>{{$user->email}}</td>
-                                <td>{{$user->profile->phone}}</td>
+                                <td>{{$user->profile->phone or ''}}</td>
                                 <td>{{$user->profile->role->name}}</td>
                                 <td>
                                     @if($user->is_admin_firm() || $user->is_client())
