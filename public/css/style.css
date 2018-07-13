@@ -149,7 +149,8 @@ i.fa-caret-down, i.fa-caret-up{
 
 .filter{
     padding-top: 10px;
-    background-color: #e6eeff;
+    /*background-color: #e6eeff;*/
+    background-image: url("/images/bg_search.jpg");
     border-bottom-left-radius: 10px;
     border-bottom: 1px solid #CCCCCC;
     border-left: 1px solid #CCCCCC;
@@ -170,13 +171,17 @@ i.fa-caret-down, i.fa-caret-up{
     cursor: pointer;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     z-index: 100;
-    margin-top: -3px;
+    /*margin-top: -3px;*/
     color: #2a88bd;
 }
 
 .filter_btn span{
     font-size: 13px;
     margin: 5px;
+}
+
+.filter label{
+    color: #2a88bd;
 }
 
 .btn-success{
@@ -201,9 +206,6 @@ i.fa-caret-down, i.fa-caret-up{
     background-color: #3a87ad;
 }
 
-.logout a{
-    color: #3465A4;
-}
 .printer{
     background-color: #f2f2f2;
     padding: 10px 10px 5px 10px;
@@ -225,5 +227,9 @@ i.fa-caret-down, i.fa-caret-up{
 }
 .head_cartridges{
     display: none;
+}
+
+ul.dropdown-menu{
+   background-color:  #376bae;
 }
 

@@ -84,9 +84,9 @@ class PrinterController extends Controller
     public function edit($id)
     {
         $printer = Printer::find($id);
-        if(Gate::denies('edit', $printer)){
-            return redirect()->back()->with('error_message','Доступ запрещен.');
-        }
+       // if(Gate::denies('edit', $printer)){
+       //     return redirect()->back()->with('error_message','Доступ запрещен.');
+       // }
 
         return view('printers.edit', ['printer'=>$printer]);
     }

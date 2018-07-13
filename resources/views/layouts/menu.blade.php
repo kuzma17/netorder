@@ -37,9 +37,17 @@
         <li class="nav-item"><a href="{{ route('firms') }}" class="nav-link">Клиенты</a></li>
         <li class="nav-item"><a href="{{ route('contractors.index') }}" class="nav-link">Подрядчики</a></li>
         <li class="nav-item"><a href="{{ route('users') }}" class="nav-link">Пользователи</a></li>
-            <li class="nav-item"><a href="{{ route('printers.index') }}" class="nav-link">Принтеры</a></li>
-            <li class="nav-item"><a href="{{ route('cartridges.index') }}" class="nav-link">Картриджи</a></li>
-            <li class="nav-item"><a href="{{ route('cites.index') }}" class="nav-link">Города</a></li>
+            <li class="dropdown">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-cog"></i>
+                     Параметры<span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="{{ route('printers.index') }}">Принтеры</a></li>
+                    <li><a href="{{ route('cartridges.index') }}">Картриджи</a></li>
+                    <li><a href="{{ route('cites.index') }}">Населенные пункты</a></li>
+                    <li class="divider"></li>
+                    <li><a href="№" class="nav-link">Настройки</a></li>
+                </ul>
+            </li>
         @endcan
         <li class="nav-item"><a href="{{ route('help') }}" class="nav-link">Помощь</a></li>
         <!-- Authentication Links -->
@@ -54,11 +62,10 @@
 
                 <ul class="dropdown-menu">
                     <li class="logout">
-                        <a style="color: #3465A4" href="{{ route('logout') }}"
+                        <a href="{{ route('logout') }}"
                            onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
-                            <i class="fa fa-sign-out" aria-hidden="true"></i>
-                            <strong>выход</strong>
+                            <i class="fa fa-sign-out" aria-hidden="true"></i> выход
                         </a>
 
                         <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
