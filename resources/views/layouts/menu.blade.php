@@ -45,7 +45,7 @@
                     <li><a href="{{ route('cartridges.index') }}">Картриджи</a></li>
                     <li><a href="{{ route('cites.index') }}">Населенные пункты</a></li>
                     <li class="divider"></li>
-                    <li><a href="№" class="nav-link">Настройки</a></li>
+                    <li><a href="{{ route('setting.edit') }}" class="nav-link">Настройки</a></li>
                 </ul>
             </li>
         @endcan

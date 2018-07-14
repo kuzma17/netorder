@@ -1,6 +1,9 @@
 html, body{
     height: 100%;
     background-color: whitesmoke;
+    padding: 0;
+    margin: 0;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Geneva, Verdana, sans-serif;
 }
 
 #app {
@@ -231,5 +234,24 @@ i.fa-caret-down, i.fa-caret-up{
 
 ul.dropdown-menu{
    background-color:  #376bae;
+}
+
+.header_top{
+    height: 35px;
+}
+
+.top_info{
+    float: right;
+    padding: 8px 10px 0 0;
+    font-size: 13px;
+    font-weight: 500;
+    color: #376bae;
+}
+.top_info i{
+    color: green;
+}
+
+.top_info span{
+    margin-left: 10px;
 }
 

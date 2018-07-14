@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ app()->getLocale() }}">
+<html lang="{{ app()->getLocale() }}" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -18,7 +18,20 @@
 <body>
 <div id="app">
     <div class="content">
-        <div style="height: 35px"></div>
+        <div class="header_top">
+            <div class="container">
+                <div class="top_info">
+                    <span>
+                        <i class="fa fa-envelope" aria-hidden="true"></i>
+                    {{ \App\Setting::get_setting('email')}}
+                    </span>
+                    <span>
+                    <i class="fa fa-phone" aria-hidden="true"></i>
+                    {{\App\Setting::get_setting('phone')}}
+                    </span>
+                </div>
+            </div>
+        </div>
         @include('layouts.menu')
         @yield('content')
     </div>
