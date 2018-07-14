@@ -16,7 +16,7 @@ class CartridgeController extends Maincontroller
      */
     public function index()
     {
-        $cartridges = Cartridge::paginate(20);
+        $cartridges = Cartridge::paginate($this->setting->get('paginate'));
         return view('cartridges.index', ['cartridges'=>$cartridges, 'setting'=>$this->setting]);
     }
 

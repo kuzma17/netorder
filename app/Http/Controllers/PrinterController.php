@@ -20,7 +20,7 @@ class PrinterController extends Maincontroller
      */
     public function index()
     {
-        $printers = Printer::paginate(20);
+        $printers = Printer::paginate($this->setting->get('paginate'));
         return view('printers.index', ['printers'=>$printers, 'setting'=>$this->setting]);
     }
 

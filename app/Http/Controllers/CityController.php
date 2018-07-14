@@ -18,7 +18,7 @@ class CityController extends Maincontroller
      */
     public function index()
     {
-        $cites = City::paginate(20);
+        $cites = City::paginate($this->setting->get('paginate'));
         return view('cites.index', ['cites'=>$cites, 'setting'=>$this->setting]);
     }
 

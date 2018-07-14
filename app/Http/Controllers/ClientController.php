@@ -12,7 +12,7 @@ use Session;
 class ClientController extends Maincontroller
 {
     public function list(){
-        $clients = Client::orderBy('updated_at', 'desc')->paginate(20);
+        $clients = Client::orderBy('updated_at', 'desc')->paginate($this->setting->get('paginate'));
         return view('clients.list', ['clients'=>$clients, 'setting'=>$this->setting]);
     }
 

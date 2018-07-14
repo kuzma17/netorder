@@ -18,7 +18,7 @@ use Session;
 class UserController extends Maincontroller
 {
     public function list(){
-        $users = User::orderBy('created_at', 'desc')->paginate(20);
+        $users = User::orderBy('created_at', 'desc')->paginate($this->setting->get('paginate'));
         return view('users.list', ['users'=>$users, 'setting'=>$this->setting]);
     }
 

@@ -10,7 +10,7 @@ use Session;
 class ContractorController extends Maincontroller
 {
     public function index(){
-        $contractors = Contractor::active()->orderBy('updated_at', 'desc')->paginate(20);
+        $contractors = Contractor::active()->orderBy('updated_at', 'desc')->paginate($this->setting->get('paginate'));
         return view('contractors.list', ['contractors'=>$contractors, 'setting'=>$this->setting]);
     }
 

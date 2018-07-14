@@ -44,7 +44,7 @@ class SettingController extends Maincontroller
             $this->setting->set($key, $value);
         }
 
-        Session::flash('ok_message', 'Параметры успешно изменен.');
+        Session::flash('ok_message', 'Параметры успешно изменены.');
 
         return redirect(route('setting.edit'));
     }
