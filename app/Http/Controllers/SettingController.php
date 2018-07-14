@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Setting;
+use Gate;
+use Hamcrest\Core\SetTest;
 use Illuminate\Http\Request;
 use Session;
 
@@ -11,9 +13,9 @@ class SettingController extends Maincontroller
     public function edit()
     {
 
-        /// if(Gate::denies('edit', $cartridge)){
-        //     return redirect()->back()->with('error_message','Доступ запрещен.');
-        //}
+         if(Gate::denies('edit', $this->setting)){
+             return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
 
         return view('settings.edit', ['setting'=>$this->setting]);
     }
@@ -28,9 +30,9 @@ class SettingController extends Maincontroller
     public function update(Request $request)
     {
 
-        //if(Gate::denies('update', $cartridge)){
-        //    return redirect()->back()->with('error_message','Доступ запрещен.');
-        // }
+        if(Gate::denies('update', $this->setting)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+         }
 
         $this->validate($request, $this->setting->rules);
 

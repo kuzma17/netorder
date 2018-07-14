@@ -49,7 +49,8 @@
                 </ul>
             </li>
         @endcan
-        <li class="nav-item"><a href="{{ route('help') }}" class="nav-link">Помощь</a></li>
+        <li class="nav-item"><a href="{{ route('help') }}" class="nav-link"><i class="fa fa-life-ring" aria-hidden="true"></i>
+                 Помощь</a></li>
         <!-- Authentication Links -->
         @guest
         <li><a href="{{ route('login') }}">Login</a></li>

@@ -15,8 +15,10 @@ use App\Policies\ContractorPolicy;
 use App\Policies\FirmPolicy;
 use App\Policies\OrderPolicy;
 use App\Policies\PrinterPolicy;
+use App\Policies\SettingPolisy;
 use App\Policies\UserPolicy;
 use App\Printer;
+use App\Setting;
 use App\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -36,6 +38,8 @@ class AuthServiceProvider extends ServiceProvider
         Order::class => OrderPolicy::class,
         Printer::class => PrinterPolicy::class,
         Cartridge::class => CartridgePolicy::class,
+        City::class => CityPolicy::class,
+        Setting::class => SettingPolisy::class
     ];
 
     /**

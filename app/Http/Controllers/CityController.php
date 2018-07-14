@@ -29,9 +29,9 @@ class CityController extends Maincontroller
      */
     public function create()
     {
-       // if(Gate::denies('create', City::class)){
-       //     return redirect()->back()->with('error_message','Доступ запрещен.');
-     //   }
+        if(Gate::denies('create', City::class)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
 
         $regions = Region::orderBy('name')->get();
         return view('cites.create', ['regions'=>$regions, 'setting'=>$this->setting]);
@@ -45,9 +45,9 @@ class CityController extends Maincontroller
      */
     public function store(Request $request)
     {
-       // if(Gate::denies('store', City::class)){
-       //     return redirect()->back()->with('error_message','Доступ запрещен.');
-      //  }
+        if(Gate::denies('store', City::class)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
 
         if($this->check_double($request)) {
             $city = new City();
@@ -84,9 +84,9 @@ class CityController extends Maincontroller
     {
         $city  = City::find($id);
 
-       // if(Gate::denies('create', User::class)){
-       //     return redirect()->back()->with('error_message','Доступ запрещен.');
-       // }
+        if(Gate::denies('create', $city)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
 
         return view('cites.edit', ['city'=>$city, 'setting'=>$this->setting]);
     }
@@ -102,10 +102,9 @@ class CityController extends Maincontroller
     {
         $city = City::find($id);
 
-        //if(Gate::denies('update',$city)){
-       //     return redirect()->back()->with('error_message','Доступ запрещен.');
-        //}
-        //dd($city);
+        if(Gate::denies('update',$city)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
 
         $this->validate($request, $city->rules );
         $city->region_id = $request->region;
@@ -131,9 +130,9 @@ class CityController extends Maincontroller
     public function delete($id){
 
         $city = City::find($id);
-      //  if(Gate::denies('delete', $city)){
-       //     return redirect()->back()->with('error_message','Доступ запрещен.');
-        //}
+       if(Gate::denies('delete', $city)){
+            return redirect()->back()->with('error_message','Доступ запрещен.');
+        }
         $city->delete();
         return redirect(route('cites.index'))->with('info_message', 'Населенный пункт успешно удален.');;
     }
