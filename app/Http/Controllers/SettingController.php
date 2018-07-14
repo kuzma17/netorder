@@ -41,7 +41,7 @@ class SettingController extends Maincontroller
             if($key == '_token'){
                 continue;
             }
-            $this->setting->set($key, $value);
+            $this->setting->set_param($key, $value);
         }
 
         Session::flash('ok_message', 'Параметры успешно изменены.');

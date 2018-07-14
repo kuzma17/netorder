@@ -10,7 +10,7 @@ use Session;
 class FirmController extends Maincontroller
 {
     public function list($id = 0){
-        $firms = Firm::orderBy('updated_at', 'asc')->paginate($this->setting->get('paginate'));
+        $firms = Firm::orderBy('updated_at', 'asc')->paginate($this->setting->get_param('paginate'));
         return view('firms.list', ['firms'=>$firms, 'id'=>$id, 'setting'=>$this->setting]);
     }
 

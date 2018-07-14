@@ -37,7 +37,7 @@ class OrderController extends Maincontroller
 
     public function list($orders = [], $firm_id = '', $filter = false){
         if(!$filter) {
-            $orders = $this->get_order()->orderBy('updated_at', 'desc')->paginate($this->setting->get('paginate'));
+            $orders = $this->get_order()->orderBy('updated_at', 'desc')->paginate($this->setting->get_param('paginate'));
         }
         if($firm_id){
             $firmId = $firm_id;
@@ -52,6 +52,7 @@ class OrderController extends Maincontroller
         $countAllOrder = $this->get_order()->count();
         $countWaitOrder = $this->get_order()->where('status_id', 1)->count();
         $countWorkOrder = $this->get_order()->whereIn('status_id', [2,3,4])->count();
+
         return view('order.list', [
             'orders' => $orders,
             'firms' => $firms,

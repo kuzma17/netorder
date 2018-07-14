@@ -18,17 +18,18 @@
 <body>
 <div id="app">
     <div class="content">
-        <div class="header_top">
+        <div style="height: 35px">
             <div class="container">
                 <div class="top_info">
-                    <span>
-                        <i class="fa fa-envelope" aria-hidden="true"></i>
-                    {{ $setting->get('email')}}
-                    </span>
-                    <span>
-                    <i class="fa fa-phone" aria-hidden="true"></i>
-                    {{$setting->get('phone')}}
-                    </span>
+                    @if(isset($setting))
+                        <span>
+                            <i class="fa fa-envelope" aria-hidden="true"></i>
+                            {{$setting->get_param('email')}}
+                        </span>
+                        <span>
+                            <i class="fa fa-phone" aria-hidden="true"></i>
+                            {{$setting->get_param('phone')}}
+                    @endif
                 </div>
             </div>
         </div>

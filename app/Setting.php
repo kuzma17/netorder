@@ -14,11 +14,11 @@ class Setting extends Model
         'paginate' => 'required|numeric'
     ];
 
-   public static function get($key){
+   public function get_param($key){
        return Setting::find($key)->value;
    }
 
-   public function set($key, $val){
+   public function set_param($key, $val){
        $setting = Setting::find($key);
        $setting->value = trim($val);
        $setting->save();

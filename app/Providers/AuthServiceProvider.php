@@ -2,15 +2,21 @@
 
 namespace App\Providers;
 
+use App\Cartridge;
+use App\City;
 use App\Client;
 use App\Contractor;
 use App\Firm;
 use App\Order;
+use App\Policies\CartridgePolicy;
+use App\Policies\CityPolicy;
 use App\Policies\ClientPolicy;
 use App\Policies\ContractorPolicy;
 use App\Policies\FirmPolicy;
 use App\Policies\OrderPolicy;
+use App\Policies\PrinterPolicy;
 use App\Policies\UserPolicy;
+use App\Printer;
 use App\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -28,6 +34,8 @@ class AuthServiceProvider extends ServiceProvider
         Client::class => ClientPolicy::class,
         Contractor::class => ContractorPolicy::class,
         Order::class => OrderPolicy::class,
+        Printer::class => PrinterPolicy::class,
+        Cartridge::class => CartridgePolicy::class,
     ];
 
     /**
