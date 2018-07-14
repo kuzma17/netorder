@@ -257,6 +257,16 @@ $(document).ready(function () {
         });
     });
 
+    $('#search_city').keyup(function () {
+        var token = $('input[name=_token]').val();
+        var search = $(this).val();
+        $.post('/ajax_search_city', {'_token': token, 'search': search}, function (data) {
+            if (data) {
+                $('#table').html(data);
+            }
+        });
+    });
+
     $('#region').change(function () {
         var token = $('input[name=_token]').val();
         var region = $(this).val();

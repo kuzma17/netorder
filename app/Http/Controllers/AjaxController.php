@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Cartridge;
+use App\City;
 use App\Client;
 use App\Contractor;
 use App\Firm;
@@ -92,6 +93,12 @@ class AjaxController extends Controller
         $search = $request->search;
         $printers = Printer::where('name', 'like', '%'.$search.'%')->get();
         return view('printers.table', ['printers'=>$printers]);
+    }
+
+    public function search_city(Request $request){
+        $search = $request->search;
+        $cites = City::where('name', 'like', '%'.$search.'%')->get();
+        return view('cites.table', ['cites'=>$cites]);
     }
 
     public function city_list(Request $request){

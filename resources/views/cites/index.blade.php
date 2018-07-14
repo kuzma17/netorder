@@ -9,7 +9,7 @@
                         <div class="col-md-6 form-group">
                             <label class="col-md-3 control-label">Название</label>
                             <div class="col-md-9 input-group-sm">
-                                <input type="text" id="search_printer" name="search_printer" class="form-control" value="">
+                                <input type="text" id="search_city" name="search_city" class="form-control" value="">
                             </div>
                         </div>
                        <!-- <div class="col-md-6 form-group">
@@ -27,30 +27,7 @@
                 @include('layouts.message')
                 <a href="{{route('cites.create')}}" ><button type="button" class="btn btn-success">Создать населенный пункт</button></a>
                 <div id="table">
-                    <table class="table table-bordered">
-                        <thead>
-                        <tr>
-                            <th>id</th>
-                            <th>Регион</th>
-                            <th>Название</th>
-                            <th></th>
-                        </tr>
-                        </thead>
-                        @foreach($cites as $city)
-                            <tr>
-                                <td>{{$city->id}}</td>
-                                <td>{{$city->region->name}}</td>
-                                <td>{{$city->name}}</td>
-                                <td>
-                                    <a title="Просмотр населенного пункта" href="{{route('cites.show', ['id'=>$city->id])}}"><i class="fa fa-eye" aria-hidden="true"></i></a>
-                                    <a title="Редактировать населенного пункта" href="{{route('cites.edit', ['id'=>$city->id])}}" ><i class="fa fa-edit"></i></a>
-                                    <a title="Удалить населенный пункт" href="{{route('cites.del', ['id'=>$city->id])}}" ><i class="fa fa-trash"></i></a>
-                                </td>
-                            </tr>
-                        @endforeach
-                        <tbody>
-                        </tbody>
-                    </table>
+                    @include('cites.table')
                     {!! $cites->render() !!}
                 </div>
             </div>
