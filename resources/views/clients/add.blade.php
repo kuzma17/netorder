@@ -70,6 +70,17 @@
                                     @endif
                                 </div>
                             </div>
+                            <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+                                <label class="col-md-3 control-label">E-mail <span class="red">*</span></label>
+                                <div class="col-md-9">
+                                    <input class="form-control" type="text" name="email" value="{{old('email', null)}}">
+                                    @if ($errors->has('email'))
+                                        <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                    @endif
+                                </div>
+                            </div>
                             <div class="form-group{{ $errors->has('address') ? ' has-error' : '' }}">
                                 <label class="col-md-3 control-label">Адрес <span class="red">*</span></label>
                                 <div class="col-md-9">

@@ -37,6 +37,10 @@
                                 <td>{{ $client->phone }}</td>
                             </tr>
                             <tr>
+                                <td>E-mail</td>
+                                <td>{{ $client->email }}</td>
+                            </tr>
+                            <tr>
                                 <td>Адрес</td>
                                 <td>{{ $client->address }}</td>
                             </tr>

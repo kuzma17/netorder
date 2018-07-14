@@ -43,6 +43,7 @@ class ClientController extends Maincontroller
             $client->contractor_id = $request->contractor;
             $client->name = $request->name;
             $client->phone = $request->phone;
+            $client->email = $request->email;
             $client->address = $request->address;
             $client->status = $request->status;
             $client->save();
@@ -76,6 +77,7 @@ class ClientController extends Maincontroller
             $client->contractor_id = $request->contractor;
             $client->name = $request->name;
             $client->phone = $request->phone;
+            $client->email = $request->email;
             $client->address = $request->address;
             $client->status = $request->status;
             $client->save();

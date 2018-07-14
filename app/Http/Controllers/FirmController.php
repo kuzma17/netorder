@@ -33,6 +33,7 @@ class FirmController extends Maincontroller
 
             $Firm->name = $request->name;
             $Firm->phone = $request->phone;
+            $Firm->email = $request->email;
             $Firm->status = $request->status;
             $Firm->save();
 
@@ -59,6 +60,7 @@ class FirmController extends Maincontroller
 
             $firm->name = $request->name;
             $firm->phone = $request->phone;
+            $firm->email = $request->email;
             $firm->status = $request->status;
             $firm->save();
 

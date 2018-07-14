@@ -17,6 +17,10 @@
                         <td>{{ $firm->phone }}</td>
                     </tr>
                     <tr>
+                        <td>E-mail</td>
+                        <td>{{ $ашкь->email }}</td>
+                    </tr>
+                    <tr>
                         <td>Статус</td>
                         <td>{{ $firm->status }}</td>
                     </tr>
