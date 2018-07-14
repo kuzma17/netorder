@@ -20,9 +20,9 @@ class UploadController extends Controller
             $tmp_name = $file->getPathname();
             $extension = $file->getClientOriginalExtension();
             $mime_type = $file->getMimeType();
-            $dir = public_path('images').'/';
+            $dir = public_path('images').'/doc/';
             $filename = uniqid().'_'.time().'_'.date('Ymd').'.'.$extension;
-            $src = '/images/'.$filename;
+            $src = '/images/doc/'.$filename;
 
             if($mime_type == 'application/pdf') {
                 $file->move($dir, $filename);

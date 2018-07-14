@@ -7,16 +7,16 @@ use Gate;
 use Illuminate\Http\Request;
 use Session;
 
-class FirmController extends Controller
+class FirmController extends Maincontroller
 {
     public function list($id = 0){
         $firms = Firm::orderBy('updated_at', 'asc')->paginate(20);
-        return view('firms.list', ['firms'=>$firms, 'id'=>$id]);
+        return view('firms.list', ['firms'=>$firms, 'id'=>$id, 'setting'=>$this->setting]);
     }
 
     public function view($id){
         $firm = Firm::find($id);
-        return view('firms.view', ['firm'=>$firm]);
+        return view('firms.view', ['firm'=>$firm, 'setting'=>$this->setting]);
     }
 
     public function add(Request $request){
@@ -42,7 +42,7 @@ class FirmController extends Controller
             return redirect(route('firms'));
         }
 
-        return view('firms.add');
+        return view('firms.add', ['setting'=>$this->setting]);
     }
 
     public function edit(Request $request, $id){
@@ -67,7 +67,7 @@ class FirmController extends Controller
             return redirect(route('firms'));
         }
 
-        return view('firms.edit', ['firm'=>$firm]);
+        return view('firms.edit', ['firm'=>$firm, 'setting'=>$this->setting]);
     }
 
     public function del($id){

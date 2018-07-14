@@ -17,7 +17,7 @@
                         <label class="col-md-3 control-label">Телефон<span class="red">*</span></label>
                         <div class="col-md-9">
                             <input class="form-control" type="text" name="phone"
-                                   value="{{old('phone', $setting->get_setting('phone'))}}">
+                                   value="{{old('phone', $setting->get('phone'))}}">
                             @if ($errors->has('phone'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('phone') }}</strong>
@@ -29,7 +29,7 @@
                         <label class="col-md-3 control-label">обраный E-mail<span class="red">*</span></label>
                         <div class="col-md-9">
                             <input class="form-control" type="text" name="email"
-                                   value="{{old('email', $setting->get_setting('email'))}}">
+                                   value="{{old('email', $setting->get('email'))}}">
                             @if ($errors->has('email'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
@@ -41,7 +41,7 @@
                         <label class="col-md-3 control-label">количество позиций на странице<span class="red">*</span></label>
                         <div class="col-md-9">
                             <input class="form-control" type="text" name="paginate"
-                                   value="{{old('paginate', $setting->get_setting('paginate'))}}">
+                                   value="{{old('paginate', $setting->get('paginate'))}}">
                             @if ($errors->has('paginate'))
                                 <span class="help-block">
                                         <strong>{{ $errors->first('paginate') }}</strong>

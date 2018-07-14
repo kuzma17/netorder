@@ -7,23 +7,23 @@ use Gate;
 use Illuminate\Http\Request;
 use Session;
 
-class ContractorController extends Controller
+class ContractorController extends Maincontroller
 {
     public function index(){
         $contractors = Contractor::active()->orderBy('updated_at', 'desc')->paginate(20);
-        return view('contractors.list', ['contractors'=>$contractors]);
+        return view('contractors.list', ['contractors'=>$contractors, 'setting'=>$this->setting]);
     }
 
     public function show($id){
         $contractor = Contractor::find($id);
-        return view('contractors.view', ['contractor'=>$contractor]);
+        return view('contractors.view', ['contractor'=>$contractor, 'setting'=>$this->setting]);
     }
 
     public function create(){
         if(Gate::denies('add', Contractor::class)){
             return redirect()->back()->with('error_message','Доступ запрещен.');
         }
-        return view('contractors.add');
+        return view('contractors.add', ['setting'=>$this->setting]);
     }
 
     public function store(Request $request){
@@ -53,7 +53,7 @@ class ContractorController extends Controller
         if(Gate::denies('edit', $contractor)){
             return redirect()->back()->with('error_message','Доступ запрещен.');
         }
-        return view('contractors.edit', ['contractor'=>$contractor]);
+        return view('contractors.edit', ['contractor'=>$contractor, 'setting'=>$this->setting]);
     }
 
     public function update(Request $request, $id){

@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Session;
 
-class PrinterController extends Controller
+class PrinterController extends Maincontroller
 {
     /**
      * Display a listing of the resource.
@@ -21,7 +21,7 @@ class PrinterController extends Controller
     public function index()
     {
         $printers = Printer::paginate(20);
-        return view('printers.index', ['printers'=>$printers]);
+        return view('printers.index', ['printers'=>$printers, 'setting'=>$this->setting]);
     }
 
     /**
@@ -35,7 +35,7 @@ class PrinterController extends Controller
        //     return redirect()->back()->with('error_message','Доступ запрещен.');
        // }
 
-        return view('printers.create');
+        return view('printers.create', ['setting'=>$this->setting]);
     }
 
     /**
@@ -72,7 +72,7 @@ class PrinterController extends Controller
     public function show($id)
     {
         $printer = Printer::find($id);
-        return view('printers.show', ['printer'=>$printer]);
+        return view('printers.show', ['printer'=>$printer, 'setting'=>$this->setting]);
     }
 
     /**
@@ -88,7 +88,7 @@ class PrinterController extends Controller
        //     return redirect()->back()->with('error_message','Доступ запрещен.');
        // }
 
-        return view('printers.edit', ['printer'=>$printer]);
+        return view('printers.edit', ['printer'=>$printer, 'setting'=>$this->setting]);
     }
 
     /**
@@ -150,7 +150,7 @@ class PrinterController extends Controller
     // Upload price
 
     public function load_printers(){
-        return view('/printers/load_printers');
+        return view('/printers/load_printers', ['setting'=>$this->setting]);
     }
 
     public function save_load_printers(Request $request){

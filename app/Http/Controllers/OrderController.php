@@ -13,7 +13,7 @@ use Gate;
 use Illuminate\Http\Request;
 use Notification;
 
-class OrderController extends Controller
+class OrderController extends Maincontroller
 {
     private function get_order(){
         $user = \Auth::user();
@@ -60,14 +60,15 @@ class OrderController extends Controller
             'statuses' => $statuses,
             'countAllOrder' => $countAllOrder,
             'countWaitOrder' => $countWaitOrder,
-            'countWorkOrder' => $countWorkOrder
+            'countWorkOrder' => $countWorkOrder,
+            'setting'=>$this->setting
         ]);
     }
 
     public function view($id){
         $order = Order::find($id);
         $user = \Auth::user();
-        return view('order.view', ['order'=>$order, 'user'=>$user]);
+        return view('order.view', ['order'=>$order, 'user'=>$user, 'setting'=>$this->setting]);
     }
 
     public function filter(Request $request){
@@ -136,7 +137,7 @@ class OrderController extends Controller
             return redirect(route('orders'))->with('ok_message', 'Ваш заказ успешно создан и будет обработан в ближайшее время.');
         }
 
-        return view('order.add', ['order'=>$order, 'user'=>$user]);
+        return view('order.add', ['order'=>$order, 'user'=>$user, 'setting'=>$this->setting]);
     }
 
     public function edit(Request $request, $id){
@@ -175,7 +176,7 @@ class OrderController extends Controller
             return redirect(route('orders'))->with('ok_message', 'Ваш заказ успешно изменен.');
         }
 
-        return view('order.edit', ['order'=>$order, 'user'=>$user]);
+        return view('order.edit', ['order'=>$order, 'user'=>$user, 'setting'=>$this->setting]);
     }
 
     public function del($id){

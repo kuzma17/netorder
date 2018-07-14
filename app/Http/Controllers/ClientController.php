@@ -9,16 +9,16 @@ use Gate;
 use Illuminate\Http\Request;
 use Session;
 
-class ClientController extends Controller
+class ClientController extends Maincontroller
 {
     public function list(){
         $clients = Client::orderBy('updated_at', 'desc')->paginate(20);
-        return view('clients.list', ['clients'=>$clients]);
+        return view('clients.list', ['clients'=>$clients, 'setting'=>$this->setting]);
     }
 
     public function view($id){
         $client = Client::find($id);
-        return view('clients.view', ['client'=>$client]);
+        return view('clients.view', ['client'=>$client, 'setting'=>$this->setting]);
     }
 
     public function add(Request $request){
@@ -55,7 +55,7 @@ class ClientController extends Controller
             return redirect(route('firms.id', $client->firm_id));
         }
 
-        return view('clients.add', ['client'=>$client]);
+        return view('clients.add', ['client'=>$client, 'setting'=>$this->setting]);
     }
 
     public function edit(Request $request, $id){
@@ -87,7 +87,7 @@ class ClientController extends Controller
             return redirect(route('firms.id', $client->firm_id));
         }
 
-        return view('clients.edit', ['client'=>$client]);
+        return view('clients.edit', ['client'=>$client, 'setting'=>$this->setting]);
     }
 
     public function del($id){

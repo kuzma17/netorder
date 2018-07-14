@@ -9,7 +9,7 @@ use Gate;
 use Illuminate\Http\Request;
 use Session;
 
-class CityController extends Controller
+class CityController extends Maincontroller
 {
     /**
      * Display a listing of the resource.
@@ -19,7 +19,7 @@ class CityController extends Controller
     public function index()
     {
         $cites = City::paginate(20);
-        return view('cites.index', ['cites'=>$cites]);
+        return view('cites.index', ['cites'=>$cites, 'setting'=>$this->setting]);
     }
 
     /**
@@ -34,7 +34,7 @@ class CityController extends Controller
      //   }
 
         $regions = Region::orderBy('name')->get();
-        return view('cites.create', ['regions'=>$regions]);
+        return view('cites.create', ['regions'=>$regions, 'setting'=>$this->setting]);
     }
 
     /**
@@ -71,7 +71,7 @@ class CityController extends Controller
     public function show($id)
     {
         $city = City::find($id);
-        return view('cites.show', ['city'=>$city]);
+        return view('cites.show', ['city'=>$city, 'setting'=>$this->setting]);
     }
 
     /**
@@ -88,7 +88,7 @@ class CityController extends Controller
        //     return redirect()->back()->with('error_message','Доступ запрещен.');
        // }
 
-        return view('cites.edit', ['city'=>$city]);
+        return view('cites.edit', ['city'=>$city, 'setting'=>$this->setting]);
     }
 
     /**

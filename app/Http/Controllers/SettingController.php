@@ -6,16 +6,16 @@ use App\Setting;
 use Illuminate\Http\Request;
 use Session;
 
-class SettingController extends Controller
+class SettingController extends Maincontroller
 {
-    public function edit(Setting $setting)
+    public function edit()
     {
 
         /// if(Gate::denies('edit', $cartridge)){
         //     return redirect()->back()->with('error_message','Доступ запрещен.');
         //}
 
-        return view('settings.edit', ['setting'=>$setting]);
+        return view('settings.edit', ['setting'=>$this->setting]);
     }
 
     /**
@@ -25,24 +25,27 @@ class SettingController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Setting $setting)
+    public function update(Request $request)
     {
 
         //if(Gate::denies('update', $cartridge)){
         //    return redirect()->back()->with('error_message','Доступ запрещен.');
         // }
 
-        $this->validate($request, $setting->rules);
+        $this->validate($request, $this->setting->rules);
 
         foreach ($request->request as $key => $value){
+
+            echo $key.' '.$value.'<br>';
+
             if($key == '_token'){
                 continue;
             }
-            $setting->set_setting($key, $value);
+            $this->setting->set($key, $value);
         }
 
-        Session::flash('ok_message', 'Параметрыуспешно изменен.');
+        Session::flash('ok_message', 'Параметры успешно изменен.');
 
-        return view('settings.edit', ['setting'=>$setting]);
+        return redirect(route('setting.edit'));
     }
 }

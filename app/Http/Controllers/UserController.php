@@ -8,22 +8,23 @@ use App\Firm;
 use App\Role;
 use App\User;
 use App\UserProfile;
+use DemeterChain\Main;
 use Gate;
 use Hash;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Session;
 
-class UserController extends Controller
+class UserController extends Maincontroller
 {
     public function list(){
         $users = User::orderBy('created_at', 'desc')->paginate(20);
-        return view('users.list', ['users'=>$users]);
+        return view('users.list', ['users'=>$users, 'setting'=>$this->setting]);
     }
 
     public function view($id){
         $user = User::find($id);
-        return view('users.view', ['user'=>$user]);
+        return view('users.view', ['user'=>$user, 'setting'=>$this->setting]);
     }
 
     public function add(Request $request){
@@ -97,7 +98,7 @@ class UserController extends Controller
         $roles = Role::all();
         $firms = Firm::where('status', 'on')->orderBy('name')->get();
 
-        return view('users.add', ['user'=>$user, 'roles'=>$roles, 'firms'=>$firms]);
+        return view('users.add', ['user'=>$user, 'roles'=>$roles, 'firms'=>$firms, 'setting'=>$this->setting]);
 
     }
 
@@ -182,7 +183,7 @@ class UserController extends Controller
             $branches = [];
         }
 
-        return view('users.edit', ['user'=>$user, 'roles'=>$roles, 'firms'=>$firms, 'branches'=>$branches]);
+        return view('users.edit', ['user'=>$user, 'roles'=>$roles, 'firms'=>$firms, 'branches'=>$branches, 'setting'=>$this->setting]);
     }
 
     public function edit_passwd(Request $request, $id){
@@ -205,7 +206,7 @@ class UserController extends Controller
             return $this->view($id);
         }
 
-        return view('users.edit_passwd', ['user'=>$user]);
+        return view('users.edit_passwd', ['user'=>$user, 'setting'=>$this->setting]);
     }
 
     public function del($id){

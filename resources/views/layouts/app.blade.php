@@ -23,11 +23,11 @@
                 <div class="top_info">
                     <span>
                         <i class="fa fa-envelope" aria-hidden="true"></i>
-                    {{ \App\Setting::get_setting('email')}}
+                    {{ $setting->get('email')}}
                     </span>
                     <span>
                     <i class="fa fa-phone" aria-hidden="true"></i>
-                    {{\App\Setting::get_setting('phone')}}
+                    {{$setting->get('phone')}}
                     </span>
                 </div>
             </div>

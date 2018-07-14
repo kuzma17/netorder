@@ -7,7 +7,7 @@ use Gate;
 use Illuminate\Http\Request;
 use Session;
 
-class CartridgeController extends Controller
+class CartridgeController extends Maincontroller
 {
     /**
      * Display a listing of the resource.
@@ -17,7 +17,7 @@ class CartridgeController extends Controller
     public function index()
     {
         $cartridges = Cartridge::paginate(20);
-        return view('cartridges.index', ['cartridges'=>$cartridges]);
+        return view('cartridges.index', ['cartridges'=>$cartridges, 'setting'=>$this->setting]);
     }
 
     /**
@@ -30,7 +30,7 @@ class CartridgeController extends Controller
        // if(Gate::denies('create', Cartridge::class)){
         //    return redirect()->back()->with('error_message','Доступ запрещен.');
        // }
-        return view('cartridges.create');
+        return view('cartridges.create', ['setting'=>$this->setting]);
     }
 
     /**
@@ -82,7 +82,7 @@ class CartridgeController extends Controller
        //     return redirect()->back()->with('error_message','Доступ запрещен.');
         //}
 
-        return view('cartridges.edit', ['cartridge'=>$cartridge]);
+        return view('cartridges.edit', ['cartridge'=>$cartridge, 'setting'=>$this->setting]);
     }
 
     /**

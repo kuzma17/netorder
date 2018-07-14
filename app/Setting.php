@@ -11,14 +11,14 @@ class Setting extends Model
     public $rules = [
         'phone' => 'required',
         'email' => 'required|string|email|max:255',
-        'paginate' => 'required|numeric|max:3'
+        'paginate' => 'required|numeric'
     ];
 
-   public static function get_setting($key){
+   public static function get($key){
        return Setting::find($key)->value;
    }
 
-   public function set_setting($key, $val){
+   public function set($key, $val){
        $setting = Setting::find($key);
        $setting->value = trim($val);
        $setting->save();
