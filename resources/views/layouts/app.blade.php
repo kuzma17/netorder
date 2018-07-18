@@ -29,6 +29,7 @@
                         <span>
                             <i class="fa fa-phone" aria-hidden="true"></i>
                             {{$setting->get_param('phone')}}
+                        </span>
                     @endif
                 </div>
             </div>

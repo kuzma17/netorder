@@ -255,3 +255,19 @@ ul.dropdown-menu{
     margin-left: 10px;
 }
 
+.container_help{
+    background-color: white;
+}
+
+.help{
+    padding: 10px;
+}
+.help p.img{
+    text-align: center;
+}
+.help img{
+    margin: 10px;
+    border: 1px solid #CCCCCC;
+    max-width: 95%;
+}
+
