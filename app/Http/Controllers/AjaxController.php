@@ -9,6 +9,7 @@ use App\Contractor;
 use App\Firm;
 use App\Printer;
 use App\Region;
+use App\User;
 use Illuminate\Http\Request;
 
 class AjaxController extends Controller
@@ -112,5 +113,40 @@ class AjaxController extends Controller
             }
             return $htm;
         }
+    }
+
+    public function add_order_printer(Request $request){
+        $user = \Auth::user();
+        $printers = $user->profile->client->printers;
+        return view('order.select_printer', ['printers' => $printers]);
+    }
+
+    public function add_order_printer2(Request $request){
+        $user = \Auth::user();
+        $select_printers = $request->printers;
+        $printers = $user->profile->client->printers;
+        if((count($printers) - count($select_printers)) > 1) {
+            $add = 1;
+        }else{
+            $add = 0;
+        }
+        $htm = view('order.select_printer2', ['printers' => $printers, 'select_printers'=>$select_printers])->render();
+        return response()->json(['add'=> $add, 'htm'=>$htm]);
+    }
+
+    public function add_order_cartridge(Request $request){
+        $printer_id = $request->printer;
+        $select_cartridges = $request->cartridges;
+
+        $cartridges = Printer::find($printer_id)->cartridges;
+        if((count($cartridges) - count($select_cartridges)) > 1) {
+            //$htm = view('order.select_cartridge', ['cartridges' => $cartridges, 'select_cartridges' => $select_cartridges])->render();
+            $add = 1;
+        }else{
+           // $htm = view('order.input_cartridge', ['cartridge' => $cartridges[0]])->render();
+            $add = 0;
+        }
+        $htm = view('order.select_cartridge', ['cartridges' => $cartridges, 'select_cartridges' => $select_cartridges])->render();
+        return response()->json(['add'=> $add, 'htm'=>$htm]);
     }
 }
