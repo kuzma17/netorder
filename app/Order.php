@@ -61,6 +61,7 @@ class Order extends Model
     }
 
     public function addPrinterOrder($request, $order_id){
+        // test revvert
         $fields = [];
         foreach ($request->printer as $printer){
             if($request->cartridge){
