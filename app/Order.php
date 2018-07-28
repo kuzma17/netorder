@@ -48,13 +48,13 @@ class Order extends Model
         return Status::all();
     }
 
-   // public function printers(){
-  //      return $this->belongsToMany(Printer::class);
-   // }
+    public function printer(){
+        return $this->belongsTo(Printer::class);
+    }
 
-  //  public function cartridge(){
-   //     return $this->belongsTo(Cartridge::class);
-  //  }
+    public function cartridge(){
+        return $this->belongsTo(Cartridge::class);
+    }
 
     public function routeNotificationForMail(){
         return $this->contractor->email;
