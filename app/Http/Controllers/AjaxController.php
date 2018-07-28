@@ -146,7 +146,7 @@ class AjaxController extends Controller
            // $htm = view('order.input_cartridge', ['cartridge' => $cartridges[0]])->render();
             $add = 0;
         }
-        $htm = view('order.select_cartridge', ['cartridges' => $cartridges, 'printer_id'=>$printer_id, 'select_cartridges' => $select_cartridges])->render();
+        $htm = view('order.select_cartridge', ['cartridges' => $cartridges, 'select_cartridges' => $select_cartridges])->render();
         return response()->json(['add'=> $add, 'htm'=>$htm]);
     }
 }

@@ -9,7 +9,6 @@ use App\Notifications\NewOrder;
 use App\Order;
 use App\Status;
 use App\User;
-use DB;
 use Gate;
 use Illuminate\Http\Request;
 use Notification;
@@ -113,7 +112,6 @@ class OrderController extends Maincontroller
 
         if($request->isMethod('post')){
 
-
             $this->validate($request, $order->rules );
 
             $order->type_work_id = $request->type_work;
@@ -121,43 +119,21 @@ class OrderController extends Maincontroller
             $order->client_id = $user->profile->branch_id;
             $order->user_id = $user->id;
             $order->contractor_id = $user->profile->client->contractor_id;
-            //$order->printer_id = isset($request->printer)? $request->printer: 0;
-            //$order->cartridge_id = isset($request->cartridge)? $request->cartridge: 0;
-            //$order->count_cartridge = isset($request->count_cartridge)? $request->count_cartridge: 0;
+            $order->printer_id = isset($request->printer)? $request->printer: 0;
+            $order->cartridge_id = isset($request->cartridge)? $request->cartridge: 0;
+            $order->count_cartridge = isset($request->count_cartridge)? $request->count_cartridge: 0;
             $order->date_end = $request->date_end;
             $order->comment = $request->comment;
             $order->status_id = 1;
             $order->save();
 
-
-           //$fields = [];
-           // foreach ($request->printer as $printer){
-            //    if($request->cartridge){
-           //         foreach ($request->cartridge[$printer] as $key=>$val){
-            //            $fields[] = [
-           //                 'order_id' => $order->id,
-            //                'printer_id' => $printer,
-            //                'cartridge_id' => $val,
-           //                 'quantity' => $request->count_cartridge[$printer][$key]
-            //            ];
-           //         }
-           //     }else{
-            //        $fields[] = [
-           //             'order_id' => $order->id,
-           //             'printer_id' => $printer,
-          //              'cartridge_id' => 0,
-           //             'quantity' => 0
-            //        ];
-           //     }
-           // };
-//
-         //   DB::table('order_printer')->insert($fields);
+            //foreach ($user->profile->client->contractor->userProfiles as $profile){
+           //     echo $profile->user->email.'<br>';
+           // }
+            //Notification::send(User::all(), new NewOrder($order));
 
 
-            $order->addPrinterOrder($request, $order->id);
-
-
-            //$order->notify(new NewOrder($order));
+            $order->notify(new NewOrder($order));
 
             return redirect(route('orders'))->with('ok_message', 'Ваш заказ успешно создан и будет обработан в ближайшее время.');
         }
@@ -212,7 +188,6 @@ class OrderController extends Maincontroller
         }
 
         $order->delete();
-        $order->delPrinterOrder($id);
         return redirect(route('orders'))->with('info_message', 'Заказ успешно удален.');
     }
 }
