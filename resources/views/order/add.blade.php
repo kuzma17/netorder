@@ -21,7 +21,7 @@
                         </div>
                     </div>
                     @if($user->is_client() && isset($user->profile->client->printers) && count($user->profile->client->printers) > 0)
-                       <!-- <div class="form-group">
+                        <div class="form-group">
                             <label class="col-md-3 control-label">Принтер</label>
                             <div class="col-md-9">
                                 <select id="printer_order" name="printer" class="form-control" required>
@@ -34,51 +34,8 @@
                         </div>
                        <div id="block_regenerate">
                            <div id="cartridge_list"></div>
-                       </div>-->
+                       </div>
                     @endif
-                    <div id="order_printers">
-                        <!--<div class="form-group">
-                            <label class="col-md-3 control-label">Принтер</label>
-                            <div class="col-md-9">
-                                <select id="printer_order" name="printer[]" class="form-control select_printer" required>
-                                    <option value="">Выберите принтер</option>
-                                    @foreach($user->profile->client->printers as $printer)
-                                        <option value="{{ $printer->id }}">{{ $printer->name }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
-                        </div>-->
-
-                        <div class="printer">
-                            <div class="form-group">
-                                <label class="col-md-3 control-label">Принтер</label>
-                                <div class="col-md-8">
-                                    <select name="printer[]" class="form-control select_order_printer" required>
-                                        <option value="">Выберите принтер</option>
-                                        @foreach($user->profile->client->printers as $printer)
-                                            <option value="{{ $printer->id }}">{{ $printer->id }} {{ $printer->name }}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <div class="col-md-1">
-                                    <a href="#" class="order_del_printer" title="Удалить принтер">
-                                        <i class="fa fa-trash"></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="regenerate"></div>
-
-                            <button type="button" class="btn btn-default add_order_cartridge" style="float: right; display: none">
-                                <i class="fa fa-plus-circle"></i> картридж
-                            </button>
-                            <div class="clearfix"></div>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                    <button id="add_order_printer" type="button" class="btn btn-default" style="float: right" disabled>
-                        <i class="fa fa-plus-circle"></i> принтер
-                    </button>
-                    </div>
                     <div class="form-group{{ $errors->has('date_end') ? ' has-error' : '' }}">
                         <label class="col-md-3 control-label">дата выполнения <span class="red">*</span></label>
                         <div class="col-md-9">
