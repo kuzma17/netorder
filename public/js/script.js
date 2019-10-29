@@ -278,4 +278,79 @@ $(document).ready(function () {
         });
     });
 
+    $('#add_order_printer').click(function () {
+        var token = $('input[name=_token]').val();
+        var type_work = $('#type_work').val();
+        var printers = $('.select_printer').map(function() {
+            return $(this).val();
+        }).get();
+        if(type_work == 3){
+            $.post('/ajax_add_order_printer', {'_token': token, 'printers': printers}, function (data) {
+                console.log(data);
+                $('#order_printers').append(data.htm);
+                if(data.add == 1){
+                    $('#add_order_printer').show();
+                }else{
+                    $('#add_order_printer').hide();
+                }
+            }, "json");
+        }else{
+            $.post('/ajax_add_order_printer2', {'_token': token}, function (data) {
+                console.log(data);
+                if(data){
+                    $('#order_printers').append(data);
+                }
+            });
+        }
+    });
+
+    $(document).on("click", ".order_del_printer", function () {
+        $(this).closest('.form-group').remove();
+        $('#add_order_printer').show();
+        return false;
+    });
+
+    $('#type_work').change(function () {
+        $('#order_printers').html('');
+    });
+
+    $(document).on("click", ".add_order_cartridge", function () {
+        var token = $('input[name=_token]').val();
+        var printer = $(this).parent().parent().find('.select_order_printer').val();
+        var dir = $(this).prev();
+        var add = $(this);
+        var cartridges = $('.select_cartridge').map(function() {
+            return $(this).val();
+        }).get();
+        $.post('/ajax_add_order_cartridge', {'_token': token, 'printer': printer, 'cartridges': cartridges}, function (data) {
+            console.log(data);
+            dir.append(data.htm);
+            if(data.add == 1){
+                add.show();
+            }else{
+                add.hide();
+            }
+        }, "json");
+    });
+
+    $(document).on("change", ".select_order_printer", function () {
+        var token = $('input[name=_token]').val();
+        var printer = $(this).val();
+        var dir = $(this).parent().parent().next();
+        var add = $(this).parent().parent().parent().find('.add_order_cartridge');
+        var cartridges = $('.select_cartridge').map(function() {
+            return $(this).val();
+        }).get();
+        //alert(add);
+        $.post('/ajax_add_order_cartridge', {'_token': token, 'printer': printer, 'cartridges': cartridges}, function (data) {
+            console.log(data);
+            dir.html(data.htm);
+            if(data.add == 1){
+                add.show();
+            }else{
+                add.hide();
+            }
+        }, "json");
+    });
+
 });
